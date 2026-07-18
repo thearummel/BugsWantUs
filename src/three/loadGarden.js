@@ -70,6 +70,11 @@ export function loadGarden(world, refs) {
             console.log("Door found");
         }
 
+        refs.lake = garden.getObjectByName("Lake");
+        if (refs.lake){
+             console.log("Lake found");
+        }
+
 
     });
 }

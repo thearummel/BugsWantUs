@@ -28,7 +28,8 @@ export default function Scene() {
         let refs = {
             plant2: null,
             plant2BaseScale: null,
-            door: null
+            door: null,
+            lake:null,
         };
         let state = {
         targetZ: 20
