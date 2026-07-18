@@ -17,22 +17,8 @@ export function loadCounter(world, refs) {
         // move model so center sits at (0,0,0)
         counter.position.sub(center);
 
-        // compute bounding sphere (radius)
-        const sphere = new THREE.Sphere();
-        box.getBoundingSphere(sphere);
-        const radius = sphere.radius;
-
-        // compute an appropriate camera distance so the whole model fits in view.
-        // using vertical fov (camera.fov is degrees)
-        const fov = world.camera.fov * (Math.PI / 180); // radians
-        // distance so that sphere fits vertically in frustum: d = r / sin(fov/2)
-        let distance = radius / Math.sin(fov / 0.8);
-
-        // add a little margin
-        // distance *= 1.2;
-
-        // place camera straight on along +Z axis looking to origin
-        world.camera.position.set(0, 0, distance);
+       
+        world.camera.position.set(0, 0, 3);
         world.camera.lookAt(0, 0, 0);
 
         // set control target to origin (the model is centered at origin now)
@@ -44,7 +30,7 @@ export function loadCounter(world, refs) {
         world.controls.maxPolarAngle = Math.PI / 2;
 
   world.controls.minDistance = 0.1;
-    world.controls.maxDistance = 14;
+    world.controls.maxDistance = 3;
 
 
         world.controls.minAzimuthAngle = 0;

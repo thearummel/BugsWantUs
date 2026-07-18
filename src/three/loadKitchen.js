@@ -54,8 +54,13 @@ export function loadKitchen(world, refs) {
 
 
         world.controls.update();
-        console.log(world.camera.position);
+   
+  world.camera.updateProjectionMatrix();
 
+        refs.bowl = kitchen.getObjectByName("Bowl");
+        if (refs.bowl) {
+            console.log("bowl found");
+        }
 
 
 
