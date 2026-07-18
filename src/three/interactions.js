@@ -36,6 +36,11 @@ export function setupInteractions(world, refs, state, router) {
         object: refs.lake,
         action: () => router.push("/Beetle")
     },
+
+    {
+        object: refs.bowl,
+        action:() => router.push("/Counter")
+    }
 ];
 
 for (const item of interactables) {
