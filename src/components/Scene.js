@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 import { setupScene } from "@/three/setupScene";
 import { loadGarden } from "@/three/loadGarden";
 import { createFlyingBall } from "@/three/createFlyingBall";
-import { createParticles } from "@/three/particles";
 import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
@@ -20,7 +19,7 @@ export default function Scene() {
         let world = setupScene(canvasRef.current);
 
    
-        createParticles(world.scene);
+
 
    
         let ball = createFlyingBall(world.scene);
