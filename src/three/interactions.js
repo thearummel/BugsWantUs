@@ -27,16 +27,35 @@ export function setupInteractions(world, refs, state, router) {
             world.camera
         );
 
-        if (!refs.door) return;
+       const interactables = [
+    {
+        object: refs.door,
+        action: () => router.push("/about"),
+    },
+    {
+        object: refs.lake,
+        action: () => router.push("/Beetle")
+    },
 
-        let hits = world.raycaster.intersectObject(
-            refs.door,
-            true
-        );
+    {
+        object: refs.bowl,
+        action:() => router.push("/Counter")
+    }
+];
 
-        if (hits.length > 0) {
-            router.push("/about");
-        }
+for (const item of interactables) {
+    if (!item.object) continue;
+
+    const hits = world.raycaster.intersectObject(
+        item.object,
+        true
+    );
+
+    if (hits.length > 0) {
+        item.action();
+        break;
+    }
+}
     }
 
     function onResize() {

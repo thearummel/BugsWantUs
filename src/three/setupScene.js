@@ -2,56 +2,50 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 export function setupScene(canvas) {
+    const scene = new THREE.Scene();
 
-
-    let scene = new THREE.Scene();
-
-
-    let camera = new THREE.PerspectiveCamera(
+    const camera = new THREE.PerspectiveCamera(
         30,
         window.innerWidth / window.innerHeight,
-        1,
-        1000
+        0.1,
+        5000
     );
 
-
-    let renderer = new THREE.WebGLRenderer({
+    const renderer = new THREE.WebGLRenderer({
         canvas,
         antialias: true,
         alpha: true
     });
 
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(window.devicePixelRatio || 1);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-
-    let controls = new OrbitControls(camera, renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
 
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.zoomToCursor = true;
-    controls.enablePan = false;
+    controls.enablePan = true;
 
-    const limit = THREE.MathUtils.degToRad(0);
+   
 
-   controls.minPolarAngle = Math.PI / 2 - limit ;
-   controls.maxPolarAngle = Math.PI / 2 + limit;
+  
 
-    controls.minAzimuthAngle = Math.PI / 40;
-    controls.maxAzimuthAngle = Math.PI / 40;
-
-    controls.minDistance = 0;
-    controls.maxDistance = 18;
-
-
-
-    let dir = new THREE.DirectionalLight(0xffffff, 4);
+    // lights
+    const dir = new THREE.DirectionalLight(0xffffff, 4);
     dir.position.set(35, 20, 100);
     scene.add(dir);
 
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
 
-    let raycaster = new THREE.Raycaster();
-    let mouse = new THREE.Vector2();
+    // handle resize to keep aspect/fov correct
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    window.addEventListener("resize", onWindowResize);
 
     return {
         scene,

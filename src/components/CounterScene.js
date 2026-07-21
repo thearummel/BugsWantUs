@@ -3,13 +3,12 @@
 import { useEffect, useRef } from "react";
 
 import { setupScene } from "@/three/setupScene";
-import { loadGarden } from "@/three/loadGarden";
-import { createFlyingBall } from "@/three/createFlyingBall";
+import { loadCounter } from "@/three/loadCounter";
 import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
 
-export default function Scene() {
+export default function CounterScene() {
 
     let canvasRef = useRef(null);
     let router = useRouter();
@@ -18,28 +17,22 @@ export default function Scene() {
 
         let world = setupScene(canvasRef.current);
 
-   
-
-
-   
-        let ball = createFlyingBall(world.scene);
 
   
         let refs = {
             plant2: null,
             plant2BaseScale: null,
-            door: null,
-            lake:null,
+            door: null
         };
         let state = {
         targetZ: 20
 };
 
       
-        loadGarden(world, refs);
+        loadCounter(world, refs);
 
         // Setup mouse / resize / click events
-      let cleanupInteractions = setupInteractions(
+let cleanupInteractions = setupInteractions(
     world,
     refs,
     state,
@@ -50,7 +43,6 @@ export default function Scene() {
        let cleanupAnimation = animate(
     world,
     refs,
-    ball,
     state
 );
         return () => {

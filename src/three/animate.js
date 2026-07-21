@@ -42,25 +42,9 @@ export function animate(world, refs, state) {
 
         }
 
-        //
-        // Flying ball
-        //
-
-     /*   flyingBall.ball.position.x = Math.sin(time * 0.8) * 6;
-        flyingBall.ball.position.y = 2 + Math.sin(time * 1.5) * 1.2;
-        flyingBall.ball.position.z = Math.cos(time * 1.1) * 4;
-
-        flyingBall.light.position.copy(
-            flyingBall.ball.position
-        );
-*/
-        //
-        // Controls
-        //
-
-        world.controls.update();
+    
         
-       // console.log(world.camera.position);
+       // 
         //
         // Render
         //
