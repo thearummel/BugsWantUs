@@ -10,7 +10,7 @@ export function loadGarden(world, refs) {
 
         // compute bounding box & sphere BEFORE we recenter the model
         const box = new THREE.Box3().setFromObject(garden);
-        const size = box.getSize(new THREE.Vector3());
+         
         const center = box.getCenter(new THREE.Vector3());
 
         // move model so center sits at (0,0,0)
@@ -59,21 +59,22 @@ export function loadGarden(world, refs) {
 
         world.camera.updateProjectionMatrix();
 
-        refs.plant2 = garden.getObjectByName("Plant2");
-        if (refs.plant2) {
-            refs.plant2BaseScale = refs.plant2.scale.clone();
-            console.log("Plant2 found");
-        }
+  const objects = [
+    "Plant2",
+    "Door",
+    "Lake",
+    "Flower"
+];
 
-        refs.door = garden.getObjectByName("Door");
-        if (refs.door) {
-            console.log("Door found");
-        }
+objects.forEach(name => {
 
-        refs.lake = garden.getObjectByName("Lake");
-        if (refs.lake){
-             console.log("Lake found");
-        }
+    refs[name.toLowerCase()] = garden.getObjectByName(name);
+
+    if (refs[name.toLowerCase()]) {
+        console.log(`${name} found`);
+    }
+
+});
 
 
     });

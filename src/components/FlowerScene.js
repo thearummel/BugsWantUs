@@ -3,12 +3,12 @@
 import { useEffect, useRef } from "react";
 
 import { setupScene } from "@/three/setupScene";
-import { loadBog } from "@/three/loadBog";
+import { loadFlowers } from "@/three/loadFlowers";
 import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
 
-export default function Scene() {
+export default function FlowerScene() {
 
     let canvasRef = useRef(null);
     let router = useRouter();
@@ -18,23 +18,21 @@ export default function Scene() {
         let world = setupScene(canvasRef.current);
 
 
-
   
         let refs = {
             plant2: null,
             plant2BaseScale: null,
-            door: null,
-            lake:null,
+            door: null
         };
         let state = {
         targetZ: 20
 };
 
       
-        loadBog(world, refs);
+        loadFlowers(world, refs);
 
         // Setup mouse / resize / click events
-      let cleanupInteractions = setupInteractions(
+let cleanupInteractions = setupInteractions(
     world,
     refs,
     state,

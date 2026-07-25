@@ -4,6 +4,7 @@ export function animate(world, refs, state) {
 
     let animationId;
 
+    
     function render() {
 
         animationId = requestAnimationFrame(render);
@@ -42,7 +43,38 @@ export function animate(world, refs, state) {
 
         }
 
-    
+    //
+// Grass sway animation
+//
+
+if (refs.grasses) {
+
+    refs.grasses.forEach((grass) => {
+
+        const swaySpeed = 1.5;
+        const swayAmount = 0.05;
+
+        // Bezier-like smooth oscillation
+        const wave = Math.sin(
+            time * swaySpeed + grass.offset
+        );
+
+        const eased = THREE.MathUtils.smoothstep(
+            wave,
+            -1,
+            1
+        );
+
+        grass.object.rotation.y =
+            grass.baseRotation +
+            (eased - 0.5) * swayAmount;
+
+
+       
+
+    });
+
+}
         
        // 
         //
