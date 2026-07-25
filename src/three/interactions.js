@@ -40,7 +40,15 @@ export function setupInteractions(world, refs, state, router) {
     {
         object: refs.bowl,
         action:() => router.push("/Counter")
-    }
+    },
+     {
+        object: refs.garden,
+        action:() => router.push("/Garden")
+    },
+     {
+        object: refs.flower,
+        action:() => router.push("/Flowers")
+    },
 ];
 
 for (const item of interactables) {

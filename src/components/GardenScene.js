@@ -1,14 +1,15 @@
+
 "use client";
 
 import { useEffect, useRef } from "react";
 
 import { setupScene } from "@/three/setupScene";
-import { loadBog } from "@/three/loadBog";
+import { loadGarden } from "@/three/loadGarden";
 import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
 
-export default function Scene() {
+export default function GardenScene() {
 
     let canvasRef = useRef(null);
     let router = useRouter();
@@ -25,13 +26,15 @@ export default function Scene() {
             plant2BaseScale: null,
             door: null,
             lake:null,
+            flower:null,
+           
         };
         let state = {
         targetZ: 20
 };
 
       
-        loadBog(world, refs);
+        loadGarden(world, refs);
 
         // Setup mouse / resize / click events
       let cleanupInteractions = setupInteractions(

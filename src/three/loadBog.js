@@ -1,25 +1,24 @@
-// Fruitbowl
 
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-export function loadCounter(world, refs) {
+export function loadBog(world, refs) {
     const loader = new GLTFLoader();
 
-    loader.load("/models/Counter.glb", (gltf) => {
-        const counter = gltf.scene;
-        world.scene.add(counter);
+    loader.load("/models/Bog.glb", (gltf) => {
+        const bog = gltf.scene;
+        world.scene.add(bog);
 
         // compute bounding box & sphere BEFORE we recenter the model
-        const box = new THREE.Box3().setFromObject(counter);
+        const box = new THREE.Box3().setFromObject(bog);
          
         const center = box.getCenter(new THREE.Vector3());
 
         // move model so center sits at (0,0,0)
-        counter.position.sub(center);
+        bog.position.sub(center);
 
        
-        world.camera.position.set(0, 0, 3);
+        world.camera.position.set(0, 0, 5);
         world.camera.lookAt(0, 0, 0);
 
         // set control target to origin (the model is centered at origin now)
@@ -30,8 +29,8 @@ export function loadCounter(world, refs) {
         world.controls.minPolarAngle = Math.PI / 2;
         world.controls.maxPolarAngle = Math.PI / 2;
 
-         world.controls.minDistance = 0.1;
-         world.controls.maxDistance = 3;
+  world.controls.minDistance = 0.1;
+    world.controls.maxDistance = 5;
 
 
         world.controls.minAzimuthAngle = 0;
@@ -46,6 +45,15 @@ export function loadCounter(world, refs) {
 
 
         world.camera.updateProjectionMatrix();
+
+ refs.garden = bog.getObjectByName("Forest");
+        if (refs.garden) {
+            console.log("garden found");
+        }
+
+
+
+
 
     });
 }
