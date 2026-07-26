@@ -27,23 +27,12 @@ export function loadBush(world, refs) {
 
         // Restrict vertical rotation to be "straight on" (no tilt) if you want:
         // This will lock the polar angle so camera cannot tilt up/down.
-        world.controls.minPolarAngle = Math.PI / 2;
-        world.controls.maxPolarAngle = Math.PI / 2;
+ 
 
          world.controls.minDistance = 0.1;
          world.controls.maxDistance = 7;
 
-
-        world.controls.minAzimuthAngle = 0;
-        world.controls.maxAzimuthAngle = 0;
-
-
-
-
         world.controls.update();
-     
-
-
 
         world.camera.updateProjectionMatrix();
 

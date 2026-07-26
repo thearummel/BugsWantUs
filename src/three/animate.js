@@ -4,83 +4,66 @@ export function animate(world, refs, state) {
 
     let animationId;
 
-    
+
     function render() {
 
         animationId = requestAnimationFrame(render);
 
-        //
-        // Camera zoom
-        //
+        world.controls.minPolarAngle = Math.PI / 2;
+        world.controls.maxPolarAngle = Math.PI / 2;
+        world.controls.minAzimuthAngle = 0;
+        world.controls.maxAzimuthAngle = 0;
 
-     /*   world.camera.position.z = THREE.MathUtils.lerp(
-            world.camera.position.z,
-            state.targetZ,
-            0.08
-        );
-
-        */
-
-        //
-        // Time
-        //
-
+   
         let time = performance.now() * 0.001;
+        
+    // ranke up and down sway motion
+        if (refs.ranke) {
 
-        //
-        // Plant animation
-        //
+            refs.ranke.position.y = Math.sin(time * 2) * 0.003;
+            refs.ranke.rotation.y = Math.sin(time * 2) * 0.003;
+        }
+        if (refs.beetlepflanze) {
 
-        if (refs.plant2 && refs.plant2BaseScale) {
+            refs.beetlepflanze.rotation.y = Math.sin(time * 2) * 0.01;
+        }
 
-            let s = 1 + 0.002 * Math.sin(time * 2);
+        if ((refs.beetlewingleft)||(refs.beetlewingright)) {
 
-            refs.plant2.scale.set(
-                refs.plant2BaseScale.x * s,
-                refs.plant2BaseScale.y * s,
-                refs.plant2BaseScale.z * s
-            );
+            refs.beetlewingleft.rotation.y = Math.sin(time * 6) * 0.05;
+            refs.beetlewingright.rotation.y = Math.sin(time * 5) * 0.05;
+        }
+       //Grass sway in Flowers
+
+        if (refs.grasses) {
+
+            refs.grasses.forEach((grass) => {
+
+                const swaySpeed = 1.5;
+                const swayAmount = 0.05;
+
+                // Bezier-like smooth oscillation
+                const wave = Math.sin(
+                    time * swaySpeed + grass.offset
+                );
+
+                const eased = THREE.MathUtils.smoothstep(
+                    wave,
+                    -1,
+                    1
+                );
+
+                grass.object.rotation.y =
+                    grass.baseRotation +
+                    (eased - 0.5) * swayAmount;
+
+            });
 
         }
 
-    //
-// Grass sway animation
-//
+        // Beetle movement
 
-if (refs.grasses) {
-
-    refs.grasses.forEach((grass) => {
-
-        const swaySpeed = 1.5;
-        const swayAmount = 0.05;
-
-        // Bezier-like smooth oscillation
-        const wave = Math.sin(
-            time * swaySpeed + grass.offset
-        );
-
-        const eased = THREE.MathUtils.smoothstep(
-            wave,
-            -1,
-            1
-        );
-
-        grass.object.rotation.y =
-            grass.baseRotation +
-            (eased - 0.5) * swayAmount;
-
-
-       
-
-    });
-
-}
-        
-       // 
-        //
-        // Render
-        //
-
+    
         world.renderer.render(
             world.scene,
             world.camera
