@@ -10,10 +10,7 @@ export function loadFlowers(world, refs) {
         const flowers = gltf.scene;
         world.scene.add(flowers);
 
-
-        //
         // Find grass groups
-        //
 
         refs.grasses = [];
 
@@ -60,14 +57,12 @@ export function loadFlowers(world, refs) {
 
         world.controls.target.set(0, 0, 0);
 
-        world.controls.minPolarAngle = Math.PI / 2;
-        world.controls.maxPolarAngle = Math.PI / 2;
+
 
         world.controls.minDistance = 0.1;
         world.controls.maxDistance = 5;
 
-        world.controls.minAzimuthAngle = 0;
-        world.controls.maxAzimuthAngle = 0;
+
 
         world.controls.update();
 

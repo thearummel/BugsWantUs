@@ -49,6 +49,14 @@ export function setupInteractions(world, refs, state, router) {
         object: refs.flower,
         action:() => router.push("/Flowers")
     },
+    {
+        object: refs.bush,
+        action:() => router.push("/Bush")
+    },
+    {
+        object: refs.river,
+        action:() => router.push("/River")
+    }
 ];
 
 for (const item of interactables) {
