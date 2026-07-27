@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 export function loadGarden(world, refs) {
-    const loader = new GLTFLoader();
+    const loader = new GLTFLoader(world.loadingManager);
 
     loader.load("/models/garden.glb", (gltf) => {
         const garden = gltf.scene;
@@ -50,6 +50,9 @@ export function loadGarden(world, refs) {
             "Flower",
             "Bush",
             "River",
+            "gardengrasone",
+            "gardengrastwo",
+            "gardengrasthree",
         ];
 
         objects.forEach(name => {

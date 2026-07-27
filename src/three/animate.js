@@ -10,9 +10,9 @@ export function animate(world, refs, state) {
         animationId = requestAnimationFrame(render);
 
         world.controls.minPolarAngle = Math.PI / 2;
-        world.controls.maxPolarAngle = Math.PI / 2;
+        world.controls.maxPolarAngle = Math.PI / 2; 
         world.controls.minAzimuthAngle = 0;
-        world.controls.maxAzimuthAngle = 0;
+        world.controls.maxAzimuthAngle = 0; //
 
    
         let time = performance.now() * 0.001;

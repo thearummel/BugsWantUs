@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
 import { setupScene } from "@/three/setupScene";
 import { loadKitchen } from "@/three/loadKitchen";
 import { setupInteractions } from "@/three/interactions";
@@ -10,12 +9,17 @@ import { useRouter } from "next/navigation";
 
 export default function AboutScene() {
 
-    let canvasRef = useRef(null);
+   const [loading, setLoading] = useState(true);
+    const [progress, setProgress] = useState(0);  
+let canvasRef = useRef(null);
     let router = useRouter();
 
     useEffect(() => {
 
         let world = setupScene(canvasRef.current);
+world.loadingManager.onLoad = () => {
+    setLoading(false);
+};
 
 
   

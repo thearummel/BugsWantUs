@@ -2,6 +2,9 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 export function setupScene(canvas) {
+
+    const loadingManager = new THREE.LoadingManager();
+
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(
@@ -48,11 +51,12 @@ export function setupScene(canvas) {
     window.addEventListener("resize", onWindowResize);
 
     return {
-        scene,
-        camera,
-        renderer,
-        controls,
-        raycaster,
-        mouse
-    };
+    scene,
+    camera,
+    renderer,
+    controls,
+    raycaster,
+    mouse,
+    loadingManager
+};
 }
