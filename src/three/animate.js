@@ -40,7 +40,7 @@ export function animate(world, refs, state) {
             refs.grasses.forEach((grass) => {
 
                 const swaySpeed = 1.5;
-                const swayAmount = 0.05;
+                const swayAmount = 0.02;
 
                 // Bezier-like smooth oscillation
                 const wave = Math.sin(

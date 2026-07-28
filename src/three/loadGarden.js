@@ -67,4 +67,17 @@ export function loadGarden(world, refs) {
 
 
     });
+
+    loader.load("/models/Moth.glb", (gltf) => {
+        const moth = gltf.scene;
+        world.scene.add(moth);
+
+        moth.position.set(-1.6, -0.2, 2);
+
+        const objects = [
+            "Moth",
+        ];
+            });
+
+      
 }

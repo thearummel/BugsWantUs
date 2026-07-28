@@ -42,7 +42,7 @@ const objects = [
             "Ranke",
             "BeetlePflanze",
             "beetlewingleft",
-           "beetlewingright",
+            "beetlewingright",
         ];
 
         objects.forEach(name => {

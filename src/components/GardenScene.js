@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 export default function GardenScene() {
 
     const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0);
 
     let canvasRef = useRef(null);
     let router = useRouter();

@@ -23,23 +23,38 @@ export function loadCounter(world, refs) {
        
         // Restrict vertical rotation to be "straight on" (no tilt) if you want:
         // This will lock the polar angle so camera cannot tilt up/down.
- 
 
          world.controls.minDistance = 0.1;
          world.controls.maxDistance = 3;
 
-
-    
-
-
-
-
         world.controls.update();
      
-
-
-
         world.camera.updateProjectionMatrix();
 
     });
+
+    loader.load("/models/Fly.glb", (gltf) => {
+        const fly = gltf.scene;
+        world.scene.add(fly);
+
+        fly.position.set(0, 0, 0.8);
+        fly.scale.set(0.5, 0.5, 0.5);
+
+
+        //call names of animatabel items
+        const objects = [
+            "Plant2",
+        ];
+
+        objects.forEach(name => {
+
+            refs[name.toLowerCase()] = fly.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+
+        });
+            });
+
 }
