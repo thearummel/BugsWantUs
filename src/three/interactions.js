@@ -56,7 +56,11 @@ export function setupInteractions(world, refs, state, router) {
     {
         object: refs.river,
         action:() => router.push("/River")
-    }
+    },
+    {
+        object: refs.sink,
+        action:() => router.push("/Sink")
+    },
 ];
 
 for (const item of interactables) {

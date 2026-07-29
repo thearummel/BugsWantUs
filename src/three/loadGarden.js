@@ -53,6 +53,10 @@ export function loadGarden(world, refs) {
             "gardengrasone",
             "gardengrastwo",
             "gardengrasthree",
+            "GardenSmallFlowerone",
+            "GardenSmallFlowertwo",
+            "GardenPlant",
+            "GardenPlantTwo"
         ];
 
         objects.forEach(name => {

@@ -29,7 +29,7 @@ export function loadRiver(world, refs) {
 
         // place camera straight on along +Z axis looking to origin
         world.camera.position.set(0, 0, distance);
-       
+
         // Restrict vertical rotation to be "straight on" (no tilt) if you want:
         // This will lock the polar angle so camera cannot tilt up/down.
         world.controls.minDistance = 0.1;
@@ -37,10 +37,49 @@ export function loadRiver(world, refs) {
 
 
         world.controls.update();
-   
-  world.camera.updateProjectionMatrix();
 
+        world.camera.updateProjectionMatrix();
 
+ /* const objects = [
+            "RiverGrasOne",
+            "RiverGrasTwo",
+            "RiverGrasThree"
+        ];
+
+        objects.forEach(name => {
+
+            refs[name.toLowerCase()] = river.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+
+        }); */
+            
     });
+
+  
+    loader.load("/models/YellowSally.glb", (gltf) => {
+        const yellowsally = gltf.scene;
+        world.scene.add(yellowsally);
+
+        yellowsally.position.set(0, -0.06, 0);
+        yellowsally.scale.set(11, 11, 11);
+
+
+        //call names of animatabel items
+        const objects = [
+           "SallyBody",
+            "SallyLegTwo",
+            "SallyLegOne",
+            "SallyLegLow",
+            "SallyLegMiddle"
+        ];
+  
+         refs.SallyBody = yellowsally.getObjectByName("SallyBody");
+         refs.SallyLegTwo = yellowsally.getObjectByName("SallyLegTwo");
+
+            });
+
 
 }

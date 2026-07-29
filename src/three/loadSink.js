@@ -1,20 +1,20 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-export function loadKitchen(world, refs) {
+export function loadSink(world, refs) {
 
     let loader = new GLTFLoader();
 
-    loader.load("/models/kitchen.glb", (gltf) => {
+    loader.load("/models/Silverfish.glb", (gltf) => {
 
-        let kitchen = gltf.scene;
-        world.scene.add(kitchen);
+        let sink = gltf.scene;
+        world.scene.add(sink);
 
 
-        let box = new THREE.Box3().setFromObject(kitchen);
+        let box = new THREE.Box3().setFromObject(sink);
         let center = box.getCenter(new THREE.Vector3());
 
-        kitchen.position.sub(center);
+        sink.position.sub(center);
 
 
         const sphere = new THREE.Sphere();
@@ -30,6 +30,8 @@ export function loadKitchen(world, refs) {
         // place camera straight on along +Z axis looking to origin
         world.camera.position.set(0, 0, distance);
        
+        // Restrict vertical rotation to be "straight on" (no tilt) if you want:
+        // This will lock the polar angle so camera cannot tilt up/down.
         world.controls.minDistance = 0.1;
         world.controls.maxDistance = 6;
 
@@ -38,15 +40,6 @@ export function loadKitchen(world, refs) {
    
   world.camera.updateProjectionMatrix();
 
-        refs.bowl = kitchen.getObjectByName("Bowl");
-        if (refs.bowl) {
-            console.log("bowl found");
-        }
-
-        refs.sink = kitchen.getObjectByName("Sink");
-        if (refs.sink) {
-            console.log("sink found");
-        }
 
     });
 

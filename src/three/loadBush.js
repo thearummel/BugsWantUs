@@ -37,4 +37,12 @@ export function loadBush(world, refs) {
         world.camera.updateProjectionMatrix();
 
     });
+
+    loader.load("/models/butterfly.glb", (gltf) => {
+        const butterfly = gltf.scene;
+        world.scene.add(butterfly);
+
+        butterfly.position.set(0, -0.8, 3.7);
+        butterfly.scale.set(0.5, 0.5, 0.5);
+            });
 }

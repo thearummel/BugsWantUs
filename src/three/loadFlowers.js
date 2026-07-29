@@ -26,7 +26,7 @@ export function loadFlowers(world, refs) {
 
                 refs.grasses.push({
                     object: grass,
-                    baseRotation: grass.rotation.y,
+                     baseRotation: grass.rotation.y,
                     offset: i * 0.7
                 });
 

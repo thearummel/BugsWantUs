@@ -43,7 +43,8 @@ export function loadCounter(world, refs) {
 
         //call names of animatabel items
         const objects = [
-            "Plant2",
+            "FlyRightWing",
+            "FlyLeftWing",
         ];
 
         objects.forEach(name => {
