@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
-import ArrowLeftIcon from "./icons/ArrowLeftIcon";
+import MenuIcon from "./icons/MenuIcon";
 
-export default function BackButton({ className = "", fallbackHref = "/" }) {
+export default function MenuButton({ className = "", fallbackHref = "/" }) {
   const router = useRouter();
 
   const goBack = () => {
@@ -23,7 +23,7 @@ export default function BackButton({ className = "", fallbackHref = "/" }) {
       type="button"
       style ={{background: "transparent", border: "none"}}
     >
-      <ArrowLeftIcon size={64} />
+      <MenuIcon size={64} />
     </button>
   );
 }

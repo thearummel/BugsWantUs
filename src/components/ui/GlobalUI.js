@@ -2,23 +2,29 @@
 import React from "react";
 import styles from "./global-ui.module.css";
 import BackButton from "./BackButton";
-import { ArrowLeftIcon } from "./icons/ArrowLeftIcon";
+import MenuButton from "./MenuButton";
+import BarBottom from "./BarBottom";
+import InfoButton from "./InfoButton";
+
 
 // Top-level UI wrapper. Place global buttons, overlays, status bars here.
 // Keep markup minimal so adding this to layout.js is cheap.
 export default function GlobalUI() {
-  return (
-    <div className={styles.globalUi}>
-      <div className={styles.left}>
-        <BackButton />
-      </div>
+    return (
+        <div className={styles.globalUi}>
+            <div className={styles.bottomleft}>
+                <BackButton />
+            </div>
+            <div className={styles.right}>
+                <MenuButton />
+            </div>
+            <div className={styles.bottommiddle}>
+                <BarBottom />
+            </div>
+            <div className={styles.left}>
+                <InfoButton />
+            </div>
 
-      <div className={styles.right}>
-        {/* Example place for other shared UI elements (toggle, status, theme switch) */}
-        <button className={styles.iconBtn} aria-label="Example action">
-          <ArrowLeftIcon size={18} />
-        </button>
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
