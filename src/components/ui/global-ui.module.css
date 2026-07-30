@@ -1,0 +1,26 @@
+.globalUi {
+  position: fixed;
+  inset: 0;
+  pointer-events: none; /* let underlying content receive events where UI has no elements */
+}
+.left {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  pointer-events: auto;
+}
+.right {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  pointer-events: auto;
+}
+.iconBtn {
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
