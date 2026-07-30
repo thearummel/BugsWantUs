@@ -10,8 +10,8 @@ export function loadBeetle(world, refs) {
         let beetle = gltf.scene;
         world.scene.add(beetle);
 
-       
-       
+
+
 
         let box = new THREE.Box3().setFromObject(beetle);
         let center = box.getCenter(new THREE.Vector3());
@@ -19,26 +19,20 @@ export function loadBeetle(world, refs) {
         beetle.position.sub(center);
 
 
-   
+
         // place camera straight on along +Z axis looking to origin
-        world.camera.position.set(1, 0, 7.6 );
-       
+        world.camera.position.set(1, 0, 7.6);
+
         // Restrict vertical rotation to be "straight on" (no tilt) if you want:
         // This will lock the polar angle so camera cannot tilt up/down.
- 
+
 
         world.controls.minDistance = 0.1;
         world.controls.maxDistance = 8;
 
-
-    
-
-
-
-
         world.controls.update();
 
-const objects = [
+        const objects = [
             "Ranke",
             "BeetlePflanze",
             "beetlewingleft",

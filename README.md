@@ -7,6 +7,7 @@ Bog:
 a
 - BogPlantOne 
 - BogPlantTwo
+- Clouds
 
 c
 - GrashopperPlant
@@ -77,3 +78,7 @@ Moth
 - MothAntenna
 - MothAntennaTwo
 
+
+Butterfly
+- AntennaOne
+- AntennaTwo

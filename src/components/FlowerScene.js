@@ -9,46 +9,47 @@ import { useRouter } from "next/navigation";
 
 export default function FlowerScene() {
 
-   const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0);  
-let canvasRef = useRef(null);
+    const [loading, setLoading] = useState(true);
+    const [progress, setProgress] = useState(0);
+    let canvasRef = useRef(null);
     let router = useRouter();
 
     useEffect(() => {
 
         let world = setupScene(canvasRef.current);
-world.loadingManager.onLoad = () => {
-    setLoading(false);
-};
+        world.loadingManager.onLoad = () => {
+            setLoading(false);
+        };
 
 
-  
+
         let refs = {
             plant2: null,
             plant2BaseScale: null,
-            door: null
+            door: null,
+
         };
         let state = {
-        targetZ: 20
-};
+            targetZ: 20
+        };
 
-      
+
         loadFlowers(world, refs);
 
         // Setup mouse / resize / click events
-let cleanupInteractions = setupInteractions(
-    world,
-    refs,
-    state,
-    router
-);
+        let cleanupInteractions = setupInteractions(
+            world,
+            refs,
+            state,
+            router
+        );
 
         // Start render loop
-       let cleanupAnimation = animate(
-    world,
-    refs,
-    state
-);
+        let cleanupAnimation = animate(
+            world,
+            refs,
+            state
+        );
         return () => {
 
             cleanupAnimation();

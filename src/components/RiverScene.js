@@ -9,31 +9,34 @@ import { useRouter } from "next/navigation";
 
 export default function RiverScene() {
 
-   const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0);  
-let canvasRef = useRef(null);
+    const [loading, setLoading] = useState(true);
+    const [progress, setProgress] = useState(0);
+    let canvasRef = useRef(null);
     let router = useRouter();
 
     useEffect(() => {
 
         let world = setupScene(canvasRef.current);
-world.loadingManager.onLoad = () => {
-    setLoading(false);
-};
+        world.loadingManager.onLoad = () => {
+            setLoading(false);
+        };
+
+        let refs = {
 
 
+        };
 
         let state = {
             targetZ: 20
         };
 
 
-        loadRiver(world);
+        loadRiver(world, refs);
 
         // Setup mouse / resize / click events
         let cleanupInteractions = setupInteractions(
             world,
-     
+            refs,
             state,
             router
         );
@@ -41,7 +44,7 @@ world.loadingManager.onLoad = () => {
         // Start render loop
         let cleanupAnimation = animate(
             world,
-          
+            refs,
             state
         );
         return () => {

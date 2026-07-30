@@ -33,7 +33,7 @@ export function loadSink(world, refs) {
         // Restrict vertical rotation to be "straight on" (no tilt) if you want:
         // This will lock the polar angle so camera cannot tilt up/down.
         world.controls.minDistance = 0.1;
-        world.controls.maxDistance = 6;
+        world.controls.maxDistance = 2.5;
 
 
         world.controls.update();

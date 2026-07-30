@@ -40,7 +40,9 @@ export function loadRiver(world, refs) {
 
         world.camera.updateProjectionMatrix();
 
- /* const objects = [
+    
+
+        const objects = [
             "RiverGrasOne",
             "RiverGrasTwo",
             "RiverGrasThree"
@@ -54,11 +56,11 @@ export function loadRiver(world, refs) {
                 console.log(`${name} found`);
             }
 
-        }); */
-            
+        });
+
     });
 
-  
+
     loader.load("/models/YellowSally.glb", (gltf) => {
         const yellowsally = gltf.scene;
         world.scene.add(yellowsally);
@@ -66,20 +68,24 @@ export function loadRiver(world, refs) {
         yellowsally.position.set(0, -0.06, 0);
         yellowsally.scale.set(11, 11, 11);
 
-
-        //call names of animatabel items
-        const objects = [
-           "SallyBody",
+           const objects = [
+            "SallyBody",
             "SallyLegTwo",
             "SallyLegOne",
             "SallyLegLow",
-            "SallyLegMiddle"
-        ];
-  
-         refs.SallyBody = yellowsally.getObjectByName("SallyBody");
-         refs.SallyLegTwo = yellowsally.getObjectByName("SallyLegTwo");
+            "SallyLegMiddle",
+        ]
+         objects.forEach(name => {
 
-            });
+            refs[name.toLowerCase()] = yellowsally.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+
+        });
+
+    });
 
 
 }

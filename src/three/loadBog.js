@@ -18,13 +18,13 @@ export function loadBog(world, refs) {
         bog.position.sub(center);
 
 
-        world.camera.position.set(0, 0, 5);
+        world.camera.position.set(0, 0, 7);
 
         // Restrict vertical rotation to be "straight on" (no tilt) if you want:
         // This will lock the polar angle so camera cannot tilt up/down.
 
         world.controls.minDistance = 0.1;
-        world.controls.maxDistance = 5;
+        world.controls.maxDistance = 7;
         world.controls.update();
 
 
@@ -36,7 +36,22 @@ export function loadBog(world, refs) {
         }
 
 
+        const objects = [
+            "Clouds",
+            "BogPlantTwo",
+            "BogPlantOne",
+        
+        ];
 
+        objects.forEach(name => {
+
+            refs[name.toLowerCase()] = bog.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+
+        });
 
 
     });
