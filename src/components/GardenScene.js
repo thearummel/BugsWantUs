@@ -61,9 +61,10 @@ export default function GardenScene() {
 
             cleanupAnimation();
             cleanupInteractions();
-
             world.controls.dispose();
             world.renderer.dispose();
+            world.renderer.domElement = null
+
 
         };
 

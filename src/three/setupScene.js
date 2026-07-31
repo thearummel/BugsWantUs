@@ -20,19 +20,20 @@ export function setupScene(canvas) {
         alpha: true
     });
 
-    renderer.setPixelRatio(window.devicePixelRatio || 1);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = false
 
     const controls = new OrbitControls(camera, renderer.domElement);
 
+    // disable pan and built-in wheel zoom so we can supply our own
+    controls.enablePan = false;
+    controls.enableRotate = false;
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.zoomToCursor = true;
-    controls.enablePan = true;
+    // controls.enablePan = true;
 
-   
-
-  
 
     // lights
     const dir = new THREE.DirectionalLight(0xffffff, 4);
@@ -48,15 +49,15 @@ export function setupScene(canvas) {
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
-    window.addEventListener("resize", onWindowResize);
+
 
     return {
-    scene,
-    camera,
-    renderer,
-    controls,
-    raycaster,
-    mouse,
-    loadingManager
-};
+        scene,
+        camera,
+        renderer,
+        controls,
+        raycaster,
+        mouse,
+        loadingManager
+    };
 }
