@@ -12,7 +12,7 @@ export default function OverlayMenu() {
   const firstCardRef = useRef(null);
 
   // Lock background scroll & manage focus
-  useEffect(() => {
+ /*  useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
       // focus first card after open
@@ -23,7 +23,7 @@ export default function OverlayMenu() {
       document.body.style.overflow = "";
       menuBtnRef.current?.focus();
     }
-  }, [open]);
+  }, [open]); */
 
   // Close on Escape
   useEffect(() => {
@@ -31,6 +31,8 @@ export default function OverlayMenu() {
       if (e.key === "Escape" && open) setOpen(false);
     }
     document.addEventListener("keydown", onKey);
+
+    // cleanup funcion 
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
@@ -39,10 +41,11 @@ export default function OverlayMenu() {
     if (e.target === overlayRef.current) setOpen(false);
   }
 
+  // card data could be body and title and things like that
 const cards = [
-  { id: 1, path: "/SVG/card1.svg", title: "Card 1" },
-  { id: 2, path: "/SVG/card2.svg", title: "Card 2" },
-  { id: 3, path: "/SVG/card3.svg", title: "Card 3" },
+  { id: 1, path: "./SVG/card1.svg", title: "Card 1" },
+  { id: 2, path: "./SVG/card2.svg", title: "Card 2" },
+  { id: 3, path: "./SVG/card3.svg", title: "Card 3" },
 ];
 
   return (
@@ -71,7 +74,7 @@ const cards = [
           onClick={(e) => e.stopPropagation()}
         >
           <header className={styles.overlayHeader}>
-            <h2>Cards</h2>
+            <h2>Invitations you have given out:</h2>
             <button
               aria-label="Close overlay"
               className={styles.closeBtn}
@@ -89,7 +92,7 @@ const cards = [
                 tabIndex={open ? 0 : -1}
                 ref={idx === 0 ? firstCardRef : null}
               >
-                <img src={c.svg} alt={c.title} />
+                <img src={c.path} alt={c.title} />
               </article>
             ))}
           </main>
