@@ -30,7 +30,7 @@ export function setupInteractions(world, refs, state, router) {
        const interactables = [
     {
         object: refs.door,
-        action: () => router.push("/about"),
+        action: () => router.push("/Kitchen"),
     },
     {
         object: refs.lake,

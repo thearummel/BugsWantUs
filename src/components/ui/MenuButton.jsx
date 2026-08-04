@@ -1,29 +1,30 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import MenuIcon from "./icons/MenuIcon";
 
-export default function MenuButton({ className = "", fallbackHref = "/" }) {
-  const router = useRouter();
-
-  const goBack = () => {
-    // prefer router.back for SPA navigation, fallback to a known route
-    if (typeof window !== "undefined" && window.history.length > 1) {
-      router.back();
-    } else {
-      router.push(fallbackHref);
+const MenuButton = React.forwardRef(function MenuButton(
+  { className = "", fallbackHref = "/", onClick, ...rest },
+  ref
+) {
+  const handleClick = (e) => {
+    if (typeof onClick === "function") {
+      onClick(e);
     }
   };
 
   return (
     <button
-      onClick={goBack}
-      aria-label="Go back"
+      onClick={handleClick}
+      aria-label="Menu"
       className={className}
       type="button"
-      style ={{background: "transparent", border: "none"}}
+      style={{ background: "transparent", border: "none" }}
+      ref={ref}
+      {...rest} // allows aria-controls / aria-expanded to be passed
     >
       <MenuIcon size={64} />
     </button>
   );
-}
+});
+
+export default MenuButton;

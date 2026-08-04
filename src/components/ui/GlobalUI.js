@@ -5,6 +5,7 @@ import BackButton from "./BackButton";
 import MenuButton from "./MenuButton";
 import BarBottom from "./BarBottom";
 import InfoButton from "./InfoButton";
+import OverlayMenu from "./OverlayMenu"
 
 
 // Top-level UI wrapper. Place global buttons, overlays, status bars here.
@@ -16,7 +17,7 @@ export default function GlobalUI() {
                 <BackButton />
             </div>
             <div className={styles.right}>
-                <MenuButton />
+                <OverlayMenu />
             </div>
             <div className={styles.bottommiddle}>
                 <BarBottom />

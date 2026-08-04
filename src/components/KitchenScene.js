@@ -7,7 +7,7 @@ import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
 
-export default function AboutScene() {
+export default function KitchenScene() {
 
    const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0);  
