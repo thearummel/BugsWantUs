@@ -43,6 +43,11 @@ export function loadKitchen(world, refs) {
             console.log("bowl found");
         }
 
+        refs.sink = kitchen.getObjectByName("Sink");
+        if (refs.sink) {
+            console.log("sink found");
+        }
+
     });
 
 }

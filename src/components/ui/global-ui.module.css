@@ -1,0 +1,48 @@
+.globalUi {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.left {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  pointer-events: auto;
+}
+
+.right {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  pointer-events: auto;
+}
+
+.bottomleft {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  pointer-events: auto;
+}
+
+.bottommiddle {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-70%);
+  pointer-events: auto;
+}
+
+.iconBtn {
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backBtn {
+  background: transparent;
+}

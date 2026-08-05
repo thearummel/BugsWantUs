@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
 import { setupScene } from "@/three/setupScene";
 import { loadBog } from "@/three/loadBog";
 import { setupInteractions } from "@/three/interactions";
@@ -10,43 +9,48 @@ import { useRouter } from "next/navigation";
 
 export default function Scene() {
 
+    const [loading, setLoading] = useState(true);
+    const [progress, setProgress] = useState(0);
     let canvasRef = useRef(null);
     let router = useRouter();
 
     useEffect(() => {
 
         let world = setupScene(canvasRef.current);
+        world.loadingManager.onLoad = () => {
+            setLoading(false);
+        };
 
 
 
-  
+
         let refs = {
             plant2: null,
             plant2BaseScale: null,
             door: null,
-            lake:null,
+            lake: null,
         };
         let state = {
-        targetZ: 20
-};
+            targetZ: 20
+        };
 
-      
+
         loadBog(world, refs);
 
         // Setup mouse / resize / click events
-      let cleanupInteractions = setupInteractions(
-    world,
-    refs,
-    state,
-    router
-);
+        let cleanupInteractions = setupInteractions(
+            world,
+            refs,
+            state,
+            router
+        );
 
         // Start render loop
-       let cleanupAnimation = animate(
-    world,
-    refs,
-    state
-);
+        let cleanupAnimation = animate(
+            world,
+            refs,
+            state
+        );
         return () => {
 
             cleanupAnimation();
