@@ -49,15 +49,12 @@ let cleanupInteractions = setupInteractions(
     refs,
     state
 );
-        return () => {
-
-            cleanupAnimation();
-            cleanupInteractions();
-
-            world.controls.dispose();
-            world.renderer.dispose();
-
-        };
+     return () => {
+  cleanupAnimation?.();
+  cleanupInteractions?.(); // safe call
+  world.controls?.dispose();
+  world.renderer?.dispose();
+};
 
     }, []);
 

@@ -7,7 +7,6 @@ export default function BackButton({ className = "", fallbackHref = "/" }) {
   const router = useRouter();
 
   const goBack = () => {
-    // prefer router.back for SPA navigation, fallback to a known route
     if (typeof window !== "undefined" && window.history.length > 1) {
       router.back();
     } else {

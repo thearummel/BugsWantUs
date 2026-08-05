@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-
+import { registerAnimal } from "./animals.js"; 
 
 export function loadGarden(world, refs) {
     const loader = new GLTFLoader(world.loadingManager);
@@ -66,6 +66,10 @@ export function loadGarden(world, refs) {
         world.scene.add(moth);
 
         moth.position.set(-1.6, -0.2, 2);
+
+      refs.moth = moth;
+
+    registerAnimal("moth", moth, world.scene);
 
         const objects = [
             "Moth",

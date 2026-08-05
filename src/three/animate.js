@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
-export function animate(world, refs, state, options = {}) {
+export function animate(world, refs = {}) {
     let animationId;
     let running = true;
 
-    // Set static control constraints once (optional)
+    // Set control 
     if (world && world.controls) {
         world.controls.minPolarAngle = Math.PI / 2;
         world.controls.maxPolarAngle = Math.PI / 2;
@@ -13,17 +13,15 @@ export function animate(world, refs, state, options = {}) {
     }
 
 
-
-
     function render() {
-        // stop quickly if we've been asked to quit
+      
         if (!running) return;
         animationId = requestAnimationFrame(render);
 
-        // update controls first (necessary for damping)
+         // update controls first for damping
         if (world.controls && typeof world.controls.update === "function") {
             world.controls.update();
-        }
+        } 
 
         const z = world.camera.position.z;
 

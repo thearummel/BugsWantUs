@@ -1,30 +1,55 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
-import styles from "./overlay.module.css";
 import MenuButton from "./MenuButton";
+import { getCollectedIds } from "@/three/animals.js";
+import styles from "./overlay.module.css";
 
+
+const animalCardMap = {
+  fly: { id: "fly-card", path: "./SVG/card1.svg", title: "Fly Card" },
+  beetle: { id: "beetle-card", path: "./SVG/beetleCard.svg", title: "Beetle Card" },
+  moth: { id: "moth-card", path: "./SVG/mothCard.svg", title: "Moth Card" },
+
+  
+};
 
 export default function OverlayMenu() {
   const [open, setOpen] = useState(false);
   const overlayRef = useRef(null);
-  const menuBtnRef = useRef(null); 
+  const menuBtnRef = useRef(null);
   const firstCardRef = useRef(null);
 
   // Lock background scroll & manage focus
- /*  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-      // focus first card after open
-      setTimeout(() => {
-        firstCardRef.current?.focus();
-      }, 50);
-    } else {
-      document.body.style.overflow = "";
-      menuBtnRef.current?.focus();
-    }
-  }, [open]); */
+  /*  useEffect(() => {
+     if (open) {
+       document.body.style.overflow = "hidden";
+       // focus first card after open
+       setTimeout(() => {
+         firstCardRef.current?.focus();
+       }, 50);
+     } else {
+       document.body.style.overflow = "";
+       menuBtnRef.current?.focus();
+     }
+   }, [open]); */
 
+  const [cards, setCards] = useState(() => {
+    const collected = getCollectedIds();
+    const animalCards = collected.map(id => animalCardMap[id]).filter(Boolean);
+    return [...animalCards, /* ...baseCards */];
+  });
+
+  useEffect(() => {
+    function onAnimalCollected(e) {
+      const id = e.detail?.id;
+      if (!id) return;
+      const card = animalCardMap[id];
+      if (!card) return;
+      setCards(prev => (prev.some(c => c.id === card.id) ? prev : [card, ...prev]));
+    }
+    window.addEventListener("animalCollected", onAnimalCollected);
+    return () => window.removeEventListener("animalCollected", onAnimalCollected);
+  }, []);
   // Close on Escape
   useEffect(() => {
     function onKey(e) {
@@ -42,11 +67,6 @@ export default function OverlayMenu() {
   }
 
   // card data could be body and title and things like that
-const cards = [
-  { id: 1, path: "./SVG/card1.svg", title: "Card 1" },
-  { id: 2, path: "./SVG/card2.svg", title: "Card 2" },
-  { id: 3, path: "./SVG/card3.svg", title: "Card 3" },
-];
 
   return (
     <>
@@ -87,7 +107,7 @@ const cards = [
           <main className={styles.cardsGrid} id="cardsGrid">
             {cards.map((c, idx) => (
               <article
-                key={c.id}
+                key={c.id} 
                 className={styles.card}
                 tabIndex={open ? 0 : -1}
                 ref={idx === 0 ? firstCardRef : null}
