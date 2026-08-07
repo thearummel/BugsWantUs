@@ -9,8 +9,12 @@ const animalCardMap = {
   fly: { id: "fly-card", path: "./SVG/card1.svg", title: "Fly Card" },
   beetle: { id: "beetle-card", path: "./SVG/beetleCard.svg", title: "Beetle Card" },
   moth: { id: "moth-card", path: "./SVG/mothCard.svg", title: "Moth Card" },
-
-  
+  silverfish: { id: "silverfish-card", path: "./SVG/silverfishCard.svg", title: "Silverfish Card" },
+  butterfly: { id: "butterfly-card", path: "./SVG/butterflyCard.svg", title: "Butterfly Card" },
+  bee: { id: "bee-card", path: "./SVG/beeCard.svg", title: "Bee Card" },
+  beetlebody: { id: "beetlebody-card", path: "./SVG/beetlebodyCard.svg", title: "Beetle Card" },
+  yellowsally: { id: "yellowsally-card", path: "./SVG/yellowsallyCard.svg", title: "Yellowsally Card" },
+  grashopper: { id: "grashopper-card", path: "./SVG/grashopperCard.svg", title: "Grashopper Card" },
 };
 
 export default function OverlayMenu() {
@@ -107,7 +111,7 @@ export default function OverlayMenu() {
           <main className={styles.cardsGrid} id="cardsGrid">
             {cards.map((c, idx) => (
               <article
-                key={c.id} 
+                key={c.id}
                 className={styles.card}
                 tabIndex={open ? 0 : -1}
                 ref={idx === 0 ? firstCardRef : null}

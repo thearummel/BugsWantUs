@@ -6,34 +6,41 @@ import { loadSink } from "@/three/loadSink";
 import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
+import Loader from "./Loader/Loader";
+import "./Loader/Loader.css";
+
 
 export default function SinkScene() {
 
-   const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0);  
-let canvasRef = useRef(null);
+    const [loading, setLoading] = useState(true);
+    
+    let canvasRef = useRef(null);
     let router = useRouter();
 
     useEffect(() => {
 
         let world = setupScene(canvasRef.current);
-world.loadingManager.onLoad = () => {
-    setLoading(false);
-};
+        world.loadingManager.onLoad = () => {
+            setLoading(false);
+        };
 
+        let refs = {
 
+        };
 
         let state = {
             targetZ: 20
         };
 
 
-        loadSink(world);
+        loadSink(world, refs, () => {
+            setLoading(false);
+        });
 
         // Setup mouse / resize / click events
         let cleanupInteractions = setupInteractions(
             world,
-     
+            refs,
             state,
             router
         );
@@ -41,22 +48,24 @@ world.loadingManager.onLoad = () => {
         // Start render loop
         let cleanupAnimation = animate(
             world,
-          
+            refs,
             state
         );
         return () => {
 
-            cleanupAnimation();
+             cleanupAnimation();
             cleanupInteractions();
-
             world.controls.dispose();
             world.renderer.dispose();
+            world.renderer.domElement = null
 
         };
 
     }, []);
 
     return (
+        <>
+                    {loading && <Loader />}
         <canvas
             ref={canvasRef}
             style={{
@@ -65,6 +74,7 @@ world.loadingManager.onLoad = () => {
                 display: "block"
             }}
         />
+          </>
     );
 
 }

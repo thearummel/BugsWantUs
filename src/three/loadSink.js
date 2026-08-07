@@ -1,11 +1,12 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { registerAnimal } from "./animals.js";
 
 export function loadSink(world, refs) {
+  const loader = new GLTFLoader(world.loadingManager);
 
-    let loader = new GLTFLoader();
 
-    loader.load("/models/Silverfish.glb", (gltf) => {
+    loader.load("/models/Sink.glb", (gltf) => {
 
         let sink = gltf.scene;
         world.scene.add(sink);
@@ -29,18 +30,31 @@ export function loadSink(world, refs) {
 
         // place camera straight on along +Z axis looking to origin
         world.camera.position.set(0, 0, distance);
-       
+
         // Restrict vertical rotation to be "straight on" (no tilt) if you want:
         // This will lock the polar angle so camera cannot tilt up/down.
         world.controls.minDistance = 0.1;
         world.controls.maxDistance = 2.5;
 
 
+
         world.controls.update();
-   
-  world.camera.updateProjectionMatrix();
+
+        world.camera.updateProjectionMatrix();
 
 
+    });
+
+    loader.load("/models/Silverfish.glb", (gltf) => {
+        const silverfish = gltf.scene;
+  
+
+        silverfish.position.set(-0.3, -0.8, 0);
+        silverfish.scale.set(0.5, 0.5, 0.5);
+
+        refs.silverfish = silverfish;
+
+        registerAnimal("silverfish", silverfish, world.scene);
     });
 
 }

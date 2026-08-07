@@ -1,9 +1,10 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { registerAnimal } from "./animals.js";
 
 export function loadFlowers(world, refs) {
-
-    const loader = new GLTFLoader();
+console.log(refs)
+    const loader = new GLTFLoader(world.loadingManager);
 
     loader.load("/models/flower.glb", (gltf) => {
 
@@ -26,7 +27,7 @@ export function loadFlowers(world, refs) {
 
                 refs.grasses.push({
                     object: grass,
-                     baseRotation: grass.rotation.y,
+                    baseRotation: grass.rotation.y,
                     offset: i * 0.7
                 });
 
@@ -48,13 +49,9 @@ export function loadFlowers(world, refs) {
 
         flowers.position.sub(center);
 
-
-
         world.camera.position.set(0, 20, 5);
 
         world.controls.target.set(0, 0, 0);
-
-
 
         world.controls.minDistance = 0.1;
         world.controls.maxDistance = 5;
@@ -63,16 +60,17 @@ export function loadFlowers(world, refs) {
         world.camera.updateProjectionMatrix();
 
     });
-     loader.load("/models/bee.glb", (gltf) => {
+
+    loader.load("/models/bee.glb", (gltf) => {
         const bee = gltf.scene;
-        world.scene.add(bee);
 
         bee.position.set(-1.2, -0.2, 0.8);
         bee.scale.set(0.5, 0.5, 0.5);
 
+        refs.bee = bee;
+        registerAnimal("bee", bee, world.scene);
 
-     
-    
-            });
+
+    });
 
 }

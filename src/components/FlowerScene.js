@@ -6,11 +6,13 @@ import { loadFlowers } from "@/three/loadFlowers";
 import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
+import Loader from "./Loader/Loader";
+import "./Loader/Loader.css";
 
 export default function FlowerScene() {
 
     const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0);
+
     let canvasRef = useRef(null);
     let router = useRouter();
 
@@ -24,9 +26,7 @@ export default function FlowerScene() {
 
 
         let refs = {
-            plant2: null,
-            plant2BaseScale: null,
-            door: null,
+         
 
         };
         let state = {
@@ -34,7 +34,9 @@ export default function FlowerScene() {
         };
 
 
-        loadFlowers(world, refs);
+        loadFlowers(world, refs, () => {
+            setLoading(false);
+        });
 
         // Setup mouse / resize / click events
         let cleanupInteractions = setupInteractions(
@@ -54,23 +56,26 @@ export default function FlowerScene() {
 
             cleanupAnimation();
             cleanupInteractions();
-
             world.controls.dispose();
             world.renderer.dispose();
+            world.renderer.domElement = null
 
         };
 
     }, []);
 
     return (
-        <canvas
-            ref={canvasRef}
-            style={{
-                width: "100vw",
-                height: "100vh",
-                display: "block"
-            }}
-        />
+        <>
+            {loading && <Loader />}
+            <canvas
+                ref={canvasRef}
+                style={{
+                    width: "100vw",
+                    height: "100vh",
+                    display: "block"
+                }}
+            />
+        </>
     );
 
 }

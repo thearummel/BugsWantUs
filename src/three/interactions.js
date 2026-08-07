@@ -10,13 +10,14 @@ export function setupInteractions(world, refs, state, router) {
 
   const animalIds = [
     "fly",
-    "beetle",
+    "beetlebody",
     "moth",
-    "sally",
+    "yellowsally",
     "silverfish",
     "butterfly",
     "grashopper",
     "ladybird",
+    "bee"
       ];
 
   function onClick(event) {

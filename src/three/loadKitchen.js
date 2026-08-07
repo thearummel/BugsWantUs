@@ -1,9 +1,10 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { registerAnimal } from "./animals.js"; 
 
 export function loadKitchen(world, refs) {
 
-    let loader = new GLTFLoader();
+    const loader = new GLTFLoader(world.loadingManager);
 
     loader.load("/models/kitchen.glb", (gltf) => {
 
