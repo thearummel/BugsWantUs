@@ -1,13 +1,14 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { registerAnimal } from "./animals.js";
 
 export function loadRiver(world, refs) {
 
-    let loader = new GLTFLoader();
+    const loader = new GLTFLoader(world.loadingManager);
 
     loader.load("/models/byRiver.glb", (gltf) => {
 
-        let river = gltf.scene;
+        const river = gltf.scene;
         world.scene.add(river);
 
 
@@ -21,7 +22,7 @@ export function loadRiver(world, refs) {
         box.getBoundingSphere(sphere);
         const radius = sphere.radius;
 
-        // compute an appropriate camera distance so the whole model fits in view.
+        // compute camera distance so the whole model fits in view.
         // using vertical fov (camera.fov is degrees)
         const fov = world.camera.fov * (Math.PI / 180); // radians
         // distance so that sphere fits vertically in frustum: d = r / sin(fov/2)
@@ -40,7 +41,7 @@ export function loadRiver(world, refs) {
 
         world.camera.updateProjectionMatrix();
 
-    
+
 
         const objects = [
             "RiverGrasOne",
@@ -63,19 +64,23 @@ export function loadRiver(world, refs) {
 
     loader.load("/models/YellowSally.glb", (gltf) => {
         const yellowsally = gltf.scene;
-        world.scene.add(yellowsally);
 
-        yellowsally.position.set(0, -0.06, 0);
-        yellowsally.scale.set(11, 11, 11);
+        yellowsally.position.set(-0.8, -0.08, 0);
+        yellowsally.rotation.set(0,0,-0.1)
+        yellowsally.scale.set(21, 21, 21);
 
-           const objects = [
+        refs.yellowsally = yellowsally;
+        
+        registerAnimal("yellowsally", yellowsally, world.scene);
+
+        const objects = [
             "SallyBody",
             "SallyLegTwo",
             "SallyLegOne",
             "SallyLegLow",
             "SallyLegMiddle",
         ]
-         objects.forEach(name => {
+        objects.forEach(name => {
 
             refs[name.toLowerCase()] = yellowsally.getObjectByName(name);
 

@@ -1,9 +1,11 @@
 
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { registerAnimal } from "./animals.js"; 
 
 export function loadBog(world, refs) {
-    const loader = new GLTFLoader();
+       const loader = new GLTFLoader(world.loadingManager);
+
 
     loader.load("/models/Bog.glb", (gltf) => {
         const bog = gltf.scene;
@@ -52,7 +54,23 @@ export function loadBog(world, refs) {
             }
 
         });
-
-
     });
+
+    loader.load("/models/Grashopper.glb", (gltf) => {
+        const grashopper = gltf.scene;
+
+        // set transforms before adding to scene
+        grashopper.position.set(-3.25, -1.2, 4.2);
+       /*  grashopper.scale.set(2, 2, 2); */
+
+        // add to refs for indivisual objects later
+        refs.grashopper = grashopper;
+
+        // register with centralized registry; it will add to scene only if not collected
+        registerAnimal("grashopper", grashopper, world.scene);
+
+
+       
+    });
+
 }

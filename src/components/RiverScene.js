@@ -6,11 +6,13 @@ import { loadRiver } from "@/three/loadRiver";
 import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
+import Loader from "./Loader/Loader";
+import "./Loader/Loader.css";
 
 export default function RiverScene() {
 
     const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0);
+
     let canvasRef = useRef(null);
     let router = useRouter();
 
@@ -31,7 +33,10 @@ export default function RiverScene() {
         };
 
 
-        loadRiver(world, refs);
+        loadRiver(world, refs, () => {
+            setLoading(false);
+        });
+
 
         // Setup mouse / resize / click events
         let cleanupInteractions = setupInteractions(
@@ -49,25 +54,29 @@ export default function RiverScene() {
         );
         return () => {
 
-            cleanupAnimation();
-            cleanupInteractions();
-
-            world.controls.dispose();
-            world.renderer.dispose();
+            cleanupAnimation?.();
+            cleanupInteractions?.();
+            world.controls?.dispose();
+            world.renderer?.dispose();
+            world.renderer.domElement = null;
 
         };
 
     }, []);
 
     return (
-        <canvas
-            ref={canvasRef}
-            style={{
-                width: "100vw",
-                height: "100vh",
-                display: "block"
-            }}
-        />
+      <>
+                 {loading && <Loader />}
+     
+                 <canvas
+                     ref={canvasRef}
+                     style={{
+                         width: "100vw",
+                         height: "100vh",
+                         display: "block"
+                     }}
+                 />
+             </>
     );
 
 }

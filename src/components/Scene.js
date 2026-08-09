@@ -6,6 +6,8 @@ import { loadBog } from "@/three/loadBog";
 import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
+import Loader from "./Loader/Loader";
+import "./Loader/Loader.css";
 
 export default function Scene() {
 
@@ -35,7 +37,9 @@ export default function Scene() {
         };
 
 
-        loadBog(world, refs);
+        loadBog(world, refs, () => {
+            setLoading(false);
+        });
 
         // Setup mouse / resize / click events
         let cleanupInteractions = setupInteractions(
@@ -58,20 +62,25 @@ export default function Scene() {
 
             world.controls.dispose();
             world.renderer.dispose();
+              world.renderer.domElement = null;
 
         };
 
     }, []);
 
     return (
-        <canvas
-            ref={canvasRef}
-            style={{
-                width: "100vw",
-                height: "100vh",
-                display: "block"
-            }}
-        />
+        <>
+            {loading && <Loader />}
+
+            <canvas
+                ref={canvasRef}
+                style={{
+                    width: "100vw",
+                    height: "100vh",
+                    display: "block"
+                }}
+            />
+        </>
     );
 
 }

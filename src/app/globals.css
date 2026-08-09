@@ -35,3 +35,18 @@ a {
   text-decoration: none;
 }
 
+
+.aboutmain{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.mainwrapp{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding-top: 1em;
+  width: 85vw;
+}

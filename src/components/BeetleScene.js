@@ -6,11 +6,13 @@ import { loadBeetle } from "@/three/loadBeetle";
 import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
+import Loader from "./Loader/Loader";
+import "./Loader/Loader.css";
 
 export default function BeetleScene() {
 
     const [loading, setLoading] = useState(true);
-   
+
     let canvasRef = useRef(null);
     let router = useRouter();
 
@@ -22,14 +24,16 @@ export default function BeetleScene() {
         };
 
         let refs = {
-           
+
         };
         let state = {
             targetZ: 20
         };
 
 
-        loadBeetle(world, refs);
+        loadBeetle(world, refs, () => {
+            setLoading(false);
+        });
 
         // Setup mouse / resize / click events
         let cleanupInteractions = setupInteractions(
@@ -49,23 +53,27 @@ export default function BeetleScene() {
 
             cleanupAnimation();
             cleanupInteractions();
-
             world.controls.dispose();
             world.renderer.dispose();
+            world.renderer.domElement = null
 
         };
 
     }, []);
 
     return (
-        <canvas
-            ref={canvasRef}
-            style={{
-                width: "100vw",
-                height: "100vh",
-                display: "block"
-            }}
-        />
+        <>
+            {loading && <Loader />}
+
+            <canvas
+                ref={canvasRef}
+                style={{
+                    width: "100vw",
+                    height: "100vh",
+                    display: "block"
+                }}
+            />
+        </>
     );
 
 }

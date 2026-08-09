@@ -6,67 +6,76 @@ import { loadCounter } from "@/three/loadCounter";
 import { setupInteractions } from "@/three/interactions";
 import { animate } from "@/three/animate";
 import { useRouter } from "next/navigation";
+import Loader from "./Loader/Loader";
+import "./Loader/Loader.css";
 
 export default function CounterScene() {
 
-   const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0);  
-let canvasRef = useRef(null);
+    const [loading, setLoading] = useState(true);
+
+    let canvasRef = useRef(null);
     let router = useRouter();
 
     useEffect(() => {
 
         let world = setupScene(canvasRef.current);
-world.loadingManager.onLoad = () => {
-    setLoading(false);
-};
+        world.loadingManager.onLoad = () => {
+            setLoading(false);
+        };
 
 
-  
+
         let refs = {
             plant2: null,
             plant2BaseScale: null,
             door: null
         };
         let state = {
-        targetZ: 20
-};
+            targetZ: 20
+        };
 
-      
-        loadCounter(world, refs);
+
+        loadCounter(world, refs, () => {
+            setLoading(false);
+        });
 
         // Setup mouse / resize / click events
-let cleanupInteractions = setupInteractions(
-    world,
-    refs,
-    state,
-    router
-);
+        let cleanupInteractions = setupInteractions(
+            world,
+            refs,
+            state,
+            router
+        );
 
         // Start render loop
-       let cleanupAnimation = animate(
-    world,
-    refs,
-    state
-);
-     return () => {
-  cleanupAnimation?.();
-  cleanupInteractions?.(); // safe call
-  world.controls?.dispose();
-  world.renderer?.dispose();
-};
+        let cleanupAnimation = animate(
+            world,
+            refs,
+            state
+        );
+        return () => {
+            cleanupAnimation?.();
+            cleanupInteractions?.(); // safe call
+            world.controls.dispose();
+            world.renderer.dispose();
+            world.renderer.domElement = null;
+        };
 
     }, []);
 
     return (
-        <canvas
-            ref={canvasRef}
-            style={{
-                width: "100vw",
-                height: "100vh",
-                display: "block"
-            }}
-        />
+        <>
+            {loading && <Loader />}
+
+            <canvas
+                ref={canvasRef}
+                style={{
+                    width: "100vw",
+                    height: "100vh",
+                    display: "block"
+                }}
+            />
+        </>
     );
 
 }

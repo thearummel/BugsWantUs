@@ -6,10 +6,10 @@ import InfoIcon from "./icons/InfoIcon";
 export default function InfoButton({ className = "", fallbackHref = "/" }) {
   const router = useRouter();
 
-  const goBack = () => {
+  const goAbout = () => {
     // prefer router.back for SPA navigation, fallback to a known route
     if (typeof window !== "undefined" && window.history.length > 1) {
-      router.back();
+      router.push("/About");
     } else {
       router.push(fallbackHref);
     }
@@ -17,8 +17,8 @@ export default function InfoButton({ className = "", fallbackHref = "/" }) {
 
   return (
     <button
-      onClick={goBack}
-      aria-label="Go back"
+      onClick={goAbout}
+      aria-label="About page"
       className={className}
       type="button"
       style ={{background: "transparent", border: "none"}}

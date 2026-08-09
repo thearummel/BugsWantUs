@@ -83,3 +83,25 @@ Moth
 Butterfly
 - AntennaOne
 - AntennaTwo
+
+
+typewriter something like this:
+useEffect(() => {
+  if (!dialogue) return;
+
+  setDisplayedText("");
+
+  let index = 0;
+
+  const interval = setInterval(() => {
+    setDisplayedText(dialogue.slice(0, index + 1));
+    index++;
+
+    if (index >= dialogue.length) {
+      clearInterval(interval);
+      setDialogueFinished(true);
+    }
+  }, 35);
+
+  return () => clearInterval(interval);
+}, [dialogue]);

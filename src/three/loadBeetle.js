@@ -1,17 +1,15 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { registerAnimal } from "./animals.js";
 
 export function loadBeetle(world, refs) {
-
-    let loader = new GLTFLoader();
+ console.log(refs)
+   const loader = new GLTFLoader(world.loadingManager);
 
     loader.load("/models/Beetle.glb", (gltf) => {
 
         let beetle = gltf.scene;
         world.scene.add(beetle);
-
-
-
 
         let box = new THREE.Box3().setFromObject(beetle);
         let center = box.getCenter(new THREE.Vector3());
@@ -31,15 +29,12 @@ export function loadBeetle(world, refs) {
         world.controls.maxDistance = 8;
 
         world.controls.update();
-
-        const objects = [
-            "Ranke",
+const objects = [
+       "Ranke",
             "BeetlePflanze",
-            "beetlewingleft",
-            "beetlewingright",
-        ];
 
-        objects.forEach(name => {
+  ];
+   objects.forEach(name => {
 
             refs[name.toLowerCase()] = beetle.getObjectByName(name);
 
@@ -48,7 +43,31 @@ export function loadBeetle(world, refs) {
             }
 
         });
+    });
 
+    loader.load("/models/BeetleBody.glb", (gltf) => {
+        const beetlebody = gltf.scene;
+
+        beetlebody.position.set(-2.7, -1, 3.6);
+        beetlebody.scale.set(1, 1, 1);
+
+        refs.beetlebody = beetlebody;
+        registerAnimal("beetlebody", beetlebody, world.scene);
+
+        const objects = [
+            "beetlewingleft",
+            "beetlewingright",
+        ];
+
+        objects.forEach(name => {
+
+            refs[name.toLowerCase()] = beetlebody.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+
+        });
     });
 
 }

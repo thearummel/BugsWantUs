@@ -104,8 +104,9 @@ export function animate(world, refs = {}) {
         if (refs.rivergrasthree) {
             refs.rivergrasthree.rotation.y = Math.sin(time * 1) * 0.08;
         }
-        if (refs.sallylegone) {
-            refs.sallylegone.rotation.y = Math.sin(time * 2) * 0.02;
+        if ((refs.sallylegone)||(refs.sallylegtwo)) {
+            refs.sallylegone.rotation.y = Math.sin(time * 2) * 0.06;
+            refs.sallylegtwo.rotation.y = Math.sin(time * -1) * 0.07;
         }
 
         if (refs.clouds && refs.clouds.position) {
