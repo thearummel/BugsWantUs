@@ -75,9 +75,9 @@
 /* Card styling and subtle hover movement */
 .card {
  /*  background: var(--card-bg); */
-  border-radius: 10px;
-  /* padding: 18px; */
-  min-height: 120px;
+  border-radius: 20px;
+  padding: -10px;
+ /*  min-height: 120px; */
   box-shadow: 0 6px 14px rgba(20,20,30,0.06);
   transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms;
   transform: translateZ(0);
@@ -85,6 +85,7 @@
   will-change: transform, box-shadow;
   outline: none;
    color: var(--text);
+ 
 
 }
 

@@ -6,7 +6,7 @@ import styles from "./overlay.module.css";
 
 
 const animalCardMap = {
-  fly: { id: "fly-card", path: "./SVG/card1.svg", title: "Fly Card" },
+  fly: { id: "fly-card", path: "./SVG/flyCard.svg", title: "Fly Card" },
   beetle: { id: "beetle-card", path: "./SVG/beetleCard.svg", title: "Beetle Card" },
   moth: { id: "moth-card", path: "./SVG/mothCard.svg", title: "Moth Card" },
   silverfish: { id: "silverfish-card", path: "./SVG/silverfishCard.svg", title: "Silverfish Card" },
