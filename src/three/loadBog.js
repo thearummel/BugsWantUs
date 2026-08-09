@@ -26,7 +26,7 @@ export function loadBog(world, refs) {
         // This will lock the polar angle so camera cannot tilt up/down.
 
         world.controls.minDistance = 0.1;
-        world.controls.maxDistance = 70;
+        world.controls.maxDistance = 7;
         world.controls.update();
 
 
