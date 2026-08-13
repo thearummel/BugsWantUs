@@ -1,54 +1,43 @@
-import * as THREE from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { registerAnimal } from "./animals";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const loader = new GLTFLoader();
 
-export function loadLadybird(scene) {
+export function loadLadybird(refs = {}) {
   return new Promise((resolve, reject) => {
-    if (!scene) {
-      reject(new Error("loadLadybird: scene is required"));
-      return;
-    }
-
     loader.load(
-      "/ladybird.glb",
+      "/models/ladybird.glb",
 
       (gltf) => {
         const ladybird = gltf.scene;
 
-        ladybird.name = "ladybird";
+        const objects = [
+          "LadybirdLegOne",
+          "LadybirdLegTwo",
+          "LadybirdLegThree",
+          "LadybirdLegFour",
+          "LadybirdLegFive",
+          "LadybirdLegSix",
+        ];
 
-        // Initial position.
-        // animate.js can move it later.
-        ladybird.position.set(0, 0, 0);
+        objects.forEach((name) => {
+          const key = name.toLowerCase();
 
-        // Adjust this once you know the model's desired size.
-        ladybird.scale.setScalar(100);
+          refs[key] = ladybird.getObjectByName(name);
 
-        // Register with the animal system.
-        // registerAnimal() also adds it to the scene.
-        registerAnimal(
-          "ladybird",
-          ladybird,
-          scene
-        );
+          if (refs[key]) {
+            console.log(`${name} found`);
+          } else {
+            console.warn(`${name} NOT found`);
+          }
+        });
 
-        console.log("Ladybird registered:", ladybird);
+        // Also keep a ref to the complete model
+        refs.ladybird = ladybird;
 
-        resolve(ladybird);
+        resolve(gltf);
       },
 
-      (progress) => {
-        if (progress.total) {
-          console.log(
-            `Ladybird loading: ${(
-              (progress.loaded / progress.total) *
-              100
-            ).toFixed(0)}%`
-          );
-        }
-      },
+      undefined,
 
       (error) => {
         console.error(
@@ -61,4 +50,3 @@ export function loadLadybird(scene) {
     );
   });
 }
-

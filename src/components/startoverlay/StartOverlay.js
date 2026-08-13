@@ -1,9 +1,9 @@
-
 "use client";
 
 import { useState, useEffect, useRef } from "react";
 import useTypewriter from "@/hooks/useTypewriter";
 import styles from "./StartOverlay.module.css";
+import LadybirdCanvas from "../LadybirdCanvas";
 
 export default function StartOverlay({
   dialogue = "Welcome…",
@@ -15,15 +15,12 @@ export default function StartOverlay({
   const [revealing, setRevealing] = useState(false);
 
   const requiredClicks = 3;
+
   const svgObjectRef = useRef(null);
 
-  // Don't start the dialogue until the SVG has loaded.
-  const { displayed, finished } = useTypewriter(
-    dialogue,
-    28
-  );
+  const { displayed, finished } =
+    useTypewriter(dialogue, 28);
 
-  // Start talking once the typewriter actually starts.
   useEffect(() => {
     if (!svgLoaded) return;
 
@@ -36,13 +33,13 @@ export default function StartOverlay({
     displayed,
   ]);
 
-  // Control the SVG mouth animation.
   useEffect(() => {
     const object = svgObjectRef.current;
 
     if (!object || !svgLoaded) return;
 
     const svg = object.contentDocument;
+
     const animation =
       svg?.getElementById("mouthAnimation");
 
@@ -77,6 +74,12 @@ export default function StartOverlay({
         revealing ? styles.reveal : ""
       }`}
     >
+      {/* Ladybird Three.js canvas */}
+      <div className={styles.ladybirdLayer}>
+        <LadybirdCanvas />
+      </div>
+
+      {/* DOM UI */}
       <div className={styles.centerContent}>
 
         {/* Talking head */}
@@ -98,6 +101,7 @@ export default function StartOverlay({
         <div
           className={styles.bottomBar}
           role="button"
+          tabIndex={0}
           onClick={handleHeadClick}
         >
           <div className={styles.textbox}>
@@ -109,16 +113,15 @@ export default function StartOverlay({
 
       </div>
 
-      {/* Start button */}
-      {finished && clicks >= requiredClicks && (
-        <button
-          className={styles.startButton}
-          onClick={handleStart}
-        >
-          Start
-        </button>
-      )}
+      {finished &&
+        clicks >= requiredClicks && (
+          <button
+            className={styles.startButton}
+            onClick={handleStart}
+          >
+            Start
+          </button>
+        )}
     </div>
   );
 }
-

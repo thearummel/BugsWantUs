@@ -123,7 +123,18 @@ export function loadGarden(world, refs) {
         const moth = gltf.scene;
 
         moth.position.set(-1.6, -1.2, 2);
+        const objects = [
+            "MothAntenna",
+            "MothAntennaTwo",
+        ];
 
+        objects.forEach(name => {
+            refs[name.toLowerCase()] = moth.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+        });
         refs.moth = moth;
         registerAnimal("moth", moth, world.scene);
     });
