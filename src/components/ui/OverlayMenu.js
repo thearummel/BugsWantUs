@@ -53,6 +53,12 @@ const animalCardMap = {
     path: "./SVG/grashopperCard.svg", 
     title: "Grashopper Card" 
   },
+  ladybird: { 
+    id: "ladybird-card", 
+    path: "./SVG/ladybirdCard.svg", 
+    title: "Ladybird Card" 
+  },
+  
 };
 
 export default function OverlayMenu() {
@@ -76,11 +82,16 @@ export default function OverlayMenu() {
      }
    }, [open]); */
 
-  const [cards, setCards] = useState(() => {
-    const collected = getCollectedIds();
-    const animalCards = collected.map(id => animalCardMap[id]).filter(Boolean);
-    return [...animalCards, /* ...baseCards */];
-  });
+const [cards, setCards] = useState([]);
+
+useEffect(() => {
+  const collected = getCollectedIds();
+  const animalCards = collected
+    .map((id) => animalCardMap[id])
+    .filter(Boolean);
+
+  setCards(animalCards);
+}, []);
 
   useEffect(() => {
     function onAnimalCollected(e) {
@@ -113,7 +124,7 @@ export default function OverlayMenu() {
 
   return (
     <>
-      {/* Render MenuButton directly, give it the ref and aria props */}
+  
       <MenuButton
         ref={menuBtnRef}
         aria-controls="overlay"
@@ -139,7 +150,7 @@ export default function OverlayMenu() {
           <header className={styles.overlayHeader}>
             <h2>Invitations you have given out:</h2>
             <button
-              aria-label="Close overlay"
+             
               className={styles.closeBtn}
               onClick={() => setOpen(false)}
             >

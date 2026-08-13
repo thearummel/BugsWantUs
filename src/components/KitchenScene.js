@@ -30,9 +30,7 @@ export default function KitchenScene() {
             plant2BaseScale: null,
             door: null
         };
-        let state = {
-            targetZ: 20
-        };
+        
 
 
         loadKitchen(world, refs, () => {
@@ -43,7 +41,7 @@ export default function KitchenScene() {
         let cleanupInteractions = setupInteractions(
             world,
             refs,
-            state,
+              
             router
         );
 
@@ -51,7 +49,6 @@ export default function KitchenScene() {
         let cleanupAnimation = animate(
             world,
             refs,
-            state
         );
         return () => {
 

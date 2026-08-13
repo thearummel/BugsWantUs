@@ -11,8 +11,21 @@ export function setupScene(canvas) {
         30,
         window.innerWidth / window.innerHeight,
         0.1,
-        5000
+        100
     );
+
+   function updateCamera() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+
+    camera.fov =
+        window.innerHeight <= 400 ? 15 :
+        window.innerHeight <= 700 ? 18 :
+        
+        30;
+
+    camera.updateProjectionMatrix();
+}
+updateCamera();
 
     const renderer = new THREE.WebGLRenderer({
         canvas,
@@ -20,22 +33,20 @@ export function setupScene(canvas) {
         alpha: true
     });
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = false
 
     const controls = new OrbitControls(camera, renderer.domElement);
 
-    // disable pan and built-in wheel zoom so we can supply our own
     controls.enablePan = false;
     controls.enableRotate = false;
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.zoomToCursor = true;
-    // controls.enablePan = true;
+    /*   controls.zoomToCursor = true; */
 
 
-    // lights
+
     const dir = new THREE.DirectionalLight(0xffffff, 4);
     dir.position.set(35, 20, 100);
     scene.add(dir);
@@ -45,10 +56,11 @@ export function setupScene(canvas) {
 
     // handle resize to keep aspect/fov correct
     function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+        updateCamera();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
+
+    window.addEventListener("resize", onWindowResize);
 
 
     return {

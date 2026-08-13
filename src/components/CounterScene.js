@@ -30,9 +30,7 @@ export default function CounterScene() {
             plant2BaseScale: null,
             door: null
         };
-        let state = {
-            targetZ: 20
-        };
+        
 
 
         loadCounter(world, refs, () => {
@@ -43,7 +41,7 @@ export default function CounterScene() {
         let cleanupInteractions = setupInteractions(
             world,
             refs,
-            state,
+              
             router
         );
 
@@ -51,7 +49,6 @@ export default function CounterScene() {
         let cleanupAnimation = animate(
             world,
             refs,
-            state
         );
         return () => {
             cleanupAnimation?.();

@@ -34,9 +34,7 @@ export default function GardenScene() {
             flower: null,
 
         };
-        let state = {
-            targetZ: 20
-        };
+        
 
 
         loadGarden(world, refs, () => {
@@ -47,7 +45,7 @@ export default function GardenScene() {
         let cleanupInteractions = setupInteractions(
             world,
             refs,
-            state,
+              
             router
         );
 
@@ -55,7 +53,7 @@ export default function GardenScene() {
         let cleanupAnimation = animate(
             world,
             refs,
-            state
+         
         );
         return () => {
 

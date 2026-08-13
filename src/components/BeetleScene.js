@@ -26,9 +26,7 @@ export default function BeetleScene() {
         let refs = {
 
         };
-        let state = {
-            targetZ: 20
-        };
+        
 
 
         loadBeetle(world, refs, () => {
@@ -39,7 +37,7 @@ export default function BeetleScene() {
         let cleanupInteractions = setupInteractions(
             world,
             refs,
-            state,
+              
             router
         );
 
@@ -47,7 +45,6 @@ export default function BeetleScene() {
         let cleanupAnimation = animate(
             world,
             refs,
-            state
         );
         return () => {
 

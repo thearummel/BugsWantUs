@@ -28,9 +28,7 @@ export default function RiverScene() {
 
         };
 
-        let state = {
-            targetZ: 20
-        };
+        
 
 
         loadRiver(world, refs, () => {
@@ -42,7 +40,7 @@ export default function RiverScene() {
         let cleanupInteractions = setupInteractions(
             world,
             refs,
-            state,
+              
             router
         );
 
@@ -50,7 +48,6 @@ export default function RiverScene() {
         let cleanupAnimation = animate(
             world,
             refs,
-            state
         );
         return () => {
 

@@ -2,11 +2,8 @@
 import * as THREE from "three";
 import { getObject, collectAnimal } from "./animals.js";
 
-export function setupInteractions(world, refs, state, router) {
-  function onWheel(event) {
-    state.targetZ += event.deltaY * 0.01;
-    state.targetZ = THREE.MathUtils.clamp(state.targetZ, 10, 30);
-  }
+export function setupInteractions(world, refs,  router) {
+ 
 
   const animalIds = [
     "fly",
@@ -64,13 +61,12 @@ export function setupInteractions(world, refs, state, router) {
     world.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
-  window.addEventListener("wheel", onWheel);
   window.addEventListener("click", onClick);
   window.addEventListener("resize", onResize);
 
   // cleanup function — ALWAYS returned
   return () => {
-    window.removeEventListener("wheel", onWheel);
+
     window.removeEventListener("click", onClick);
     window.removeEventListener("resize", onResize);
   };

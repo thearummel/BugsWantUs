@@ -30,9 +30,7 @@ export default function BushScene() {
             plant2BaseScale: null,
             door: null
         };
-        let state = {
-            targetZ: 20
-        };
+        
 
 
         loadBush(world, refs, () => {
@@ -42,7 +40,7 @@ export default function BushScene() {
         let cleanupInteractions = setupInteractions(
             world,
             refs,
-            state,
+              
             router
         );
 
@@ -50,7 +48,6 @@ export default function BushScene() {
         let cleanupAnimation = animate(
             world,
             refs,
-            state
         );
         return () => {
 

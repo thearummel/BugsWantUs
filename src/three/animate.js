@@ -25,7 +25,7 @@ export function animate(world, refs = {}) {
 
         const z = world.camera.position.z;
 
-        if (z <= 15) {
+       /*  if (z <= 15) {
             world.camera.position.x = Math.max(
                 -1,
                 Math.min(world.camera.position.x, 0.5)
@@ -36,7 +36,7 @@ export function animate(world, refs = {}) {
                 -0.2,
                  Math.min(world.camera.position.y, 0.5)
              )
-        }
+        } */
 
 
         const time = performance.now() * 0.001;

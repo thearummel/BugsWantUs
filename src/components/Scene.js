@@ -12,7 +12,7 @@ import "./Loader/Loader.css";
 export default function Scene() {
 
     const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0);
+
     let canvasRef = useRef(null);
     let router = useRouter();
 
@@ -32,9 +32,7 @@ export default function Scene() {
             door: null,
             lake: null,
         };
-        let state = {
-            targetZ: 20
-        };
+        
 
 
         loadBog(world, refs, () => {
@@ -45,7 +43,7 @@ export default function Scene() {
         let cleanupInteractions = setupInteractions(
             world,
             refs,
-            state,
+              
             router
         );
 
@@ -53,7 +51,6 @@ export default function Scene() {
         let cleanupAnimation = animate(
             world,
             refs,
-            state
         );
         return () => {
 
@@ -62,7 +59,7 @@ export default function Scene() {
 
             world.controls.dispose();
             world.renderer.dispose();
-              world.renderer.domElement = null;
+            world.renderer.domElement = null;
 
         };
 

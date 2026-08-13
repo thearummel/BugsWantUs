@@ -1,29 +1,38 @@
 "use client";
+
 import React from "react";
+import { usePathname } from "next/navigation";
 import styles from "./global-ui.module.css";
 import BackButton from "./BackButton";
 import BarBottom from "./BarBottom";
 import InfoButton from "./InfoButton";
-import OverlayMenu from "./OverlayMenu"
-
-
+import OverlayMenu from "./OverlayMenu";
 
 export default function GlobalUI() {
+    const pathname = usePathname();
+    const isHome = pathname === "/";
+
     return (
         <div className={styles.globalUi}>
-            <div className={styles.bottomleft}>
-                <BackButton />
-            </div>
+            {!isHome && (
+                <div className={styles.bottomleft}>
+                    <BackButton />
+                </div>
+            )}
+
             <div className={styles.right}>
                 <OverlayMenu />
             </div>
+
             <div className={styles.bottommiddle}>
                 <BarBottom />
             </div>
-            <div className={styles.left}>
-                <InfoButton />
-            </div>
 
+            {!isHome && (
+                <div className={styles.left}>
+                    <InfoButton />
+                </div>
+            )}
         </div>
     );
 }

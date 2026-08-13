@@ -2,6 +2,7 @@
   position: fixed;
   inset: 0;
   pointer-events: none;
+  z-index: 1400;
 }
 
 .left {
@@ -29,8 +30,16 @@
   position: fixed;
   bottom: 16px;
   left: 50%;
-  transform: translateX(-70%);
+  transform: translateX(-130%);
   pointer-events: auto;
+}
+
+@media (max-height: 999px) {
+  .bottommiddle {
+    left: auto;
+    right: 16px;
+  transform: translateX(-100%);
+  }
 }
 
 .iconBtn {
