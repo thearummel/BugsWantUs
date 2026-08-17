@@ -31,14 +31,24 @@
   bottom: 16px;
   left: 50%;
   transform: translateX(-130%);
+  width: 600px;
   pointer-events: auto;
 }
 
+/* Short screens */
 @media (max-height: 999px) {
   .bottommiddle {
     left: auto;
     right: 16px;
-  transform: translateX(-100%);
+    transform: translateX(0%);
+  }
+}
+
+/* Mobile */
+@media (max-width: 490px) {
+  .bottommiddle {
+    width: 140vw;
+    bottom: 10px;
   }
 }
 

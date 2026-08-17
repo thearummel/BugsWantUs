@@ -80,7 +80,7 @@ export function loadGarden(world, refs) {
                 world.camera.position.set(0, 0, 13);
             }
 
-            world.controls.target.set(0, -0.7, 0);
+            world.controls.target.set(0, -0.6, 0);
         }
 
         world.controls.minDistance = 0.1;
@@ -99,6 +99,7 @@ export function loadGarden(world, refs) {
             "Door",
             "Lake",
             "Flower",
+            "Anthill",
             "Bush",
             "River",
             "gardengrasone",
@@ -111,18 +112,79 @@ export function loadGarden(world, refs) {
         ];
 
         objects.forEach(name => {
-            refs[name.toLowerCase()] = garden.getObjectByName(name);
+            const object = garden.getObjectByName(name);
 
-            if (refs[name.toLowerCase()]) {
+            refs[name.toLowerCase()] = object;
+
+            if (object) {
                 console.log(`${name} found`);
             }
         });
+
+  setTimeout(() => {
+    const door = garden.getObjectByName("Door");
+
+    if (door) {
+        door.traverse((child) => {
+            if (child.isMesh && child.material) {
+                const material = child.material;
+
+                // Save original material state
+                const originalEmissive = material.emissive
+                    ? material.emissive.clone()
+                    : null;
+
+                const originalEmissiveIntensity =
+                    material.emissiveIntensity ??   0;
+
+                // Set glow
+                material.emissive = new THREE.Color(0xffffff)
+
+                const startTime = performance.now();
+                const duration = 20000;      // Effect lasts 10 seconds
+                const pulseDuration = 5000;  // Slow pulse
+                const maxIntensity = 1;
+
+                function glow(time) {
+                    const elapsed = time - startTime;
+
+                    if (elapsed >= duration) {
+                        // Restore original material
+                        if (originalEmissive) {
+                            material.emissive.copy(originalEmissive);
+                        }
+
+                        material.emissiveIntensity =
+                            originalEmissiveIntensity;
+
+                        return;
+                    }
+
+                    // Smooth pulse between 0 and 1
+                    const pulse =
+                        (Math.sin(
+                            (elapsed / pulseDuration) * Math.PI * 2
+                        ) + 1) / 2;
+
+                    material.emissiveIntensity =
+                        pulse * maxIntensity;
+
+                    requestAnimationFrame(glow);
+                }
+
+                requestAnimationFrame(glow);
+            }
+        });
+    }
+}, 5000);
+
+
     });
 
     loader.load("/models/Moth.glb", (gltf) => {
         const moth = gltf.scene;
 
-        moth.position.set(-1.6, -1.2, 2);
+        moth.position.set(-1.5, -1.6, 2);
         const objects = [
             "MothAntenna",
             "MothAntennaTwo",

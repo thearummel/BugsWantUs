@@ -357,49 +357,52 @@ export function animate(world, refs = {}) {
             refs.tail.rotation.y = Math.sin(time * 3) * 0.04;
 
         }
-
         // Ladybird legs
-if (refs.ladybird) {
-    if (refs.ladybird.position.x <= -4) {
-        refs.ladybird.position.y = Math.sin(time * 8) * 0.01;
-        refs.ladybird.position.x += 0.04;
+        if (refs.ladybird) {
+            const isMobile = window.innerWidth < 450;
+            const endX = isMobile ? -2.1 : -3.1;
 
-        const legs = [
-            refs.ladybirdlegone,
-            refs.ladybirdlegtwo,
-            refs.ladybirdlegthree,
-            refs.ladybirdlegfour,
-            refs.ladybirdlegfive,
-            refs.ladybirdlegsix
-        ];
+            if (refs.ladybird.position.x <= endX) {
+                refs.ladybird.position.y = Math.sin(time * 8) * 0.01;
+                refs.ladybird.position.x += 0.01;
 
-        legs.forEach((leg, index) => {
-            if (leg) {
-                leg.rotation.y =
-                    Math.sin(time * 8 + (index % 2) * Math.PI) * 0.06;
+                const legs = [
+                    refs.ladybirdlegone,
+                    refs.ladybirdlegtwo,
+                    refs.ladybirdlegthree,
+                    refs.ladybirdlegfour,
+                    refs.ladybirdlegfive,
+                    refs.ladybirdlegsix
+                ];
+
+                legs.forEach((leg, index) => {
+                    if (leg) {
+                        leg.rotation.y =
+                            Math.sin(time * 8 + (index % 2) * Math.PI) * 0.06;
+                    }
+                });
+
+            } else {
+          
+                refs.ladybird.position.x = endX;
+                 refs.ladybird.position.y = 0
+
+                const legs = [
+                    refs.ladybirdlegone,
+                    refs.ladybirdlegtwo,
+                    refs.ladybirdlegthree,
+                    refs.ladybirdlegfour,
+                    refs.ladybirdlegfive,
+                    refs.ladybirdlegsix
+                ];
+
+                legs.forEach(leg => {
+                    if (leg) {
+                        leg.rotation.y = 0;
+                    }
+                });
             }
-        });
-
-    } else {
-        refs.ladybird.position.set = -4.1;
-
-        const legs = [
-            refs.ladybirdlegone,
-            refs.ladybirdlegtwo,
-            refs.ladybirdlegthree,
-            refs.ladybirdlegfour,
-            refs.ladybirdlegfive,
-            refs.ladybirdlegsix
-        ];
-
-        legs.forEach(leg => {
-            if (leg) {
-                leg.rotation.y = 0;
-            }
-        });
-    }
-}
-
+        }
 
 
 

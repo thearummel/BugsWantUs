@@ -14,18 +14,18 @@ export function setupScene(canvas) {
         100
     );
 
-   function updateCamera() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    function updateCamera() {
+        camera.aspect = window.innerWidth / window.innerHeight;
 
-    camera.fov =
-        window.innerHeight <= 400 ? 15 :
-        window.innerHeight <= 700 ? 18 :
-        
-        30;
+        camera.fov =
+            window.innerHeight <= 400 ? 15 :
+                window.innerHeight <= 700 ? 18 :
 
-    camera.updateProjectionMatrix();
-}
-updateCamera();
+                    30;
+
+        camera.updateProjectionMatrix();
+    }
+    updateCamera();
 
     const renderer = new THREE.WebGLRenderer({
         canvas,
@@ -39,13 +39,64 @@ updateCamera();
 
     const controls = new OrbitControls(camera, renderer.domElement);
 
-    controls.enablePan = false;
+    controls.enablePan = window.innerWidth < 450;
     controls.enableRotate = false;
+    controls.enableZoom = true;
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    /*   controls.zoomToCursor = true; */
 
 
+    setupKeyboardPan(camera, controls);
+
+    function onWindowResize() {
+        updateCamera();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        controls.enablePan = window.innerWidth < 450;
+    }
+
+    window.addEventListener("resize", onWindowResize);
+    function setupKeyboardPan(camera, controls) {
+        const panAmount = 0.1;
+        const maxPanX = 1;
+        const maxPanY = 1;
+
+        function handleKeyDown(event) {
+            if (window.innerWidth >= 450) return;
+
+            if (event.key === "ArrowLeft") {
+                camera.position.x = THREE.MathUtils.clamp(
+                    camera.position.x - panAmount,
+                    -maxPanX,
+                    maxPanX
+                );
+
+                controls.target.x = THREE.MathUtils.clamp(
+                    controls.target.x - panAmount,
+                    -maxPanX,
+                    maxPanX
+                );
+            }
+
+            if (event.key === "ArrowRight") {
+                camera.position.x = THREE.MathUtils.clamp(
+                    camera.position.x + panAmount,
+                    -maxPanX,
+                    maxPanX
+                );
+
+                controls.target.x = THREE.MathUtils.clamp(
+                    controls.target.x + panAmount,
+                    -maxPanX,
+                    maxPanX
+                );
+            }
+
+
+        }
+
+        window.addEventListener("keydown", handleKeyDown);
+    }
 
     const dir = new THREE.DirectionalLight(0xffffff, 4);
     dir.position.set(35, 20, 100);

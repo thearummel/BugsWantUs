@@ -58,6 +58,12 @@ const animalCardMap = {
     path: "./SVG/ladybirdCard.svg", 
     title: "Ladybird Card" 
   },
+   ant: { 
+    id: "ant-card", 
+    path: "./SVG/antCard.svg", 
+    title: "Ant Card",
+    text: ["The Great Diving Beetle zipped straight to Dr. Critter’s birthday party right after work! Without any time to change, they wore their usual work outfit to the celebration, a shiny wetsuit!", "They surprised Dr. Critter with a thoughtful gift, a fossil they found during one of their big sea adventures. They crossed their antennas, hoping Dr. Critter loves it!","For dinner, the Great Diving beetle munched on delicious little fish while sharing funny stories with the Small Yellow Sally.","They headed home early, excited to wake up at dawn for a refreshing morning sea swim!"]
+   },
   
 };
 
@@ -94,13 +100,26 @@ useEffect(() => {
 }, []);
 
   useEffect(() => {
-    function onAnimalCollected(e) {
-      const id = e.detail?.id;
-      if (!id) return;
-      const card = animalCardMap[id];
-      if (!card) return;
-      setCards(prev => (prev.some(c => c.id === card.id) ? prev : [card, ...prev]));
-    }
+  function onAnimalCollected(e) {
+  const id = e.detail?.id;
+  if (!id) return;
+
+  const card = animalCardMap[id];
+  if (!card) return;
+
+  setCards(prev =>
+    prev.some(c => c.id === card.id)
+      ? prev
+      : [card, ...prev]
+  );
+
+  // Send event to StartOverlay
+  window.dispatchEvent(
+    new CustomEvent("showStartButton", {
+      detail: { id }
+    })
+  );
+}
     window.addEventListener("animalCollected", onAnimalCollected);
     return () => window.removeEventListener("animalCollected", onAnimalCollected);
   }, []);
@@ -125,13 +144,18 @@ useEffect(() => {
   return (
     <>
   
-      <MenuButton
-        ref={menuBtnRef}
-        aria-controls="overlay"
-        aria-expanded={open}
-        onClick={() => setOpen((s) => !s)}
-      // className={styles.menuBtn}
-      />
+     <MenuButton
+  ref={menuBtnRef}
+  aria-controls="overlay"
+  aria-expanded={open}
+  onClick={() => {
+    setOpen((s) => !s);
+
+    window.dispatchEvent(
+      new CustomEvent("showStartButton")
+    );
+  }}
+/>
 
       <div
         id="overlay"

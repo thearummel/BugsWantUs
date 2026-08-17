@@ -13,6 +13,7 @@ export default function StartOverlay({
   const [talking, setTalking] = useState(false);
   const [clicks, setClicks] = useState(0);
   const [revealing, setRevealing] = useState(false);
+  const [alertReceived, setAlertReceived] = useState(false);
 
   const requiredClicks = 3;
 
@@ -51,6 +52,26 @@ export default function StartOverlay({
       animation.endElement();
     }
   }, [talking, svgLoaded]);
+
+  useEffect(() => {
+  function handleShowStartButton(e) {
+    console.log("Alert received:", e.detail);
+
+    setAlertReceived(true);
+  }
+
+  window.addEventListener(
+    "showStartButton",
+    handleShowStartButton
+  );
+
+  return () => {
+    window.removeEventListener(
+      "showStartButton",
+      handleShowStartButton
+    );
+  };
+}, []);
 
   function handleSvgLoad() {
     setSvgLoaded(true);
@@ -113,15 +134,14 @@ export default function StartOverlay({
 
       </div>
 
-      {finished &&
-        clicks >= requiredClicks && (
-          <button
-            className={styles.startButton}
-            onClick={handleStart}
-          >
-            Start
-          </button>
-        )}
+  {(finished && clicks >= requiredClicks) || alertReceived ? (
+  <button
+    className={styles.startButton}
+    onClick={handleStart}
+  >
+    Start
+  </button>
+) : null}
     </div>
   );
 }

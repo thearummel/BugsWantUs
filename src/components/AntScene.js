@@ -1,0 +1,78 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { setupScene } from "@/three/setupScene";
+import { loadAnt } from "@/three/loadAnt";
+import { setupInteractions } from "@/three/interactions";
+import { animate } from "@/three/animate";
+import { useRouter } from "next/navigation";
+import Loader from "./Loader/Loader";
+import "./Loader/Loader.css";
+
+export default function AntScene() {
+
+    const [loading, setLoading] = useState(true);
+
+    let canvasRef = useRef(null);
+    let router = useRouter();
+
+    useEffect(() => {
+
+        let world = setupScene(canvasRef.current);
+        world.loadingManager.onLoad = () => {
+            setLoading(false);
+        };
+
+
+
+        let refs = {
+         
+
+        };
+        
+
+
+        loadAnt(world, refs, () => {
+            setLoading(false);
+        });
+
+        // Setup mouse / resize / click events
+        let cleanupInteractions = setupInteractions(
+            world,
+            refs,
+              
+            router
+        );
+
+        // Start render loop
+        let cleanupAnimation = animate(
+            world,
+            refs,
+        );
+        return () => {
+
+            cleanupAnimation();
+            cleanupInteractions();
+            world.controls.dispose();
+            world.renderer.dispose();
+            world.renderer.domElement = null
+
+        };
+
+    }, []);
+
+    return (
+        <>
+            {loading && <Loader />}
+            <canvas
+                ref={canvasRef}
+                style={{
+                    width: "100vw",
+                    height: "100vh",
+                    display: "block"
+                }}
+            />
+        </>
+    );
+
+}
