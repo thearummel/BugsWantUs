@@ -1,5 +1,27 @@
 import * as THREE from "three";
 
+function animateSparkleGroup(group, time) {
+    group.children.forEach(sparkle => {
+        const {
+            baseScale,
+            speed,
+            phase
+        } = sparkle.userData;
+
+        const pulse =
+            0.2 +
+            (Math.sin(time * speed + phase) + 1) * 0.4;
+
+        const scale = baseScale * pulse;
+
+        sparkle.scale.set(
+            scale,
+            scale,
+            scale
+        );
+    });
+}
+
 export function animate(world, refs = {}) {
     let animationId;
     let running = true;
@@ -357,56 +379,78 @@ export function animate(world, refs = {}) {
             refs.tail.rotation.y = Math.sin(time * 3) * 0.04;
 
         }
-        // Ladybird legs
-        if (refs.ladybird) {
-            const isMobile = window.innerWidth < 450;
-            const endX = isMobile ? -2.1 : -3.1;
 
-            if (refs.ladybird.position.x <= endX) {
-                refs.ladybird.position.y = Math.sin(time * 8) * 0.01;
-                refs.ladybird.position.x += 0.01;
+        // Ladybird
+if (refs.ladybird) {
+    const isMobile = window.innerWidth < 450;
+    const endX = isMobile ? -2.1 : -3.1;
 
-                const legs = [
-                    refs.ladybirdlegone,
-                    refs.ladybirdlegtwo,
-                    refs.ladybirdlegthree,
-                    refs.ladybirdlegfour,
-                    refs.ladybirdlegfive,
-                    refs.ladybirdlegsix
-                ];
+    // Only move once the start signal has been triggered
+    if (refs.ladybirdStarted?.current) {
+        if (refs.ladybird.position.x <= endX) {
+            refs.ladybird.position.y = Math.sin(time * 8) * 0.01;
+            refs.ladybird.position.x += 0.01;
 
-                legs.forEach((leg, index) => {
-                    if (leg) {
-                        leg.rotation.y =
-                            Math.sin(time * 8 + (index % 2) * Math.PI) * 0.06;
-                    }
-                });
+            const legs = [
+                refs.ladybirdlegone,
+                refs.ladybirdlegtwo,
+                refs.ladybirdlegthree,
+                refs.ladybirdlegfour,
+                refs.ladybirdlegfive,
+                refs.ladybirdlegsix
+            ];
 
-            } else {
-          
-                refs.ladybird.position.x = endX;
-                 refs.ladybird.position.y = 0
+            legs.forEach((leg, index) => {
+                if (leg) {
+                    leg.rotation.y =
+                        Math.sin(
+                            time * 8 +
+                            (index % 2) * Math.PI
+                        ) * 0.06;
+                }
+            });
 
-                const legs = [
-                    refs.ladybirdlegone,
-                    refs.ladybirdlegtwo,
-                    refs.ladybirdlegthree,
-                    refs.ladybirdlegfour,
-                    refs.ladybirdlegfive,
-                    refs.ladybirdlegsix
-                ];
+        } else {
+            refs.ladybird.position.x = endX;
+            refs.ladybird.position.y = 0;
 
-                legs.forEach(leg => {
-                    if (leg) {
-                        leg.rotation.y = 0;
-                    }
-                });
-            }
+            const legs = [
+                refs.ladybirdlegone,
+                refs.ladybirdlegtwo,
+                refs.ladybirdlegthree,
+                refs.ladybirdlegfour,
+                refs.ladybirdlegfive,
+                refs.ladybirdlegsix
+            ];
+
+            legs.forEach(leg => {
+                if (leg) {
+                    leg.rotation.y = 0;
+                }
+            });
         }
+    }
+}
 
 
+// Sparkles
 
+const sparkleGroups = [
+    refs.doorsparkles,
+    refs.bushsparkles,
+    refs.lakesparkles,
+    refs.anthillsparkles,
+    refs.riversparkles,
+    refs.forestsparkles,
+    refs.bowlsparkles,
+    refs.sinksparkles,
+];
 
+sparkleGroups.forEach(group => {
+    if (group) {
+        animateSparkleGroup(group, time);
+    }
+});
         world.renderer.render(world.scene, world.camera);
 
         //console.log(world.camera.position);

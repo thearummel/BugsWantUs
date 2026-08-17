@@ -3,7 +3,7 @@
   --card-bg: #FFFFF0;
   --radius: 12px;
   --gap: 18px;
-  --text: #3D2E28;
+  --text: #3d2e28;
 }
 
 
@@ -63,6 +63,26 @@
   padding: 6px;
   border-radius: 6px;
   color: var(--text);
+}
+
+.overlayFooter {
+  display: flex;
+  justify-content: flex-end;
+  
+}
+
+.printBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.printBtn img {
+  display: block;
+  width: 60px;
+  height: auto;
+
 }
 
 /* Cards grid */

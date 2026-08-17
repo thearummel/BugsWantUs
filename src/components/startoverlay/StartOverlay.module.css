@@ -20,6 +20,29 @@
   overflow: hidden;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
+.nextIndicator {
+  margin-top: 8px;
+  font-size: 14px;
+  opacity: 0.65;
+  text-align: right;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
 
 /*
  * Ladybird Three.js layer.
@@ -67,6 +90,7 @@
   border: solid 1.5px #41403E;
 
   cursor: pointer;
+  max-width: 60vw;
 }
 
 
@@ -84,13 +108,33 @@
 
 .head {
   width: 20em;
+  padding: 1em;
 }
 
 @media (max-width: 490px) {
- .head {
-  width: 14em;
-}
+  .head {
+    width: 14em;
+  }
 
+  .bottomBar {
+    background: #F8EFD5;
+
+    padding: 24px;
+
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    border-bottom-right-radius: 225px 15px;
+    border-bottom-left-radius: 15px 255px;
+
+    border: solid 1.5px #41403E;
+
+    cursor: pointer;
+    max-width: 90vw;
+  }
 }
 
 
@@ -102,10 +146,10 @@
 
 .startButton {
   background: #F8EFD5;
- border: solid 1.5px #41403E;
+  border: solid 1.5px #41403E;
 
-  
- border-top-left-radius: 255px 15px;
+
+  border-top-left-radius: 255px 15px;
   border-top-right-radius: 15px 225px;
   border-bottom-right-radius: 225px 15px;
   border-bottom-left-radius: 15px 255px;
@@ -133,6 +177,3 @@
     clip-path 900ms ease-in-out,
     opacity 300ms ease;
 }
-
-
-

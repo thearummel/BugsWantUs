@@ -2,6 +2,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { registerAnimal } from "./animals.js"; 
+import { addSparkles } from "./sparkels.js";
 
 export function loadBog(world, refs) {
        const loader = new GLTFLoader(world.loadingManager);
@@ -54,7 +55,23 @@ export function loadBog(world, refs) {
             }
 
         });
+
+
+        const clickableObjects = [
+           "Forest",
+        ];
+
+        clickableObjects.forEach(name => {
+            const object = bog.getObjectByName(name);
+
+            if (object) {
+                refs[`${name.toLowerCase()}sparkles`] =
+                    addSparkles(object, world);
+            }
+        });
+
     });
+
 
     loader.load("/models/Grashopper.glb", (gltf) => {
         const grashopper = gltf.scene;

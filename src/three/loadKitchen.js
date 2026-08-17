@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-
+import { addSparkles } from "./sparkels.js";
 
 export function loadKitchen(world, refs) {
 
@@ -30,14 +30,14 @@ export function loadKitchen(world, refs) {
 
         // place camera straight on along +Z axis looking to origin
         world.camera.position.set(0, 0, distance);
-       
+
         world.controls.minDistance = 0.1;
         world.controls.maxDistance = 6;
 
 
         world.controls.update();
-   
-  world.camera.updateProjectionMatrix();
+
+        world.camera.updateProjectionMatrix();
 
         refs.bowl = kitchen.getObjectByName("Bowl");
         if (refs.bowl) {
@@ -49,6 +49,23 @@ export function loadKitchen(world, refs) {
             console.log("sink found");
         }
 
+
+        const clickableObjects = [
+            "Bowl",
+            "Sink",
+        ];
+
+        clickableObjects.forEach(name => {
+            const object = kitchen.getObjectByName(name);
+
+            if (object) {
+                refs[`${name.toLowerCase()}sparkles`] =
+                    addSparkles(object, world);
+            }
+        });
+
     });
+
+
 
 }

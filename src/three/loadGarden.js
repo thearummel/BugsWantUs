@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { registerAnimal } from "./animals.js";
+import { addSparkles } from "./sparkels.js";
 
 function saveCameraPosition(world) {
     const cameraData = {
@@ -104,7 +105,7 @@ export function loadGarden(world, refs) {
             "River",
             "gardengrasone",
             "gardengrastwo",
-            "gardengrasthree",
+            "gardengrastthree",
             "GardenSmallFlowerone",
             "GardenSmallFlowertwo",
             "GardenPlant",
@@ -121,65 +122,27 @@ export function loadGarden(world, refs) {
             }
         });
 
-  setTimeout(() => {
-    const door = garden.getObjectByName("Door");
+    
+        const clickableObjects = [
+            "Door",
+            "Bush",
+            "Lake",
+            "Anthill",
+            "River"
+        ];
 
-    if (door) {
-        door.traverse((child) => {
-            if (child.isMesh && child.material) {
-                const material = child.material;
+        clickableObjects.forEach(name => {
+            const object = garden.getObjectByName(name);
 
-                // Save original material state
-                const originalEmissive = material.emissive
-                    ? material.emissive.clone()
-                    : null;
-
-                const originalEmissiveIntensity =
-                    material.emissiveIntensity ??   0;
-
-                // Set glow
-                material.emissive = new THREE.Color(0xffffff)
-
-                const startTime = performance.now();
-                const duration = 20000;      // Effect lasts 10 seconds
-                const pulseDuration = 5000;  // Slow pulse
-                const maxIntensity = 1;
-
-                function glow(time) {
-                    const elapsed = time - startTime;
-
-                    if (elapsed >= duration) {
-                        // Restore original material
-                        if (originalEmissive) {
-                            material.emissive.copy(originalEmissive);
-                        }
-
-                        material.emissiveIntensity =
-                            originalEmissiveIntensity;
-
-                        return;
-                    }
-
-                    // Smooth pulse between 0 and 1
-                    const pulse =
-                        (Math.sin(
-                            (elapsed / pulseDuration) * Math.PI * 2
-                        ) + 1) / 2;
-
-                    material.emissiveIntensity =
-                        pulse * maxIntensity;
-
-                    requestAnimationFrame(glow);
-                }
-
-                requestAnimationFrame(glow);
+            if (object) {
+                refs[`${name.toLowerCase()}sparkles`] =
+                    addSparkles(object, world);
             }
         });
-    }
-}, 5000);
-
 
     });
+
+
 
     loader.load("/models/Moth.glb", (gltf) => {
         const moth = gltf.scene;

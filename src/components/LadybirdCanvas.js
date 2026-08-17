@@ -5,7 +5,9 @@ import { setupLadybirdScene } from "@/three/setupLadybirdScene";
 import { createLadybird } from "./LadybirdScene";
 import { animate } from "@/three/animate";
 
-export default function LadybirdCanvas() {
+export default function LadybirdCanvas({
+  ladybirdStarted,
+}) {
   const canvasRef = useRef(null);
 
   const refs = useRef({
@@ -37,19 +39,16 @@ export default function LadybirdCanvas() {
 
       if (!ladybirdData) return;
 
-      /*
-       * The refs have now been populated by
-       * loadLadybird().
-       */
-
       console.log(
         "Ladybird refs:",
         refs.current
       );
 
-      /*
-       * Start the animation loop.
-       */
+      // Give the animation access to the
+      // dialogue-controlled start signal.
+      refs.current.ladybirdStarted =
+        ladybirdStarted;
+
       cleanupAnimation = animate(
         world,
         refs.current
@@ -65,7 +64,7 @@ export default function LadybirdCanvas() {
 
       world.cleanup();
     };
-  }, []);
+  }, [ladybirdStarted]);
 
   return (
     <canvas

@@ -6,38 +6,38 @@ import styles from "./StartOverlay.module.css";
 import LadybirdCanvas from "../LadybirdCanvas";
 
 export default function StartOverlay({
-  dialogue = "Welcome…",
+  dialogue = [],
   onStart,
 }) {
   const [svgLoaded, setSvgLoaded] = useState(false);
-  const [talking, setTalking] = useState(false);
-  const [clicks, setClicks] = useState(0);
   const [revealing, setRevealing] = useState(false);
   const [alertReceived, setAlertReceived] = useState(false);
-
-  const requiredClicks = 3;
+  const [dialogueIndex, setDialogueIndex] = useState(0);
 
   const svgObjectRef = useRef(null);
 
+  const ladybirdStarted = useRef(false);
+
+
+  // Current piece of dialogue
+  const currentDialogue =
+    dialogue[dialogueIndex] || "";
+
   const { displayed, finished } =
-    useTypewriter(dialogue, 28);
+    useTypewriter(currentDialogue, 28);
+
+  const isLastDialogue =
+    dialogueIndex === dialogue.length - 1;
+
+  const talking =
+    !finished && displayed.length > 0;
 
   useEffect(() => {
     if (!svgLoaded) return;
 
-    setTalking(
-      !finished && displayed.length > 0
-    );
-  }, [
-    svgLoaded,
-    finished,
-    displayed,
-  ]);
-
-  useEffect(() => {
     const object = svgObjectRef.current;
 
-    if (!object || !svgLoaded) return;
+    if (!object) return;
 
     const svg = object.contentDocument;
 
@@ -54,31 +54,44 @@ export default function StartOverlay({
   }, [talking, svgLoaded]);
 
   useEffect(() => {
-  function handleShowStartButton(e) {
-    console.log("Alert received:", e.detail);
-
-    setAlertReceived(true);
+  if (dialogueIndex === 2) {
+    ladybirdStarted.current = true;
   }
+}, [dialogueIndex]);
 
-  window.addEventListener(
-    "showStartButton",
-    handleShowStartButton
-  );
+  useEffect(() => {
+    function handleShowStartButton(e) {
+      console.log("Alert received:", e.detail);
+      setAlertReceived(true);
+    }
 
-  return () => {
-    window.removeEventListener(
+    window.addEventListener(
       "showStartButton",
       handleShowStartButton
     );
-  };
-}, []);
+
+    return () => {
+      window.removeEventListener(
+        "showStartButton",
+        handleShowStartButton
+      );
+    };
+  }, []);
 
   function handleSvgLoad() {
     setSvgLoaded(true);
   }
 
-  function handleHeadClick() {
-    setClicks((c) => c + 1);
+  function handleDialogueClick() {
+    // Don't do anything while the text is still typing
+    if (!finished) return;
+
+    // If this isn't the final dialogue,
+    // move to the next part.
+    if (!isLastDialogue) {
+      setDialogueIndex((index) => index + 1);
+      return;
+    }
   }
 
   function handleStart() {
@@ -89,15 +102,19 @@ export default function StartOverlay({
     }, 900);
   }
 
+  const showStartButton =
+    (finished && isLastDialogue) || alertReceived;
+
   return (
     <div
-      className={`${styles.overlay} ${
-        revealing ? styles.reveal : ""
-      }`}
+      className={`${styles.overlay} ${revealing ? styles.reveal : ""
+        }`}
     >
       {/* Ladybird Three.js canvas */}
       <div className={styles.ladybirdLayer}>
-        <LadybirdCanvas />
+        <LadybirdCanvas
+          ladybirdStarted={ladybirdStarted}
+        />
       </div>
 
       {/* DOM UI */}
@@ -120,28 +137,42 @@ export default function StartOverlay({
 
         {/* Dialogue */}
         <div
-          className={styles.bottomBar}
+          className={`${styles.bottomBar} ${finished ? styles.clickable : ""
+            }`}
           role="button"
           tabIndex={0}
-          onClick={handleHeadClick}
+          onClick={handleDialogueClick}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              handleDialogueClick();
+            }
+          }}
         >
           <div className={styles.textbox}>
             <div className={styles.text}>
               {displayed}
             </div>
+
+            {/* Optional next indicator */}
+            {finished && !isLastDialogue && (
+              <div className={styles.nextIndicator}>
+                Click to continue →
+              </div>
+            )}
           </div>
         </div>
 
       </div>
 
-  {(finished && clicks >= requiredClicks) || alertReceived ? (
-  <button
-    className={styles.startButton}
-    onClick={handleStart}
-  >
-    Start
-  </button>
-) : null}
+      {/* Start button */}
+      {showStartButton && (
+        <button
+          className={styles.startButton}
+          onClick={handleStart}
+        >
+          Start
+        </button>
+      )}
     </div>
   );
 }

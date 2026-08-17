@@ -24,7 +24,7 @@ const animalCardMap = {
     id: "silverfish-card",
     path: "./SVG/silverfishCard.svg",
     title: "Silverfish Card",
-    text: ["The Silverfish was a bit unsure whether they should attend the party or not, as they are quite shy. But the Silverfish worked up the courage to attend the party! Wearing a lovely, but a little bit stained, red tie.","They gifted Dr.Critter a single oat for his birthday, as it is one of the Silverfishes favourite meals. They made sure to pick the most delicious looking oat!","The Silverfish spent the night talking to their best friend, the Common Fly and reading a book they found at the table… They sneakily took a bite of the page when no bug was looking!"]
+    text: ["The Silverfish was a bit unsure whether they should attend the party or not, as they are quite shy. But the Silverfish worked up the courage to attend the party! Wearing a lovely, but a little bit stained, red tie.", "They gifted Dr.Critter a single oat for his birthday, as it is one of the Silverfishes favourite meals. They made sure to pick the most delicious looking oat!", "The Silverfish spent the night talking to their best friend, the Common Fly and reading a book they found at the table… They sneakily took a bite of the page when no bug was looking!"]
   },
   butterfly: {
     id: "butterfly-card",
@@ -36,35 +36,35 @@ const animalCardMap = {
     path: "./SVG/beeCard.svg",
     title: "Bee Card"
   },
-  beetlebody: { 
-    id: "beetlebody-card", 
-    path: "./SVG/beetleCard.svg", 
+  beetlebody: {
+    id: "beetlebody-card",
+    path: "./SVG/beetleCard.svg",
     title: "Beetle Card",
-    text: ["The Great Diving Beetle zipped straight to Dr. Critter’s birthday party right after work! Without any time to change, they wore their usual work outfit to the celebration, a shiny wetsuit!", "They surprised Dr. Critter with a thoughtful gift, a fossil they found during one of their big sea adventures. They crossed their antennas, hoping Dr. Critter loves it!","For dinner, the Great Diving beetle munched on delicious little fish while sharing funny stories with the Small Yellow Sally.","They headed home early, excited to wake up at dawn for a refreshing morning sea swim!"]
-   },
+    text: ["The Great Diving Beetle zipped straight to Dr. Critter’s birthday party right after work! Without any time to change, they wore their usual work outfit to the celebration, a shiny wetsuit!", "They surprised Dr. Critter with a thoughtful gift, a fossil they found during one of their big sea adventures. They crossed their antennas, hoping Dr. Critter loves it!", "For dinner, the Great Diving beetle munched on delicious little fish while sharing funny stories with the Small Yellow Sally.", "They headed home early, excited to wake up at dawn for a refreshing morning sea swim!"]
+  },
 
-  yellowsally: { 
-    id: "yellowsally-card", 
-    path: "./SVG/yellowsallyCard.svg", 
+  yellowsally: {
+    id: "yellowsally-card",
+    path: "./SVG/yellowsallyCard.svg",
     title: "Yellowsally Card"
-   },
-  grashopper: { 
-    id: "grashopper-card", 
-    path: "./SVG/grashopperCard.svg", 
-    title: "Grashopper Card" 
   },
-  ladybird: { 
-    id: "ladybird-card", 
-    path: "./SVG/ladybirdCard.svg", 
-    title: "Ladybird Card" 
+  grashopper: {
+    id: "grashopper-card",
+    path: "./SVG/grashopperCard.svg",
+    title: "Grashopper Card"
   },
-   ant: { 
-    id: "ant-card", 
-    path: "./SVG/antCard.svg", 
+  ladybird: {
+    id: "ladybird-card",
+    path: "./SVG/ladybirdCard.svg",
+    title: "Ladybird Card"
+  },
+  ant: {
+    id: "ant-card",
+    path: "./SVG/antCard.svg",
     title: "Ant Card",
-    text: ["The Great Diving Beetle zipped straight to Dr. Critter’s birthday party right after work! Without any time to change, they wore their usual work outfit to the celebration, a shiny wetsuit!", "They surprised Dr. Critter with a thoughtful gift, a fossil they found during one of their big sea adventures. They crossed their antennas, hoping Dr. Critter loves it!","For dinner, the Great Diving beetle munched on delicious little fish while sharing funny stories with the Small Yellow Sally.","They headed home early, excited to wake up at dawn for a refreshing morning sea swim!"]
-   },
-  
+    text: ["The Great Diving Beetle zipped straight to Dr. Critter’s birthday party right after work! Without any time to change, they wore their usual work outfit to the celebration, a shiny wetsuit!", "They surprised Dr. Critter with a thoughtful gift, a fossil they found during one of their big sea adventures. They crossed their antennas, hoping Dr. Critter loves it!", "For dinner, the Great Diving beetle munched on delicious little fish while sharing funny stories with the Small Yellow Sally.", "They headed home early, excited to wake up at dawn for a refreshing morning sea swim!"]
+  },
+
 };
 
 export default function OverlayMenu() {
@@ -88,38 +88,38 @@ export default function OverlayMenu() {
      }
    }, [open]); */
 
-const [cards, setCards] = useState([]);
-
-useEffect(() => {
-  const collected = getCollectedIds();
-  const animalCards = collected
-    .map((id) => animalCardMap[id])
-    .filter(Boolean);
-
-  setCards(animalCards);
-}, []);
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
-  function onAnimalCollected(e) {
-  const id = e.detail?.id;
-  if (!id) return;
+    const collected = getCollectedIds();
+    const animalCards = collected
+      .map((id) => animalCardMap[id])
+      .filter(Boolean);
 
-  const card = animalCardMap[id];
-  if (!card) return;
+    setCards(animalCards);
+  }, []);
 
-  setCards(prev =>
-    prev.some(c => c.id === card.id)
-      ? prev
-      : [card, ...prev]
-  );
+  useEffect(() => {
+    function onAnimalCollected(e) {
+      const id = e.detail?.id;
+      if (!id) return;
 
-  // Send event to StartOverlay
-  window.dispatchEvent(
-    new CustomEvent("showStartButton", {
-      detail: { id }
-    })
-  );
-}
+      const card = animalCardMap[id];
+      if (!card) return;
+
+      setCards(prev =>
+        prev.some(c => c.id === card.id)
+          ? prev
+          : [card, ...prev]
+      );
+
+      // Send event to StartOverlay
+      window.dispatchEvent(
+        new CustomEvent("showStartButton", {
+          detail: { id }
+        })
+      );
+    }
     window.addEventListener("animalCollected", onAnimalCollected);
     return () => window.removeEventListener("animalCollected", onAnimalCollected);
   }, []);
@@ -143,19 +143,19 @@ useEffect(() => {
 
   return (
     <>
-  
-     <MenuButton
-  ref={menuBtnRef}
-  aria-controls="overlay"
-  aria-expanded={open}
-  onClick={() => {
-    setOpen((s) => !s);
 
-    window.dispatchEvent(
-      new CustomEvent("showStartButton")
-    );
-  }}
-/>
+      <MenuButton
+        ref={menuBtnRef}
+        aria-controls="overlay"
+        aria-expanded={open}
+        onClick={() => {
+          setOpen((s) => !s);
+
+          window.dispatchEvent(
+            new CustomEvent("showStartButton")
+          );
+        }}
+      />
 
       <div
         id="overlay"
@@ -174,7 +174,7 @@ useEffect(() => {
           <header className={styles.overlayHeader}>
             <h2>Invitations you have given out:</h2>
             <button
-             
+
               className={styles.closeBtn}
               onClick={() => setOpen(false)}
             >
@@ -226,6 +226,15 @@ useEffect(() => {
               </article>
             ))}
           </main>
+
+         <footer className={styles.overlayFooter}>
+  <button className={styles.printBtn}>
+    <img
+      src="/SVG/printBtn.svg"
+      alt="Print cards"
+    />
+  </button>
+</footer>
         </div>
       </div>
     </>
