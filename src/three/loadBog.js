@@ -2,6 +2,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { registerAnimal } from "./animals.js"; 
+import { addSparkles } from "./sparkels.js";
 
 export function loadBog(world, refs) {
        const loader = new GLTFLoader(world.loadingManager);
@@ -16,7 +17,7 @@ export function loadBog(world, refs) {
 
         const center = box.getCenter(new THREE.Vector3());
 
-        // move model so center sits at (0,0,0)
+       
         bog.position.sub(center);
 
 
@@ -54,11 +55,37 @@ export function loadBog(world, refs) {
             }
 
         });
+
+
+        const clickableObjects = [
+           "Forest",
+        ];
+
+        clickableObjects.forEach(name => {
+            const object = bog.getObjectByName(name);
+
+            if (object) {
+                refs[`${name.toLowerCase()}sparkles`] =
+                    addSparkles(object, world);
+            }
+        });
+
     });
+
 
     loader.load("/models/Grashopper.glb", (gltf) => {
         const grashopper = gltf.scene;
 
+        const objects =[
+            "GrashopperAntenna",
+        ];
+        objects.forEach(name => {
+            refs[name.toLowerCase()] = grashopper.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+        });
         // set transforms before adding to scene
         grashopper.position.set(-3.25, -1.2, 4.2);
        /*  grashopper.scale.set(2, 2, 2); */
@@ -68,6 +95,7 @@ export function loadBog(world, refs) {
 
         // register with centralized registry; it will add to scene only if not collected
         registerAnimal("grashopper", grashopper, world.scene);
+
 
 
        

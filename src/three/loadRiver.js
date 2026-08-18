@@ -65,7 +65,7 @@ export function loadRiver(world, refs) {
     loader.load("/models/YellowSally.glb", (gltf) => {
         const yellowsally = gltf.scene;
 
-        yellowsally.position.set(-0.8, -0.08, 0);
+        yellowsally.position.set(-0.8, -0.4, 0);
         yellowsally.rotation.set(0,0,-0.1)
         yellowsally.scale.set(21, 21, 21);
 

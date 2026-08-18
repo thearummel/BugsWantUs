@@ -29,9 +29,7 @@ export default function FlowerScene() {
          
 
         };
-        let state = {
-            targetZ: 20
-        };
+        
 
 
         loadFlowers(world, refs, () => {
@@ -42,7 +40,7 @@ export default function FlowerScene() {
         let cleanupInteractions = setupInteractions(
             world,
             refs,
-            state,
+              
             router
         );
 
@@ -50,7 +48,6 @@ export default function FlowerScene() {
         let cleanupAnimation = animate(
             world,
             refs,
-            state
         );
         return () => {
 

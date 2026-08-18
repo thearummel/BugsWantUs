@@ -28,9 +28,7 @@ export default function SinkScene() {
 
         };
 
-        let state = {
-            targetZ: 20
-        };
+        
 
 
         loadSink(world, refs, () => {
@@ -41,7 +39,7 @@ export default function SinkScene() {
         let cleanupInteractions = setupInteractions(
             world,
             refs,
-            state,
+              
             router
         );
 
@@ -49,7 +47,6 @@ export default function SinkScene() {
         let cleanupAnimation = animate(
             world,
             refs,
-            state
         );
         return () => {
 

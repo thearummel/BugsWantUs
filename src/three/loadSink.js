@@ -49,9 +49,21 @@ export function loadSink(world, refs) {
         const silverfish = gltf.scene;
   
 
-        silverfish.position.set(-0.3, -0.8, 0);
+        silverfish.position.set(-0.9, -0.4, 0);
         silverfish.scale.set(0.5, 0.5, 0.5);
 
+             const objects = [
+            "Tail",
+            "SilverfishLeg",
+        ];
+
+        objects.forEach(name => {
+            refs[name.toLowerCase()] = silverfish.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+        });
         refs.silverfish = silverfish;
 
         registerAnimal("silverfish", silverfish, world.scene);

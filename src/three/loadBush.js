@@ -37,6 +37,27 @@ export function loadBush(world, refs) {
 
         world.camera.updateProjectionMatrix();
 
+        const objects = [
+            "bushFrontOne",
+            "bushFrontTwo",
+            "bushFrontTree",
+            "bushFrontFour",
+            "bushFrontFive",
+            "bushFrontSix",
+            "bushFrontSeven",
+            "bushFrontEight",
+            "bushFrontNine",
+
+        ];
+
+        objects.forEach(name => {
+            refs[name.toLowerCase()] = bush.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+        });
+
     });
 
     loader.load("/models/butterfly.glb", (gltf) => {
@@ -45,6 +66,21 @@ export function loadBush(world, refs) {
 
         butterfly.position.set(0, -0.8, 3.7);
         butterfly.scale.set(0.5, 0.5, 0.5);
+
+        const objects = [
+            "AntennaOne",
+            "AntennaTwo"
+
+        ];
+
+        objects.forEach(name => {
+            refs[name.toLowerCase()] = butterfly.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+        });
+
 
         refs.butterfly = butterfly;
         registerAnimal("butterfly", butterfly, world.scene);

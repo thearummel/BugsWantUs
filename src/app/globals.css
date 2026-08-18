@@ -1,5 +1,5 @@
 :root {
-  --background: #ffffff;
+  --background: #fffff0;
   --foreground: #171717;
 }
 
@@ -41,6 +41,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+
 
 }
 
