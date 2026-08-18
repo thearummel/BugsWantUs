@@ -17,7 +17,7 @@ export function loadBog(world, refs) {
 
         const center = box.getCenter(new THREE.Vector3());
 
-        // move model so center sits at (0,0,0)
+       
         bog.position.sub(center);
 
 

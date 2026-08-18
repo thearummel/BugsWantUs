@@ -2,8 +2,8 @@
 import * as THREE from "three";
 import { getObject, collectAnimal } from "./animals.js";
 
-export function setupInteractions(world, refs,  router) {
- 
+export function setupInteractions(world, refs, router) {
+
 
   const animalIds = [
     "fly",
@@ -16,7 +16,7 @@ export function setupInteractions(world, refs,  router) {
     "ladybird",
     "bee",
     "ant"
-      ];
+  ];
 
   function onClick(event) {
     world.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -25,11 +25,19 @@ export function setupInteractions(world, refs,  router) {
 
     // Static interactables (doors, bowls, etc.)
     const interactables = [
-      { object: refs.door, action: () => router.push("/Kitchen") },
+      {
+        object: refs.door,
+        zoom: true,
+        action: () => router.push("/Kitchen")
+      },
       { object: refs.lake, action: () => router.push("/Beetle") },
       { object: refs.bowl, action: () => router.push("/Counter") },
-      { object: refs.garden, action: () => router.push("/Garden") },
-        { object: refs.anthill, action: () => router.push("/Anthill") },
+      {
+        object: refs.garden,
+        zoom: true,
+        action: () => router.push("/Garden")
+      },
+      { object: refs.anthill, action: () => router.push("/Anthill") },
       { object: refs.flower, action: () => router.push("/Flowers") },
       { object: refs.bush, action: () => router.push("/Bush") },
       { object: refs.river, action: () => router.push("/River") },
@@ -40,7 +48,11 @@ export function setupInteractions(world, refs,  router) {
       if (!item.object) continue;
       const hits = world.raycaster.intersectObject(item.object, true);
       if (hits.length > 0) {
-        item.action();
+        if (item.zoom) {
+          zoomToObject(world, item.object, item.action);
+        } else {
+          item.action();
+        }
         return;
       }
     }
@@ -57,6 +69,59 @@ export function setupInteractions(world, refs,  router) {
     }
   }
 
+  function zoomToObject(world, object, onComplete) {
+    const duration = 1000; // milliseconds
+    const startTime = performance.now();
+
+    // Get the object's world-space position
+    const targetPosition = new THREE.Vector3();
+    object.getWorldPosition(targetPosition);
+
+    // Direction from object toward the camera
+    const direction = new THREE.Vector3()
+      .subVectors(world.camera.position, targetPosition)
+      .normalize();
+
+    // How close the camera should get to the object
+    const distance = 1;
+
+    const endCameraPosition = targetPosition
+      .clone()
+      .add(direction.multiplyScalar(distance));
+
+    const startCameraPosition = world.camera.position.clone();
+    const startTarget = world.controls.target.clone();
+
+    function animateZoom(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Smooth ease-out
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      world.camera.position.lerpVectors(
+        startCameraPosition,
+        endCameraPosition,
+        eased
+      );
+
+      world.controls.target.lerpVectors(
+        startTarget,
+        targetPosition,
+        eased
+      );
+
+      world.controls.update();
+
+      if (progress < 1) {
+        requestAnimationFrame(animateZoom);
+      } else {
+        onComplete?.();
+      }
+    }
+
+    requestAnimationFrame(animateZoom);
+  }
   function onResize() {
     world.camera.aspect = window.innerWidth / window.innerHeight;
     world.camera.updateProjectionMatrix();

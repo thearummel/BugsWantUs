@@ -30,7 +30,7 @@ export default function GlobalUI() {
 
             {!isHome && (
                 <div className={styles.left}>
-                    <InfoButton />
+                    <InfoButton tooltip="Information" />
                 </div>
             )}
         </div>
