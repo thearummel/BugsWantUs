@@ -362,8 +362,14 @@ export function animate(world, refs = {}) {
 
 
 
+//Grashopper
 
 
+        if (refs.grashopperantenna) {
+
+            refs.grashopperantenna.rotation.y = Math.sin(time * 2) * 0.03;
+
+        }
 
 
         //silverfish

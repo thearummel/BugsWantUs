@@ -59,7 +59,7 @@ export function addSparkles(object, world, count = 6) {
         sparkle.position.set(
             center.x + (Math.random() - 0.5) * 0.3,
             center.y + (Math.random() - 0.5) * 0.3,
-            center.z + (Math.random() - 0.5) * 0.3
+            center.z + (Math.random() - 0.1) * 0.3,
         );
 
         const scale = 0.02 + Math.random() * 0.08;

@@ -76,6 +76,16 @@ export function loadBog(world, refs) {
     loader.load("/models/Grashopper.glb", (gltf) => {
         const grashopper = gltf.scene;
 
+        const objects =[
+            "GrashopperAntenna",
+        ];
+        objects.forEach(name => {
+            refs[name.toLowerCase()] = grashopper.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+        });
         // set transforms before adding to scene
         grashopper.position.set(-3.25, -1.2, 4.2);
        /*  grashopper.scale.set(2, 2, 2); */
@@ -85,6 +95,7 @@ export function loadBog(world, refs) {
 
         // register with centralized registry; it will add to scene only if not collected
         registerAnimal("grashopper", grashopper, world.scene);
+
 
 
        

@@ -24,7 +24,7 @@ const dialogue = [
   `Click on the menu icon up top to open your Bug Collection! Here, you can see all the awesome insects you’ve invited so far, discover cool facts about them, and read fun mini-stories about their time at the party!`,
 
   // INFO SECTION
-  `Now go find my friends and have fun.`,
+  `Now go find my friends and have fun and look out for the sparkels`,
 ];
 
 export default function Home() {
