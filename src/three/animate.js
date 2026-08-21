@@ -26,7 +26,7 @@ export function animate(world, refs = {}) {
     let animationId;
     let running = true;
 
-    // Set control 
+
     if (world && world.controls) {
         world.controls.minPolarAngle = Math.PI / 2;
         world.controls.maxPolarAngle = Math.PI / 2;
@@ -40,7 +40,6 @@ export function animate(world, refs = {}) {
         if (!running) return;
         animationId = requestAnimationFrame(render);
 
-        // update controls first for damping
         if (world.controls && typeof world.controls.update === "function") {
             world.controls.update();
         }
@@ -391,7 +390,6 @@ if (refs.ladybird) {
     const isMobile = window.innerWidth < 450;
     const endX = isMobile ? -2.1 : -3.1;
 
-    // Only move once the start signal has been triggered
     if (refs.ladybirdStarted?.current) {
         if (refs.ladybird.position.x <= endX) {
             refs.ladybird.position.y = Math.sin(time * 8) * 0.01;
@@ -417,7 +415,7 @@ if (refs.ladybird) {
             });
 
         } else {
-            refs.ladybird.position.x = endX;
+            refs.ladybird.position.x = endX+0.1;
             refs.ladybird.position.y = 0;
 
             const legs = [

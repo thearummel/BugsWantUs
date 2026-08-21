@@ -36,7 +36,7 @@ export default function RiverScene() {
         });
 
 
-        // Setup mouse / resize / click events
+       
         let cleanupInteractions = setupInteractions(
             world,
             refs,
@@ -44,7 +44,7 @@ export default function RiverScene() {
             router
         );
 
-        // Start render loop
+    
         let cleanupAnimation = animate(
             world,
             refs,

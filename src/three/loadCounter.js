@@ -11,8 +11,7 @@ export function loadCounter(world, refs) {
         const counter = gltf.scene;
         world.scene.add(counter);
 
-        // compute bounding box & sphere BEFORE we recenter the model
-        const box = new THREE.Box3().setFromObject(counter);
+         const box = new THREE.Box3().setFromObject(counter);
 
         const center = box.getCenter(new THREE.Vector3());
 
@@ -37,8 +36,7 @@ export function loadCounter(world, refs) {
     loader.load("/models/Fly.glb", (gltf) => {
         const fly = gltf.scene;
 
-        // set transforms before adding to scene
-        fly.position.set(0, 0, 0.8);
+         fly.position.set(0, 0, 0.8);
         fly.scale.set(0.5, 0.5, 0.5);
 
         // add to refs for indivisual objects later

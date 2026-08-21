@@ -236,14 +236,14 @@ export default function OverlayMenu() {
                     current === c.id ? null : c.id
                   )
                 }
-                onKeyDown={(e) => {
+               /*  onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     setActiveCard((current) =>
                       current === c.id ? null : c.id
                     );
                   }
-                }}
+                }} */
                 role="button"
                 aria-expanded={activeCard === c.id}
               >

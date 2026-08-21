@@ -12,8 +12,7 @@ export function loadBog(world, refs) {
         const bog = gltf.scene;
         world.scene.add(bog);
 
-        // compute bounding box & sphere BEFORE we recenter the model
-        const box = new THREE.Box3().setFromObject(bog);
+         const box = new THREE.Box3().setFromObject(bog);
 
         const center = box.getCenter(new THREE.Vector3());
 
@@ -23,8 +22,6 @@ export function loadBog(world, refs) {
 
         world.camera.position.set(0, 0, 7);
 
-        // Restrict vertical rotation to be "straight on" (no tilt) if you want:
-        // This will lock the polar angle so camera cannot tilt up/down.
 
         world.controls.minDistance = 0.1;
         world.controls.maxDistance = 7;
@@ -86,14 +83,11 @@ export function loadBog(world, refs) {
                 console.log(`${name} found`);
             }
         });
-        // set transforms before adding to scene
-        grashopper.position.set(-3.25, -1.2, 4.2);
+         grashopper.position.set(-3.25, -1.2, 4.2);
        /*  grashopper.scale.set(2, 2, 2); */
 
-        // add to refs for indivisual objects later
         refs.grashopper = grashopper;
 
-        // register with centralized registry; it will add to scene only if not collected
         registerAnimal("grashopper", grashopper, world.scene);
 
 

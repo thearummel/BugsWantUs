@@ -44,12 +44,19 @@
   }
 }
 
-/* Mobile */
+
+
 @media (max-width: 490px) {
   .bottommiddle {
     width: 140vw;
     bottom: 10px;
+  }.bottomleft{
+        pointer-events: auto;
+    position: fixed;
+    bottom: 70px;
+    left: 16px;
   }
+
 }
 
 .iconBtn {

@@ -4,7 +4,7 @@ import { registerAnimal } from "./animals.js";
 import { addSparkles } from "./sparkels.js";
 
 function saveCameraPosition(world) {
-    const cameraData = {
+    let cameraData = {
         position: {
             x: world.camera.position.x,
             y: world.camera.position.y,
@@ -19,12 +19,12 @@ function saveCameraPosition(world) {
 
     localStorage.setItem(
         "gardenCamera",
-        JSON.stringify(cameraData)
+        JSON.stringify(cameraData) //https://www.youtube.com/watch?v=AwicscsvGLg
     );
 }
 
 function restoreCameraPosition(world) {
-    const saved = localStorage.getItem("gardenCamera");
+    let saved = localStorage.getItem("gardenCamera");
 
     if (!saved) {
         return false;
@@ -58,7 +58,7 @@ export function loadGarden(world, refs) {
     const loader = new GLTFLoader(world.loadingManager);
 
     loader.load("/models/garden.glb", (gltf) => {
-        const garden = gltf.scene;
+        let garden = gltf.scene;
         world.scene.add(garden);
 
         const box = new THREE.Box3().setFromObject(garden);
@@ -66,14 +66,14 @@ export function loadGarden(world, refs) {
 
         garden.position.sub(center);
 
-        // Try to restore previous camera position
-        const restored = restoreCameraPosition(world);
+    
+        let restored = restoreCameraPosition(world);
 
-        // If there is no saved position, use the default
+     
         if (!restored) {
             world.camera.position.set(0, 0, 15);
 
-            const narrow = window.innerHeight;
+            let narrow = window.innerHeight;
 
             if (narrow >= 900) {
                 world.camera.position.set(0, 0, 14);
@@ -90,7 +90,7 @@ export function loadGarden(world, refs) {
         world.controls.update();
         world.camera.updateProjectionMatrix();
 
-        // Save camera whenever user moves it
+       
         world.controls.addEventListener("change", () => {
             saveCameraPosition(world);
         });

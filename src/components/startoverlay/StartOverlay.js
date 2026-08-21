@@ -19,7 +19,7 @@ export default function StartOverlay({
   const ladybirdStarted = useRef(false);
 
 
-  // Current piece of dialogue
+ 
   const currentDialogue =
     dialogue[dialogueIndex] || "";
 

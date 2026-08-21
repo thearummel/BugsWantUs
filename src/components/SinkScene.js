@@ -35,7 +35,7 @@ export default function SinkScene() {
             setLoading(false);
         });
 
-        // Setup mouse / resize / click events
+       
         let cleanupInteractions = setupInteractions(
             world,
             refs,
@@ -43,7 +43,7 @@ export default function SinkScene() {
             router
         );
 
-        // Start render loop
+    
         let cleanupAnimation = animate(
             world,
             refs,

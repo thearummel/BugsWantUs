@@ -37,7 +37,7 @@ export default function CounterScene() {
             setLoading(false);
         });
 
-        // Setup mouse / resize / click events
+       
         let cleanupInteractions = setupInteractions(
             world,
             refs,
@@ -45,14 +45,14 @@ export default function CounterScene() {
             router
         );
 
-        // Start render loop
+    
         let cleanupAnimation = animate(
             world,
             refs,
         );
         return () => {
             cleanupAnimation?.();
-            cleanupInteractions?.(); // safe call
+            cleanupInteractions?.(); 
             world.controls.dispose();
             world.renderer.dispose();
             world.renderer.domElement = null;

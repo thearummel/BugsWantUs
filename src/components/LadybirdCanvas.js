@@ -44,8 +44,7 @@ export default function LadybirdCanvas({
         refs.current
       );
 
-      // Give the animation access to the
-      // dialogue-controlled start signal.
+
       refs.current.ladybirdStarted =
         ladybirdStarted;
 

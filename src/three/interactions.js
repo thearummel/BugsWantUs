@@ -3,8 +3,6 @@ import * as THREE from "three";
 import { getObject, collectAnimal } from "./animals.js";
 
 export function setupInteractions(world, refs, router) {
-
-
   const animalIds = [
     "fly",
     "beetlebody",
@@ -14,9 +12,14 @@ export function setupInteractions(world, refs, router) {
     "butterfly",
     "grashopper",
     "ladybird",
-    "bee",
-    "ant"
+    "ant",
   ];
+
+  function handleAllAnimalsCollected() {
+    router.push("/Finale");
+  }
+
+  window.addEventListener("allAnimalsCollected", handleAllAnimalsCollected);
 
   function onClick(event) {
     world.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -131,10 +134,12 @@ export function setupInteractions(world, refs, router) {
   window.addEventListener("click", onClick);
   window.addEventListener("resize", onResize);
 
-  // cleanup function — ALWAYS returned
   return () => {
-
     window.removeEventListener("click", onClick);
     window.removeEventListener("resize", onResize);
+    window.removeEventListener(
+      "allAnimalsCollected",
+      handleAllAnimalsCollected
+    );
   };
 }
