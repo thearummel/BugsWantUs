@@ -83,11 +83,10 @@ export default function StartOverlay({
   }
 
   function handleDialogueClick() {
-    // Don't do anything while the text is still typing
+
     if (!finished) return;
 
-    // If this isn't the final dialogue,
-    // move to the next part.
+
     if (!isLastDialogue) {
       setDialogueIndex((index) => index + 1);
       return;
@@ -153,7 +152,7 @@ export default function StartOverlay({
               {displayed}
             </div>
 
-            {/* Optional next indicator */}
+            {/*next indicator */}
             {finished && !isLastDialogue && (
               <div className={styles.nextIndicator}>
                 Click to continue →
