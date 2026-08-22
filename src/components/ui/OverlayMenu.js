@@ -178,7 +178,30 @@ export default function OverlayMenu() {
     if (e.target === overlayRef.current) setOpen(false);
   }
 
-  // card data could be body and title and things like that
+function printDocument() {
+  const iframe = document.createElement("iframe");
+
+  iframe.style.position = "fixed";
+  iframe.style.width = "0";
+  iframe.style.height = "0";
+  iframe.style.border = "0";
+  iframe.style.visibility = "hidden";
+
+  iframe.src = "/SVG/Invites.pdf";
+
+  document.body.appendChild(iframe);
+
+  iframe.onload = () => {
+    setTimeout(() => {
+      iframe.contentWindow?.focus();
+      iframe.contentWindow?.print();
+
+      setTimeout(() => {
+        document.body.removeChild(iframe);
+      }, 1000);
+    }, 500);
+  };
+}
 
   return (
     <>
@@ -236,14 +259,14 @@ export default function OverlayMenu() {
                     current === c.id ? null : c.id
                   )
                 }
-               /*  onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActiveCard((current) =>
-                      current === c.id ? null : c.id
-                    );
-                  }
-                }} */
+                /*  onKeyDown={(e) => {
+                   if (e.key === "Enter" || e.key === " ") {
+                     e.preventDefault();
+                     setActiveCard((current) =>
+                       current === c.id ? null : c.id
+                     );
+                   }
+                 }} */
                 role="button"
                 aria-expanded={activeCard === c.id}
               >
@@ -269,17 +292,19 @@ export default function OverlayMenu() {
           </main>
 
           <footer className={styles.overlayFooter}>
-            <button
-              className={styles.printBtn}
-              aria-label="Print cards"
-              title="Print cards"
-            >
-              <img
-                src="/SVG/printBtn.svg"
-                alt=""
-              />
-            </button>
-          </footer>
+  <button
+    type="button"
+    className={styles.printBtn}
+    aria-label="Print cards"
+    title="Print cards"
+    onClick={printDocument}
+  >
+    <img
+      src="/SVG/printBtn.svg"
+      alt=""
+    />
+  </button>
+</footer>
         </div>
       </div>
     </>

@@ -85,6 +85,11 @@
 
 }
 
+#pdfDocument{
+ display: "none";
+}
+
+
 /* Cards grid */
 .cardsGrid {
   display: grid;

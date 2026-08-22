@@ -81,7 +81,7 @@ export function loadGarden(world, refs) {
                 world.camera.position.set(0, 0, 13);
             }
 
-            world.controls.target.set(0, -0.6, 0);
+            world.controls.target.set(0, 0, 0);
         }
 
         world.controls.minDistance = 0.1;
@@ -147,7 +147,7 @@ export function loadGarden(world, refs) {
     loader.load("/models/Moth.glb", (gltf) => {
         const moth = gltf.scene;
 
-        moth.position.set(-1.5, -1.6, 2);
+        moth.position.set(-1.7, -0.4, 2);
         const objects = [
             "MothAntenna",
             "MothAntennaTwo",
