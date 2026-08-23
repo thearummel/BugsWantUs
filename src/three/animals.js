@@ -78,7 +78,6 @@ export function collectAnimal(id) {
     })
   );
 
-  // Check whether every animal has now been collected
   const allCollected = ANIMAL_IDS.every((animalId) =>
     isCollected(animalId)
   );

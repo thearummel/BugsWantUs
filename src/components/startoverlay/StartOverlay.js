@@ -19,7 +19,7 @@ export default function StartOverlay({
   const ladybirdStarted = useRef(false);
 
 
- 
+
   const currentDialogue =
     dialogue[dialogueIndex] || "";
 
@@ -54,10 +54,10 @@ export default function StartOverlay({
   }, [talking, svgLoaded]);
 
   useEffect(() => {
-  if (dialogueIndex === 2) {
-    ladybirdStarted.current = true;
-  }
-}, [dialogueIndex]);
+    if (dialogueIndex === 2) {
+      ladybirdStarted.current = true;
+    }
+  }, [dialogueIndex]);
 
   useEffect(() => {
     function handleShowStartButton(e) {
@@ -159,18 +159,26 @@ export default function StartOverlay({
               </div>
             )}
           </div>
+
+
         </div>
 
       </div>
 
       {/* Start button */}
-      {showStartButton && (
+      {dialogueIndex === 8 && (
         <button
           className={styles.startButton}
           onClick={handleStart}
         >
           Start
         </button>
+      )}
+      {dialogueIndex === 5 && (
+        <div className={styles.focus}></div>
+      )}
+       {dialogueIndex === 6 && (
+        <div className={styles.focusmenu}></div>
       )}
     </div>
   );

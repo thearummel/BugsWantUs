@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
 
-  background: #93dad63c;
+  background: #93dad6;
 
   display: flex;
   flex-direction: column;
@@ -44,7 +44,54 @@
     opacity: 1;
   }
 }
+.focus {
+  background-color: #ee7f59;
 
+ border-top-left-radius: 255px 15px;
+border-top-right-radius: 15px 225px;
+border-bottom-right-radius: 225px 15px;
+border-bottom-left-radius: 15px 255px;
+
+box-shadow: 0 0 0 1.5px #ee7f59;
+
+  height: 45px;
+  width: 390px;
+
+  position: fixed;
+  bottom: 27px;
+  right: 30px;
+
+  animation: focus 1.5s ease-in-out infinite;
+}
+.focusmenu{
+  background-color: #ee7f59;
+
+border-top-left-radius: 255px 15px;
+border-top-right-radius: 15px 225px;
+border-bottom-right-radius: 225px 15px;
+border-bottom-left-radius: 15px 255px;
+
+box-shadow: 0 0 0 1.5px #ee7f59;
+
+  height: 55px;
+  width: 40px;
+
+  position: fixed;
+top: 17px;
+  right: 36px;
+
+  animation: focus 1.5s ease-in-out infinite;
+}
+@keyframes focus {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0.5px #ee7f59;
+  }
+
+  50% {
+    box-shadow: 0 0 0 9.5px #ee7f59;
+  }
+}
 /*
  * Ladybird Three.js layer.
  */

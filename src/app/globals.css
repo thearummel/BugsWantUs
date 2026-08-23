@@ -35,19 +35,134 @@ a {
   text-decoration: none;
 }
 
+.aboutmain {
+  min-height: 100vh;
+  background: #f4f1e8;
+  color: #222;
+}
 
-.aboutmain{
-  width: 100vw;
+
+
+.site-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 2em 6em;
+    border-bottom: 1px solid #222;
+  
+}
 
+
+.site-header nav {
+  display: flex;
+  gap: 40px;
+}
+
+.site-header a {
+  color: #222;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.site-header a:hover {
+  text-decoration: underline;
+}
+
+
+.about-section {
+  display: grid;
+  grid-template-columns: 2fr 4fr ;
+  gap: 2em;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 70px 50px;
+}
+
+
+
+.about-image {
+  width: 100%;
+  height: 650px;
+}
+
+.about-image img {
+  width: 100%;
+
+  object-fit: cover;
+}
+
+
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-content h1 {
+  font-size: 38px;
 
 }
 
-.mainwrapp{
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  padding-top: 1em;
-  width: 85vw;
+.about-head{
+  margin-bottom: 35px;
+}
+
+
+.interview {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+    font-size: 17px;
+}
+
+.question h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.question p {
+  font-size: 17px;
+  
+  margin-left:1em ;
+
+  
+}
+
+
+footer {
+  padding: 3em 6em;
+  border-top: 1px solid #222;
+  font-size: 14px;
+}
+
+
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .site-header nav {
+    gap: 20px;
+  }
+
+  .about-section {
+    grid-template-columns: 1fr;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  .about-image {
+    height: 400px;
+  }
+
+  .about-content h1 {
+    font-size: 26px;
+  }
+
+  footer {
+    padding: 20px;
+  }
 }

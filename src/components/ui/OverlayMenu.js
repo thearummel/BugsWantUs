@@ -173,7 +173,7 @@ export default function OverlayMenu() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Click outside to close
+
   function onOverlayClick(e) {
     if (e.target === overlayRef.current) setOpen(false);
   }

@@ -39,7 +39,7 @@
   border: solid, 0.1em, var(--text);
 }
 
-/* Header */
+
 .overlayHeader {
   display: flex;
   align-items: center;

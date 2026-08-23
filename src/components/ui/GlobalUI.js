@@ -11,6 +11,13 @@ import OverlayMenu from "./OverlayMenu";
 export default function GlobalUI() {
     const pathname = usePathname();
     const isHome = pathname === "/";
+    const isAbout = pathname === "/About"
+    const isFinale = pathname === "/Finale"
+       // Hide all GlobalUI elements on /Finale
+    if (isFinale) {
+        return null;
+    }
+
 
     return (
         <div className={styles.globalUi}>
@@ -23,10 +30,11 @@ export default function GlobalUI() {
             <div className={styles.right}>
                 <OverlayMenu />
             </div>
-
-            <div className={styles.bottommiddle}>
-                <BarBottom />
-            </div>
+            {!isAbout && (
+                <div className={styles.bottommiddle}>
+                    <BarBottom />
+                </div>
+            )}
 
             {!isHome && (
                 <div className={styles.left}>

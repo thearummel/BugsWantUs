@@ -26,7 +26,6 @@ export function setupInteractions(world, refs, router) {
     world.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     world.raycaster.setFromCamera(world.mouse, world.camera);
 
-    // Static interactables (doors, bowls, etc.)
     const interactables = [
       {
         object: refs.door,
@@ -60,10 +59,10 @@ export function setupInteractions(world, refs, router) {
       }
     }
 
-    // Animal collection: check each registered animal at click time
+    // Animal collection check registered animal at click time
     for (const id of animalIds) {
       const obj = getObject(id);
-      if (!obj) continue; // not loaded yet
+      if (!obj) continue; 
       const hits = world.raycaster.intersectObject(obj, true);
       if (hits.length > 0) {
         collectAnimal(id);
@@ -73,19 +72,16 @@ export function setupInteractions(world, refs, router) {
   }
 
   function zoomToObject(world, object, onComplete) {
-    const duration = 1000; // milliseconds
+    const duration = 1000; 
     const startTime = performance.now();
 
-    // Get the object's world-space position
     const targetPosition = new THREE.Vector3();
     object.getWorldPosition(targetPosition);
 
-    // Direction from object toward the camera
     const direction = new THREE.Vector3()
       .subVectors(world.camera.position, targetPosition)
       .normalize();
 
-    // How close the camera should get to the object
     const distance = 1;
 
     const endCameraPosition = targetPosition
@@ -99,7 +95,6 @@ export function setupInteractions(world, refs, router) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
 
-      // Smooth ease-out
       const eased = 1 - Math.pow(1 - progress, 3);
 
       world.camera.position.lerpVectors(

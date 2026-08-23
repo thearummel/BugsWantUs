@@ -1,11 +1,23 @@
+"use client";
+
 import GardenScene from "@/components/GardenScene";
+import { useEffect, useRef } from "react";
 
 export default function Garden() {
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.08;
+    }
+  }, []);
+
   return (
     <>
       <GardenScene />
 
       <audio
+        ref={audioRef}
         autoPlay
         loop
         preload="auto"
@@ -15,5 +27,3 @@ export default function Garden() {
     </>
   );
 }
-
-//Sound Effect by <a href="https://pixabay.com/de/users/sspsurvival-22364443/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=8257">Semen Surin</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=8257">Pixabay</a>

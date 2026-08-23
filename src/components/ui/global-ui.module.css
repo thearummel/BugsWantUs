@@ -39,7 +39,7 @@
 @media (max-height: 999px) {
   .bottommiddle {
     left: auto;
-    right: 16px;
+    right: 30px;
     transform: translateX(0%);
   }
 }

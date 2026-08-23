@@ -20,8 +20,6 @@ export function loadFinale(world, refs) {
 
      world.camera.position.set(0, 0, 6);
 
-        // Restrict vertical rotation to be "straight on" (no tilt) if you want:
-        // This will lock the polar angle so camera cannot tilt up/down.
 
         world.controls.minDistance = 0.1;
         world.controls.maxDistance = 6;
