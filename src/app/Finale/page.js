@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import FinaleScene from "@/components/FinaleScene";
+import GlobalAudio from "@/components/audio/GlobalAudio";
 
 const STORAGE_KEY = "collectedAnimals_v1";
 
@@ -27,20 +28,14 @@ export default function FinalePage() {
     };
   }, []);
 
-  useEffect(() => {
-    if (birthdayAudioRef.current) {
-      birthdayAudioRef.current.volume = 0.08;
-    }
 
-    if (forestAudioRef.current) {
-      forestAudioRef.current.volume = 0.04;
-    }
-  }, []);
 
-  const handleGoToStart = () => {
-    localStorage.removeItem(STORAGE_KEY);
-    window.location.href = "/";
-  };
+ const handleGoToStart = () => {
+  localStorage.removeItem(STORAGE_KEY);
+  sessionStorage.removeItem("hasStarted");
+  window.location.href = "/";
+};
+
 
   return (
     <div className="finale-container">
@@ -61,27 +56,24 @@ export default function FinalePage() {
       className="go-start-button"
       onClick={handleGoToStart}
     >
-      Go To the start
+      Restart Game
     </button>
   </>
 )}
 
-     
+   <GlobalAudio
+  autoPlay
+  volume={0.08}
+  src="/audio/sub_clair-happy-birthday-579516.mp3"
+/>
 
-      <audio
-        ref={birthdayAudioRef}
-        autoPlay
-        preload="auto"
-        src="/audio/sub_clair-happy-birthday-579516.mp3"
-      />
+<GlobalAudio
+  autoPlay
+  loop
+  volume={0.04}
+  src="/audio/forest-stream-birds.mp3"
+/>
 
-      <audio
-        ref={forestAudioRef}
-        autoPlay
-        loop
-        preload="auto"
-        src="/audio/forest-stream-birds.mp3"
-      />
     </div>
   );
 }

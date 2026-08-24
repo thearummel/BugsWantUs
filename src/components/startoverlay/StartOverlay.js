@@ -15,7 +15,7 @@ export default function StartOverlay({
   const [dialogueIndex, setDialogueIndex] = useState(0);
 
   const svgObjectRef = useRef(null);
-
+  const audioRef = useRef(null);
   const ladybirdStarted = useRef(false);
 
 
@@ -31,6 +31,25 @@ export default function StartOverlay({
 
   const talking =
     !finished && displayed.length > 0;
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    if (talking) {
+      audio.play().catch((error) => {
+        console.log("Audio playback prevented:", error);
+      });
+    } else {
+      audio.pause();
+    }
+    
+     if (audioRef.current) {
+      audioRef.current.volume = 0.2;
+      audioRef.current.playbackRate = 0.7;
+    }
+  }, [talking]);
 
   useEffect(() => {
     if (!svgLoaded) return;
@@ -109,17 +128,25 @@ export default function StartOverlay({
       className={`${styles.overlay} ${revealing ? styles.reveal : ""
         }`}
     >
-      {/* Ladybird Three.js canvas */}
+      <audio
+        ref={audioRef}
+        src="/audio/artificiallyinspired-alien-high-pitch-312010.mp3"
+        loop
+         volume={0.03}
+        preload="auto"
+      />
+
+
       <div className={styles.ladybirdLayer}>
         <LadybirdCanvas
           ladybirdStarted={ladybirdStarted}
         />
       </div>
 
-      {/* DOM UI */}
+
       <div className={styles.centerContent}>
 
-        {/* Talking head */}
+
         <div
           className={styles.head}
           aria-label="Talking head"
@@ -134,7 +161,6 @@ export default function StartOverlay({
           />
         </div>
 
-        {/* Dialogue */}
         <div
           className={`${styles.bottomBar} ${finished ? styles.clickable : ""
             }`}
@@ -152,7 +178,7 @@ export default function StartOverlay({
               {displayed}
             </div>
 
-            {/*next indicator */}
+
             {finished && !isLastDialogue && (
               <div className={styles.nextIndicator}>
                 Click to continue →
@@ -175,7 +201,7 @@ export default function StartOverlay({
       {dialogueIndex === 5 && (
         <div className={styles.focus}></div>
       )}
-       {dialogueIndex === 6 && (
+      {dialogueIndex === 6 && (
         <div className={styles.focusmenu}></div>
       )}
     </div>

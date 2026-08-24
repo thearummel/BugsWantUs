@@ -2,27 +2,23 @@
 "use client";
 import AntScene from "@/components/AntScene";
 import { useEffect, useRef } from "react";
+import GlobalAudio from "@/components/audio/GlobalAudio";
 
 export default function AntPage() {
-     const audioRef = useRef(null);
     
-      useEffect(() => {
-        if (audioRef.current) {
-          audioRef.current.volume = 1;
-        }
-      }, []);
     
       return (
         <>
          <AntScene />
-          <audio
-        ref={audioRef}
+    
+
+         <GlobalAudio
         autoPlay
-        loop
-        preload="auto"
-        src="/audio/freesound_community-low-hum-14645.mp3"
-        style={{ display: "none" }}
+        volume={1}
+       src="/audio/freesound_community-low-hum-14645.mp3"
       />
+      
+  
     </>
   );
 }

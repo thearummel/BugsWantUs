@@ -7,16 +7,17 @@ import BackButton from "./BackButton";
 import BarBottom from "./BarBottom";
 import InfoButton from "./InfoButton";
 import OverlayMenu from "./OverlayMenu";
+import AudioButton from "./AudioButton";
 
 export default function GlobalUI() {
     const pathname = usePathname();
     const isHome = pathname === "/";
-    const isAbout = pathname === "/About"
-    const isFinale = pathname === "/Finale"
+    const isAbout = pathname === "/About";
+    const isFinale = pathname === "/Finale";
+
     if (isFinale) {
         return null;
     }
-
 
     return (
         <div className={styles.globalUi}>
@@ -29,6 +30,7 @@ export default function GlobalUI() {
             <div className={styles.right}>
                 <OverlayMenu />
             </div>
+
             {!isAbout && (
                 <div className={styles.bottommiddle}>
                     <BarBottom />
@@ -40,6 +42,10 @@ export default function GlobalUI() {
                     <InfoButton tooltip="Information" />
                 </div>
             )}
+
+            <div className={styles.audioButton}>
+                <AudioButton />
+            </div>
         </div>
     );
 }
