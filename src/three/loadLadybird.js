@@ -31,7 +31,7 @@ export function loadLadybird(refs = {}) {
           }
         });
 
-        // Also keep a ref to the complete model
+   
         refs.ladybird = ladybird;
 
         resolve(gltf);

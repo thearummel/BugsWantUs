@@ -11,8 +11,7 @@ export function loadBush(world, refs) {
         const bush = gltf.scene;
         world.scene.add(bush);
 
-        // compute bounding box & sphere BEFORE we recenter the model
-        const box = new THREE.Box3().setFromObject(bush);
+         const box = new THREE.Box3().setFromObject(bush);
 
         const center = box.getCenter(new THREE.Vector3());
 

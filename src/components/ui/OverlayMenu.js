@@ -113,25 +113,11 @@ export default function OverlayMenu() {
   const menuBtnRef = useRef(null);
   const firstCardRef = useRef(null);
 
-  // Lock background scroll & manage focus
-  /*  useEffect(() => {
-     if (open) {
-       document.body.style.overflow = "hidden";
-       // focus first card after open
-       setTimeout(() => {
-         firstCardRef.current?.focus();
-       }, 50);
-     } else {
-       document.body.style.overflow = "";
-       menuBtnRef.current?.focus();
-     }
-   }, [open]); */
-
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    const collected = getCollectedIds();
-    const animalCards = collected
+    let collected = getCollectedIds();
+    let animalCards = collected
       .map((id) => animalCardMap[id])
       .filter(Boolean);
 
@@ -139,7 +125,7 @@ export default function OverlayMenu() {
   }, []);
 
   useEffect(() => {
-    function onAnimalCollected(e) {
+    function onAnimalCollected(e) { // e is a event 
       const id = e.detail?.id;
       if (!id) return;
 
@@ -152,33 +138,46 @@ export default function OverlayMenu() {
           : [card, ...prev]
       );
 
-      // Send event to StartOverlay
-      window.dispatchEvent(
+
+  /*     window.dispatchEvent(
         new CustomEvent("showStartButton", {
           detail: { id }
         })
-      );
+      ); */
     }
     window.addEventListener("animalCollected", onAnimalCollected);
     return () => window.removeEventListener("animalCollected", onAnimalCollected);
   }, []);
-  // Close on Escape
-  useEffect(() => {
-    function onKey(e) {
-      if (e.key === "Escape" && open) setOpen(false);
-    }
-    document.addEventListener("keydown", onKey);
 
-    // cleanup funcion 
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open]);
-
-  // Click outside to close
   function onOverlayClick(e) {
     if (e.target === overlayRef.current) setOpen(false);
   }
 
-  // card data could be body and title and things like that
+
+  function printDocument() {
+    let iframe = document.createElement("iframe");
+
+    iframe.style.position = "fixed";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "0";
+    iframe.style.visibility = "hidden";
+
+    iframe.src = "/SVG/Invites.pdf";
+
+    document.body.appendChild(iframe);
+
+    iframe.onload = () => {
+      setTimeout(() => {
+        iframe.contentWindow?.focus();
+        iframe.contentWindow?.print();
+
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 1000);
+      }, 500);
+    };
+  }
 
   return (
     <>
@@ -190,10 +189,6 @@ export default function OverlayMenu() {
         title={open ? "Close invitations" : "Open invitations"}
         onClick={() => {
           setOpen((s) => !s);
-
-          window.dispatchEvent(
-            new CustomEvent("showStartButton")
-          );
         }}
       />
 
@@ -201,14 +196,12 @@ export default function OverlayMenu() {
         id="overlay"
         ref={overlayRef}
         className={`${styles.overlay} ${open ? styles.open : ""}`}
-        role="dialog"
         aria-modal="true"
         aria-hidden={!open}
         onClick={onOverlayClick}
       >
         <div
           className={styles.overlayPanel}
-          role="document"
           onClick={(e) => e.stopPropagation()}
         >
           <header className={styles.overlayHeader}>
@@ -223,7 +216,7 @@ export default function OverlayMenu() {
             </button>
           </header>
 
-          <main className={styles.cardsGrid} id="cardsGrid">
+          <main className={styles.cardsGrid} >
             {cards.map((c, idx) => (
               <article
                 key={c.id}
@@ -236,14 +229,14 @@ export default function OverlayMenu() {
                     current === c.id ? null : c.id
                   )
                 }
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActiveCard((current) =>
-                      current === c.id ? null : c.id
-                    );
-                  }
-                }}
+                /*  onKeyDown={(e) => {
+                   if (e.key === "Enter" || e.key === " ") {
+                     e.preventDefault();
+                     setActiveCard((current) =>
+                       current === c.id ? null : c.id
+                     );
+                   }
+                 }} */
                 role="button"
                 aria-expanded={activeCard === c.id}
               >
@@ -270,9 +263,11 @@ export default function OverlayMenu() {
 
           <footer className={styles.overlayFooter}>
             <button
+              type="button"
               className={styles.printBtn}
               aria-label="Print cards"
               title="Print cards"
+              onClick={printDocument}
             >
               <img
                 src="/SVG/printBtn.svg"

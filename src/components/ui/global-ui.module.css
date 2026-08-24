@@ -39,17 +39,24 @@
 @media (max-height: 999px) {
   .bottommiddle {
     left: auto;
-    right: 16px;
+    right: 30px;
     transform: translateX(0%);
   }
 }
 
-/* Mobile */
+
+
 @media (max-width: 490px) {
   .bottommiddle {
     width: 140vw;
     bottom: 10px;
+  }.bottomleft{
+        pointer-events: auto;
+    position: fixed;
+    bottom: 70px;
+    left: 16px;
   }
+
 }
 
 .iconBtn {
@@ -64,4 +71,33 @@
 
 .backBtn {
   background: transparent;
+}
+
+
+.audioButton {
+  position: fixed;
+  top: 24px;
+  right: 90px;
+  pointer-events: auto;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 12px;
+}
+
+.audioButton button {
+  background: #F8EFD5;
+ border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  border-bottom-right-radius: 225px 15px;
+  border-bottom-left-radius: 15px 255px;
+
+  border: solid 1.5px #41403E;
+  padding: 6px;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 16px;
 }

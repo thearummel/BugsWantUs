@@ -36,7 +36,7 @@ export default function BushScene() {
         loadBush(world, refs, () => {
             setLoading(false);
         });
-        // Setup mouse / resize / click events
+       
         let cleanupInteractions = setupInteractions(
             world,
             refs,
@@ -44,7 +44,7 @@ export default function BushScene() {
             router
         );
 
-        // Start render loop
+    
         let cleanupAnimation = animate(
             world,
             refs,

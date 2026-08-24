@@ -1,7 +1,19 @@
-// animals.js
+
 const STORAGE_KEY = "collectedAnimals_v1";
 
 const registry = new Map();
+
+const ANIMAL_IDS = [
+  "fly",
+  "beetlebody",
+  "moth",
+  "yellowsally",
+  "silverfish",
+  "butterfly",
+  "grashopper",
+  "ladybird",
+  "ant",
+];
 
 function readStore() {
   try {
@@ -10,22 +22,21 @@ function readStore() {
     return {};
   }
 }
+
 function writeStore(obj) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
 }
 
 export function registerAnimal(id, object, scene) {
-  // store object reference
   registry.set(id, object);
 
-  // if already collected, keep it hidden; otherwise add to scene
   const collected = !!readStore()[id];
+
   object.visible = !collected;
-  if (!collected) {
-    scene.add(object);
-  } else {
-    // optional: do not add to scene at all if already collected
-    scene.add(object); object.visible = false;
+  scene.add(object);
+
+  if (collected) {
+    object.visible = false;
   }
 }
 
@@ -38,7 +49,8 @@ export function isCollected(id) {
 }
 
 export function getCollectedIds() {
-  return Object.keys(readStore()).filter(k => readStore()[k]);
+  const store = readStore();
+  return Object.keys(store).filter((k) => store[k]);
 }
 
 export function markCollected(id) {
@@ -48,15 +60,29 @@ export function markCollected(id) {
 }
 
 export function collectAnimal(id) {
-  // hide/remove the model from scene so it's no longer clickable/visible
   const obj = registry.get(id);
+
   if (obj) {
-    obj.visible = false;            // Raycaster ignores invisible objects
-    if (obj.parent) obj.parent.remove(obj); // extra: remove from scene graph
+    obj.visible = false;
+
+    if (obj.parent) {
+      obj.parent.remove(obj);
+    }
   }
 
   markCollected(id);
 
-  // notify UI/other code immediately
-  window.dispatchEvent(new CustomEvent("animalCollected", { detail: { id } }));
+  window.dispatchEvent(
+    new CustomEvent("animalCollected", {
+      detail: { id },
+    })
+  );
+
+  const allCollected = ANIMAL_IDS.every((animalId) =>
+    isCollected(animalId)
+  );
+
+  if (allCollected) {
+    window.dispatchEvent(new CustomEvent("allAnimalsCollected"));
+  }
 }
