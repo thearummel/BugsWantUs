@@ -13,7 +13,6 @@ export default function GlobalUI() {
     const isHome = pathname === "/";
     const isAbout = pathname === "/About"
     const isFinale = pathname === "/Finale"
-       // Hide all GlobalUI elements on /Finale
     if (isFinale) {
         return null;
     }

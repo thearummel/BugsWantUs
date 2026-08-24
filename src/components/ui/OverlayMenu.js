@@ -113,25 +113,11 @@ export default function OverlayMenu() {
   const menuBtnRef = useRef(null);
   const firstCardRef = useRef(null);
 
-  // Lock background scroll & manage focus
-  /*  useEffect(() => {
-     if (open) {
-       document.body.style.overflow = "hidden";
-       // focus first card after open
-       setTimeout(() => {
-         firstCardRef.current?.focus();
-       }, 50);
-     } else {
-       document.body.style.overflow = "";
-       menuBtnRef.current?.focus();
-     }
-   }, [open]); */
-
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    const collected = getCollectedIds();
-    const animalCards = collected
+    let collected = getCollectedIds();
+    let animalCards = collected
       .map((id) => animalCardMap[id])
       .filter(Boolean);
 
@@ -139,7 +125,7 @@ export default function OverlayMenu() {
   }, []);
 
   useEffect(() => {
-    function onAnimalCollected(e) {
+    function onAnimalCollected(e) { // e is a event 
       const id = e.detail?.id;
       if (!id) return;
 
@@ -152,56 +138,46 @@ export default function OverlayMenu() {
           : [card, ...prev]
       );
 
-      // Send event to StartOverlay
-      window.dispatchEvent(
+
+  /*     window.dispatchEvent(
         new CustomEvent("showStartButton", {
           detail: { id }
         })
-      );
+      ); */
     }
     window.addEventListener("animalCollected", onAnimalCollected);
     return () => window.removeEventListener("animalCollected", onAnimalCollected);
   }, []);
-  // Close on Escape
-  useEffect(() => {
-    function onKey(e) {
-      if (e.key === "Escape" && open) setOpen(false);
-    }
-    document.addEventListener("keydown", onKey);
-
-    // cleanup funcion 
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open]);
-
 
   function onOverlayClick(e) {
     if (e.target === overlayRef.current) setOpen(false);
   }
 
-function printDocument() {
-  const iframe = document.createElement("iframe");
 
-  iframe.style.position = "fixed";
-  iframe.style.width = "0";
-  iframe.style.height = "0";
-  iframe.style.border = "0";
-  iframe.style.visibility = "hidden";
+  function printDocument() {
+    let iframe = document.createElement("iframe");
 
-  iframe.src = "/SVG/Invites.pdf";
+    iframe.style.position = "fixed";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "0";
+    iframe.style.visibility = "hidden";
 
-  document.body.appendChild(iframe);
+    iframe.src = "/SVG/Invites.pdf";
 
-  iframe.onload = () => {
-    setTimeout(() => {
-      iframe.contentWindow?.focus();
-      iframe.contentWindow?.print();
+    document.body.appendChild(iframe);
 
+    iframe.onload = () => {
       setTimeout(() => {
-        document.body.removeChild(iframe);
-      }, 1000);
-    }, 500);
-  };
-}
+        iframe.contentWindow?.focus();
+        iframe.contentWindow?.print();
+
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 1000);
+      }, 500);
+    };
+  }
 
   return (
     <>
@@ -213,10 +189,6 @@ function printDocument() {
         title={open ? "Close invitations" : "Open invitations"}
         onClick={() => {
           setOpen((s) => !s);
-
-          window.dispatchEvent(
-            new CustomEvent("showStartButton")
-          );
         }}
       />
 
@@ -224,14 +196,12 @@ function printDocument() {
         id="overlay"
         ref={overlayRef}
         className={`${styles.overlay} ${open ? styles.open : ""}`}
-        role="dialog"
         aria-modal="true"
         aria-hidden={!open}
         onClick={onOverlayClick}
       >
         <div
           className={styles.overlayPanel}
-          role="document"
           onClick={(e) => e.stopPropagation()}
         >
           <header className={styles.overlayHeader}>
@@ -246,7 +216,7 @@ function printDocument() {
             </button>
           </header>
 
-          <main className={styles.cardsGrid} id="cardsGrid">
+          <main className={styles.cardsGrid} >
             {cards.map((c, idx) => (
               <article
                 key={c.id}
@@ -292,19 +262,19 @@ function printDocument() {
           </main>
 
           <footer className={styles.overlayFooter}>
-  <button
-    type="button"
-    className={styles.printBtn}
-    aria-label="Print cards"
-    title="Print cards"
-    onClick={printDocument}
-  >
-    <img
-      src="/SVG/printBtn.svg"
-      alt=""
-    />
-  </button>
-</footer>
+            <button
+              type="button"
+              className={styles.printBtn}
+              aria-label="Print cards"
+              title="Print cards"
+              onClick={printDocument}
+            >
+              <img
+                src="/SVG/printBtn.svg"
+                alt=""
+              />
+            </button>
+          </footer>
         </div>
       </div>
     </>

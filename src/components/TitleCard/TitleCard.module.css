@@ -30,10 +30,7 @@
   object-fit: cover;
 }
 
-/*
-  After the video finishes,
-  dissolve the entire title card.
-*/
+
 .dissolving {
   opacity: 0;
   filter: blur(10px);

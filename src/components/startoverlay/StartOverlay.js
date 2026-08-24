@@ -54,7 +54,7 @@ export default function StartOverlay({
   }, [talking, svgLoaded]);
 
   useEffect(() => {
-    if (dialogueIndex === 2) {
+    if (dialogueIndex === 3) {
       ladybirdStarted.current = true;
     }
   }, [dialogueIndex]);
@@ -164,8 +164,6 @@ export default function StartOverlay({
         </div>
 
       </div>
-
-      {/* Start button */}
       {dialogueIndex === 8 && (
         <button
           className={styles.startButton}
