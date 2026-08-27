@@ -57,12 +57,18 @@ export function setupScene(canvas) {
 
     const minPanX = -1;
     const maxPanX = 1;
+    
 
     controls.addEventListener("change", () => {
         if (!isMobile()) return; //https://medium.com/swlh/return-early-pattern-3d18a41bba8
 
         controls.target.x = THREE.MathUtils.clamp(
             controls.target.x,
+            minPanX,
+            maxPanX
+        );
+         controls.target.y = THREE.MathUtils.clamp(
+            controls.target.y,
             minPanX,
             maxPanX
         );

@@ -12,10 +12,11 @@ export default function AboutPage() {
       {/* Header */}
       <header className="site-header">
         <nav>
-          <a href="/about">About this Project</a>
-          {/* <a href="/additional-information">
-            Additional Information
-          </a> */}
+            <a href="/Instructions">
+            Use Instructions
+          </a>
+          <a href="/About">About this Project</a>
+        
         </nav>
       </header>
 

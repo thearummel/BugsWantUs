@@ -415,7 +415,7 @@ if (refs.ladybird) {
             });
 
         } else {
-            refs.ladybird.position.x = endX+0.1;
+            refs.ladybird.position.x = endX+0.01;
             refs.ladybird.position.y = 0;
 
             const legs = [

@@ -1,30 +1,24 @@
 
 
-"use client";
+
 
 import BeetleScene from "@/components/BeetleScene";
-import { useEffect, useRef } from "react";
+import GlobalAudio from "@/components/audio/GlobalAudio";
+
 
 export default function BeetlePage() {
-  const audioRef = useRef(null);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 1;
-    }
-  }, []);
 
   return (
     <>
       <BeetleScene />
 
-      <audio
-        ref={audioRef}
+     
+      <GlobalAudio
         autoPlay
         loop
-        preload="auto"
+        volume={1}
         src="/audio/freesound_community-underwater-loop-amb-6182.mp3"
-        style={{ display: "none" }}
       />
     </>
   );

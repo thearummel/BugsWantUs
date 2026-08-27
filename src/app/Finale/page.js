@@ -30,11 +30,11 @@ export default function FinalePage() {
 
 
 
- const handleGoToStart = () => {
-  localStorage.removeItem(STORAGE_KEY);
-  sessionStorage.removeItem("hasStarted");
-  window.location.href = "/";
-};
+  const handleGoToStart = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem("hasStarted");
+    window.location.href = "/";
+  };
 
 
   return (
@@ -43,36 +43,36 @@ export default function FinalePage() {
 
       {transition && <div className="circle-transition" />}
 
-    {showVideo && (
-  <>
-    <video
-      src="/animations/end-card.mp4"
-      autoPlay
-      playsInline
-      className="end-video"
-    />
+      {showVideo && (
+        <>
+          <video
+            src="/animations/end-card.mp4"
+            autoPlay
+            playsInline
+            className="end-video"
+          />
 
-    <button
-      className="go-start-button"
-      onClick={handleGoToStart}
-    >
-      Restart Game
-    </button>
-  </>
-)}
+          <button
+            className="go-start-button"
+            onClick={handleGoToStart}
+          >
+            Restart Game
+          </button>
+        </>
+      )}
 
-   <GlobalAudio
-  autoPlay
-  volume={0.08}
-  src="/audio/sub_clair-happy-birthday-579516.mp3"
-/>
+      <GlobalAudio
+        autoPlay
+        volume={0.08}
+        src="/audio/sub_clair-happy-birthday-579516.mp3"
+      />
 
-<GlobalAudio
-  autoPlay
-  loop
-  volume={0.04}
-  src="/audio/forest-stream-birds.mp3"
-/>
+      <GlobalAudio
+        autoPlay
+        loop
+        volume={0.04}
+        src="/audio/forest-stream-birds.mp3"
+      />
 
     </div>
   );

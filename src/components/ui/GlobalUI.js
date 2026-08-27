@@ -14,6 +14,7 @@ export default function GlobalUI() {
     const isHome = pathname === "/";
     const isAbout = pathname === "/About";
     const isFinale = pathname === "/Finale";
+    const isInstructions = pathname === "/Instructions";
 
     if (isFinale) {
         return null;
@@ -31,7 +32,7 @@ export default function GlobalUI() {
                 <OverlayMenu />
             </div>
 
-            {!isAbout && (
+            {!isAbout  && !isInstructions && (
                 <div className={styles.bottommiddle}>
                     <BarBottom />
                 </div>
@@ -46,6 +47,7 @@ export default function GlobalUI() {
             <div className={styles.audioButton}>
                 <AudioButton />
             </div>
+            
         </div>
     );
 }

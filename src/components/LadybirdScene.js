@@ -12,7 +12,7 @@ export async function createLadybird(scene, refs) {
 
     ladybird.scale.setScalar(1.5);
 
-    ladybird.position.set(-9, 0, 0);
+    ladybird.position.set(-6, 0, 0);
 
  
 

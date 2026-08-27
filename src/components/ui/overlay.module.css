@@ -8,23 +8,20 @@
 
 
 
-/* Overlay covers almost the whole canvas */
 .overlay {
   position: fixed;
-  inset: 3% 2%;
+  inset: 7% 2%;
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 1400;
+  z-index: 1500;
 
 }
 
-/* Visible state */
 .open {
   display: flex;
 }
 
-/* Inner panel (the white sheet inside the dim) */
 .overlayPanel {
   width: 94%;
   height: 94%;
@@ -225,3 +222,4 @@
     margin-bottom: 6px;
   }
 }
+

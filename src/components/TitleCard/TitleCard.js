@@ -21,14 +21,26 @@ export default function TitleCard({ onComplete }) {
         dissolving ? styles.dissolving : ""
       }`}
     >
-      <video
+     <video
         className={styles.video}
-        src="/animations/title-card.mp4"
         autoPlay
         muted
         playsInline
         onEnded={handleVideoEnd}
-      />
+      >
+        <source
+          src="/animations/Small_Start_1.mp4"
+          media="(max-width: 821px)"
+        />
+        <source
+          src="/animations/Middle_Start.mp4"
+          media="(max-width: 1025px)"
+        /> 
+        <source
+          src="/animations/title-card.mp4"
+          media="(min-width:  1028px)"
+        />
+      </video>
     </div>
   );
 }

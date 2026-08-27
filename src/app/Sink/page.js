@@ -1,29 +1,23 @@
 
 
-"use client";
+
 import SinkScene from "@/components/SinkScene";
-import { useEffect, useRef } from "react";
+import GlobalAudio from "@/components/audio/GlobalAudio";
 
 export default function Sink() {
-     const audioRef = useRef(null);
-    
-      useEffect(() => {
-        if (audioRef.current) {
-          audioRef.current.volume = 0.3;
-        }
-      }, []);
+ 
     
       return (
         <>
          <SinkScene />
-          <audio
-        ref={audioRef}
-        autoPlay
-        loop
-        preload="auto"
+    
+
+            <GlobalAudio
+              autoPlay
+              loop
+              volume={1}
         src="/audio/freesound_community-fridge-hum-loud-saint-john-191002-62243.mp3"
-        style={{ display: "none" }}
-      />
+            />
     </>
   );
 }

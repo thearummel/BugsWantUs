@@ -10,11 +10,11 @@ const dialogue = [
   `Guess what? It’s my birthday, and I’m throwing a bug-tastic party! But here’s the problem... I have so many crawling and buzzing friends that I can’t send the invitations by myself.`,
   `That’s where you come in! Are you ready to help me get this party started? Let me show you what to do!`,
   `Look at your screen… a beautiful, bright 7-Spotted Ladybird is crawling right across! Don't be shy, give that little bug a click!`,
-  `Poof! Did you see it vanish? That means the 7-Spotted Ladybird is officially coming to the party! This is what I need you to do for the rest of my friends in the wild.`,
-  `At the bottom is your Party Progress Bar! It’s like a countdown to party time! It shows you exactly how many bugs are left to invite!`,
+  `Poof! Did you see it vanish? That means the 7-Spotted Ladybird is coming to the party! This is what I need you to do for the rest of my friends in the wild.`,
+  `At the bottom is your Party Progress Bar! It shows you exactly how many bugs are left to invite!`,
   `Click on the menu icon up top to open your Bug Collection! Here, you can see all the insects you’ve invited. Learn about them, and read fun mini-stories about their time at the party!`,
   'To move through the world just scroll with your mouse. If you are on a phone use two fingers.',
-  `Now go find my friends and have fun and look out for the sparkels`,
+  `Now go find my friends, have fun and look out for the sparkels.`,
 ];
 
 export default function Home() {

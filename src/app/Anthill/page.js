@@ -1,7 +1,6 @@
 
-"use client";
+
 import AntScene from "@/components/AntScene";
-import { useEffect, useRef } from "react";
 import GlobalAudio from "@/components/audio/GlobalAudio";
 
 export default function AntPage() {

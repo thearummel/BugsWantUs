@@ -1,39 +1,30 @@
 
-"use client";
+
 import BushScene from "@/components/BushScene";
-import { useEffect, useRef } from "react";
+import GlobalAudio from "@/components/audio/GlobalAudio";
+
+
 
 export default function BushPage() {
-  const audioRef = useRef(null);
-  const forestAudioRef = useRef(null);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 1;
-    }
-    if (forestAudioRef.current) {
-      forestAudioRef.current.volume = 0.03;
-    }
-  }, []);
+
+
 
   return (
     <>
       <BushScene />
-      <audio
-        ref={audioRef}
+
+      <GlobalAudio
         autoPlay
         loop
-        preload="auto"
+        volume={0.3}
         src="/audio/soul_serenity_sounds-leaves-rustling-236742.mp3"
-        style={{ display: "none" }}
       />
-      <audio
-        ref={forestAudioRef}
+      <GlobalAudio
         autoPlay
         loop
-        preload="auto"
+        volume={0.01}
         src="/audio/forest-stream-birds.mp3"
-        style={{ display: "none" }}
       />
     </>
   );

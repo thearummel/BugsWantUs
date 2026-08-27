@@ -1,29 +1,25 @@
-"use client";
+
 
 import GardenScene from "@/components/GardenScene";
-import { useEffect, useRef } from "react";
+import GlobalAudio from "@/components/audio/GlobalAudio";
+
 
 export default function Garden() {
-  const audioRef = useRef(null);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.08;
-    }
-  }, []);
+
+
 
   return (
     <>
       <GardenScene />
 
-      <audio
-        ref={audioRef}
-        autoPlay
-        loop
-        preload="auto"
-        src="/audio/forest-stream-birds.mp3"
-        style={{ display: "none" }}
-      />
+    
+            <GlobalAudio
+              autoPlay
+              loop
+              volume={1}
+              src="/audio/forest-stream-birds.mp3"
+            />
     </>
   );
 }

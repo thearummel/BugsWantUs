@@ -8,17 +8,17 @@ export default function InfoButton({ className = "", fallbackHref = "/" }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const goAbout = () => {
-    if (pathname === "/About") {
+  const goInfo = () => {
+    if (pathname === "/Instructions") {
      router.back();
     } else {
-      router.push("/About");
+      router.push("/Instructions");
     }
   };
 
   return (
     <button
-      onClick={goAbout}
+      onClick={goInfo}
       aria-label={pathname === "/About" ? "Go home" : "About page"}
       className={className}
       type="button"

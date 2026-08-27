@@ -130,9 +130,9 @@ export default function StartOverlay({
     >
       <audio
         ref={audioRef}
-        src="/audio/artificiallyinspired-alien-high-pitch-312010.mp3"
+        src="/audio/drcritter2_mixdown.wav"
         loop
-         volume={0.03}
+         volume={1}
         preload="auto"
       />
 

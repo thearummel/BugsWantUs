@@ -1,40 +1,28 @@
 
 
-"use client";
+
 import RiverScene from "@/components/RiverScene";
-import { useEffect, useRef } from "react";
+import GlobalAudio from "@/components/audio/GlobalAudio";
+
 
 export default function River() {
-     const audioRef = useRef(null);
-       const forestAudioRef = useRef(null);
-    
-      useEffect(() => {
-        if (audioRef.current) {
-          audioRef.current.volume = 0.3;
-        }
-          if (forestAudioRef.current) {
-      forestAudioRef.current.volume = 0.04;
-    }
-      }, []);
-    
-      return (
-        <>
-         <RiverScene />
-          <audio
-        ref={audioRef}
+
+
+  return (
+    <>
+      <RiverScene />
+     
+      <GlobalAudio
         autoPlay
         loop
-        preload="auto"
+        volume={1}
         src="/audio/dragon-studio-quiet-stream-420899.mp3"
-        style={{ display: "none" }}
       />
-       <audio
-        ref={forestAudioRef}
+      <GlobalAudio
         autoPlay
         loop
-        preload="auto"
+        volume={1}
         src="/audio/forest-stream-birds.mp3"
-        style={{ display: "none" }}
       />
     </>
   );
