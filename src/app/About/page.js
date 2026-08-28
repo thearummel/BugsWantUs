@@ -15,7 +15,7 @@ export default function AboutPage() {
             <a href="/Instructions">
             Use Instructions
           </a>
-          <a href="/About">About this Project</a>
+          <a href="/About">About</a>
         
         </nav>
       </header>

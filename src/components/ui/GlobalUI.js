@@ -9,6 +9,9 @@ import InfoButton from "./InfoButton";
 import OverlayMenu from "./OverlayMenu";
 import AudioButton from "./AudioButton";
 
+
+
+
 export default function GlobalUI() {
     const pathname = usePathname();
     const isHome = pathname === "/";
@@ -27,12 +30,12 @@ export default function GlobalUI() {
                     <BackButton />
                 </div>
             )}
-
-            <div className={styles.right}>
-                <OverlayMenu />
-            </div>
-
-            {!isAbout  && !isInstructions && (
+            {!isAbout && !isInstructions && (
+                <div className={styles.right}>
+                    <OverlayMenu />
+                </div>
+            )}
+            {!isAbout && !isInstructions && (
                 <div className={styles.bottommiddle}>
                     <BarBottom />
                 </div>
@@ -43,11 +46,11 @@ export default function GlobalUI() {
                     <InfoButton tooltip="Information" />
                 </div>
             )}
-
-            <div className={styles.audioButton}>
-                <AudioButton />
-            </div>
-            
+            {!isAbout && !isInstructions && (
+                <div className={styles.audioButton}>
+                    <AudioButton />
+                </div>
+            )}
         </div>
     );
 }

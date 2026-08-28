@@ -211,8 +211,17 @@ top: 17px;
 
   z-index: 3;
   color: #3B2F29;
+  
+    transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
-
+.startButton:hover {
+  background: #3e2f28;
+  color: #96d1d0;
+  transform: translateY(-2px);
+}
 
 .reveal {
   clip-path: circle(0% at 50% 50%);

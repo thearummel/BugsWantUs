@@ -436,6 +436,46 @@ if (refs.ladybird) {
     }
 }
 
+// Finale
+// Finale plants
+
+const plants = [
+    refs.finbgplant,
+    refs.smallgrasfinale,
+    refs.smallgrasfinaletwo,
+    refs.grashoppergras,
+    refs.biggrasfinale,
+    refs.bigleaffinale,
+    refs.biggrasone,
+    refs.giggrasfinaletwo
+];
+
+plants.forEach((plant, index) => {
+
+    if (!plant) return;
+
+    const swaySpeed = 1.5;
+    const swayAmount = 0.02;
+
+    const wave = Math.sin(
+        time * swaySpeed + index * 0.7
+    );
+
+    const eased = THREE.MathUtils.smoothstep(
+        wave,
+        -1,
+        1
+    );
+
+    if (plant.userData.baseRotation === undefined) {
+        plant.userData.baseRotation = plant.rotation.y;
+    }
+
+    plant.rotation.y =
+        plant.userData.baseRotation +
+        (eased - 0.5) * swayAmount;
+});
+
 
 // Sparkles
 

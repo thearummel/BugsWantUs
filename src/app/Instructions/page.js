@@ -12,10 +12,10 @@ return (
   {/* Header */}
   <header className="site-header">
     <nav>
-      <a href="/additional-information">
+      <a href="/Instructions">
         Use Instructions
       </a>
-      <a href="/About">About this Project</a>
+      <a href="/About">About</a>
     </nav>
   </header>
 
