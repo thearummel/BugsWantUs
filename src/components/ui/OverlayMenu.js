@@ -109,9 +109,12 @@ const animalCardMap = {
 export default function OverlayMenu() {
   const [activeCard, setActiveCard] = useState(null);
   const [open, setOpen] = useState(false);
+  const [popupCard, setPopupCard] = useState(null);
+  const collectedPopupIds = useRef(new Set());
   const overlayRef = useRef(null);
   const menuBtnRef = useRef(null);
   const firstCardRef = useRef(null);
+
 
   const [cards, setCards] = useState([]);
 
@@ -124,30 +127,44 @@ export default function OverlayMenu() {
     setCards(animalCards);
   }, []);
 
+useEffect(() => {
+  function onAnimalCollected(e) {
+    const id = e.detail?.id;
+    if (!id) return;
+
+    const card = animalCardMap[id];
+    if (!card) return;
+    if (collectedPopupIds.current.has(id)) return;
+
+    collectedPopupIds.current.add(id);
+
+    setCards(prev =>
+      prev.some(c => c.id === card.id)
+        ? prev
+        : [card, ...prev]
+    );
+
+    setPopupCard(card);
+  }
+
+  window.addEventListener("animalCollected", onAnimalCollected);
+
+  return () => {
+    window.removeEventListener("animalCollected", onAnimalCollected);
+  };
+}, []);
+
+
   useEffect(() => {
-    function onAnimalCollected(e) { // e is a event 
-      const id = e.detail?.id;
-      if (!id) return;
+    if (!popupCard) return;
 
-      const card = animalCardMap[id];
-      if (!card) return;
+    const timer = setTimeout(() => {
+      setPopupCard(null);
+    }, 4200);
 
-      setCards(prev =>
-        prev.some(c => c.id === card.id)
-          ? prev
-          : [card, ...prev]
-      );
+    return () => clearTimeout(timer);
+  }, [popupCard]);
 
-
-  /*     window.dispatchEvent(
-        new CustomEvent("showStartButton", {
-          detail: { id }
-        })
-      ); */
-    }
-    window.addEventListener("animalCollected", onAnimalCollected);
-    return () => window.removeEventListener("animalCollected", onAnimalCollected);
-  }, []);
 
   function onOverlayClick(e) {
     if (e.target === overlayRef.current) setOpen(false);
@@ -181,7 +198,13 @@ export default function OverlayMenu() {
 
   return (
     <>
-
+      {popupCard && (
+        <div className={styles.cardPopup}>
+          <article className={styles.popupCard}>
+            <img src={popupCard.path} alt={popupCard.title} />
+          </article>
+        </div>
+      )}
       <MenuButton
         ref={menuBtnRef}
         aria-controls="overlay"

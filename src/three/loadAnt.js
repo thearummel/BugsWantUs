@@ -11,38 +11,7 @@ console.log(refs)
         const anthill = gltf.scene;
         world.scene.add(anthill);
 
-        // Find grass groups
-
-        refs.grasses = [];
-
-        for (let i = 1; i <= 8; i++) {
-
-            const name = `gras${i}`;
-
-            const grass = anthill.getObjectByName(name);
-
-            if (grass) {
-
-                console.log("Found grass group:", name, grass);
-
-                refs.grasses.push({
-                    object: grass,
-                    baseRotation: grass.rotation.y,
-                    offset: i * 0.7
-                });
-
-            } else {
-
-                console.warn("Missing grass group:", name);
-
-            }
-        }
-
-        console.log("Total grasses found:", refs.grasses.length);
-
-        //
-        // Center model
-        //
+       
 
         const box = new THREE.Box3().setFromObject(anthill);
         const center = box.getCenter(new THREE.Vector3());
@@ -66,6 +35,20 @@ console.log(refs)
 
         ant.position.set(-3.5, -2.2, 0);
         ant.scale.set(1, 1,1);
+
+         const objects = [
+            "antantennatwo",
+            "antantennaone",
+            "antleglow",
+        ];
+
+        objects.forEach(name => {
+            refs[name.toLowerCase()] = ant.getObjectByName(name);
+
+            if (refs[name.toLowerCase()]) {
+                console.log(`${name} found`);
+            }
+        });
 
         refs.ant = ant;
         registerAnimal("ant", ant, world.scene);

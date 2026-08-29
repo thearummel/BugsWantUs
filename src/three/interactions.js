@@ -2,7 +2,7 @@
 
 
 import * as THREE from "three";
-import { getObject, collectAnimal } from "./animals.js";
+import { getObject, collectAnimal,getCollectedIds } from "./animals.js";
 import { addSparkles } from "./sparkels.js";
 
 
@@ -22,10 +22,11 @@ export function setupInteractions(world, refs, router) {
     "ladybird",
     "ant",
   ];
-
-  function handleAllAnimalsCollected() {
+function handleAllAnimalsCollected() {
+  setTimeout(() => {
     router.push("/Finale");
-  }
+  }, 3000); 
+}
 
   window.addEventListener("allAnimalsCollected", handleAllAnimalsCollected);
 
@@ -71,7 +72,7 @@ export function setupInteractions(world, refs, router) {
     for (const id of animalIds) {
       const obj = getObject(id);
       if (!obj) continue;
-
+if (getCollectedIds().includes(id)) continue;
       const hits = world.raycaster.intersectObject(obj, true);
 
       if (hits.length > 0) {
@@ -115,6 +116,7 @@ export function setupInteractions(world, refs, router) {
   for (const id of animalIds) {
     const obj = getObject(id);
     if (!obj) continue;
+if (getCollectedIds().includes(id)) continue;
 
     if (world.raycaster.intersectObject(obj, true).length > 0) {
       world.renderer.domElement.style.cursor = "pointer";

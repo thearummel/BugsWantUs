@@ -25,7 +25,7 @@ export default function TitleCard({ onComplete }) {
     ];
 
     const morphTime = 0.5;
-    const cooldownTime = 0.25;
+    const cooldownTime = 0;
 
     let textIndex = texts.length - 1;
 

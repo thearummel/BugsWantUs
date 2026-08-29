@@ -325,9 +325,19 @@ export function animate(world, refs = {}) {
 
         }
 
+        //ant
 
+        if (refs.antantennaone || refs.antleglow) {
 
+            refs.antantennaone.rotation.y = Math.sin(time * 3) * 0.04;
+            refs.antleglow.rotation.y = Math.sin(time * 2) * 0.08;
+        }
 
+        if (refs.antantennatwo) {
+
+            refs.antantennatwo.rotation.y = Math.sin(time * 2) * 0.04;
+
+        }
 
         // Clouds - bog
 
@@ -361,7 +371,7 @@ export function animate(world, refs = {}) {
 
 
 
-//Grashopper
+        //Grashopper
 
 
         if (refs.grashopperantenna) {
@@ -386,115 +396,115 @@ export function animate(world, refs = {}) {
         }
 
         // Ladybird
-if (refs.ladybird) {
-    const isMobile = window.innerWidth < 450;
-    const endX = isMobile ? -2.1 : -3.1;
+        if (refs.ladybird) {
+            const isMobile = window.innerWidth < 450;
+            const endX = isMobile ? -2.1 : -3.1;
 
-    if (refs.ladybirdStarted?.current) {
-        if (refs.ladybird.position.x <= endX) {
-            refs.ladybird.position.y = Math.sin(time * 8) * 0.01;
-            refs.ladybird.position.x += 0.01;
+            if (refs.ladybirdStarted?.current) {
+                if (refs.ladybird.position.x <= endX) {
+                    refs.ladybird.position.y = Math.sin(time * 8) * 0.01;
+                    refs.ladybird.position.x += 0.01;
 
-            const legs = [
-                refs.ladybirdlegone,
-                refs.ladybirdlegtwo,
-                refs.ladybirdlegthree,
-                refs.ladybirdlegfour,
-                refs.ladybirdlegfive,
-                refs.ladybirdlegsix
-            ];
+                    const legs = [
+                        refs.ladybirdlegone,
+                        refs.ladybirdlegtwo,
+                        refs.ladybirdlegthree,
+                        refs.ladybirdlegfour,
+                        refs.ladybirdlegfive,
+                        refs.ladybirdlegsix
+                    ];
 
-            legs.forEach((leg, index) => {
-                if (leg) {
-                    leg.rotation.y =
-                        Math.sin(
-                            time * 8 +
-                            (index % 2) * Math.PI
-                        ) * 0.06;
+                    legs.forEach((leg, index) => {
+                        if (leg) {
+                            leg.rotation.y =
+                                Math.sin(
+                                    time * 8 +
+                                    (index % 2) * Math.PI
+                                ) * 0.06;
+                        }
+                    });
+
+                } else {
+                    refs.ladybird.position.x = endX + 0.01;
+                    refs.ladybird.position.y = 0;
+
+                    const legs = [
+                        refs.ladybirdlegone,
+                        refs.ladybirdlegtwo,
+                        refs.ladybirdlegthree,
+                        refs.ladybirdlegfour,
+                        refs.ladybirdlegfive,
+                        refs.ladybirdlegsix
+                    ];
+
+                    legs.forEach(leg => {
+                        if (leg) {
+                            leg.rotation.y = 0;
+                        }
+                    });
                 }
-            });
-
-        } else {
-            refs.ladybird.position.x = endX+0.01;
-            refs.ladybird.position.y = 0;
-
-            const legs = [
-                refs.ladybirdlegone,
-                refs.ladybirdlegtwo,
-                refs.ladybirdlegthree,
-                refs.ladybirdlegfour,
-                refs.ladybirdlegfive,
-                refs.ladybirdlegsix
-            ];
-
-            legs.forEach(leg => {
-                if (leg) {
-                    leg.rotation.y = 0;
-                }
-            });
+            }
         }
-    }
-}
 
-// Finale
-// Finale plants
+        // Finale
+        // Finale plants
 
-const plants = [
-    refs.finbgplant,
-    refs.smallgrasfinale,
-    refs.smallgrasfinaletwo,
-    refs.grashoppergras,
-    refs.biggrasfinale,
-    refs.bigleaffinale,
-    refs.biggrasone,
-    refs.giggrasfinaletwo
-];
+        const plants = [
+            refs.finbgplant,
+            refs.smallgrasfinale,
+            refs.smallgrasfinaletwo,
+            refs.grashoppergras,
+            refs.biggrasfinale,
+            refs.bigleaffinale,
+            refs.biggrasone,
+            refs.giggrasfinaletwo
+        ];
 
-plants.forEach((plant, index) => {
+        plants.forEach((plant, index) => {
 
-    if (!plant) return;
+            if (!plant) return;
 
-    const swaySpeed = 1.5;
-    const swayAmount = 0.02;
+            const swaySpeed = 1.5;
+            const swayAmount = 0.02;
 
-    const wave = Math.sin(
-        time * swaySpeed + index * 0.7
-    );
+            const wave = Math.sin(
+                time * swaySpeed + index * 0.7
+            );
 
-    const eased = THREE.MathUtils.smoothstep(
-        wave,
-        -1,
-        1
-    );
+            const eased = THREE.MathUtils.smoothstep(
+                wave,
+                -1,
+                1
+            );
 
-    if (plant.userData.baseRotation === undefined) {
-        plant.userData.baseRotation = plant.rotation.y;
-    }
+            if (plant.userData.baseRotation === undefined) {
+                plant.userData.baseRotation = plant.rotation.y;
+            }
 
-    plant.rotation.y =
-        plant.userData.baseRotation +
-        (eased - 0.5) * swayAmount;
-});
+            plant.rotation.y =
+                plant.userData.baseRotation +
+                (eased - 0.5) * swayAmount;
+        });
 
 
-// Sparkles
+        // Sparkles
 
-const sparkleGroups = [
-    refs.doorsparkles,
-    refs.bushsparkles,
-    refs.lakesparkles,
-    refs.anthillsparkles,
-    refs.riversparkles,
-    refs.forestsparkles,
-    refs.bowlsparkles,
-    refs.sinksparkles,
-];
+        const sparkleGroups = [
+            refs.doorsparkles,
+            refs.bushsparkles,
+            refs.lakesparkles,
+            refs.anthillsparkles,
+            refs.riversparkles,
+            refs.forestsparkles,
+            refs.bowlsparkles,
+            refs.sinksparkles,
+        ];
 
-sparkleGroups.forEach(group => {
-    if (group) {
-        animateSparkleGroup(group, time);
-    }
-});
+        sparkleGroups.forEach(group => {
+            if (group) {
+                animateSparkleGroup(group, time);
+            }
+        });
         world.renderer.render(world.scene, world.camera);
 
         //console.log(world.camera.position);

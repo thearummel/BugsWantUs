@@ -13,7 +13,7 @@ const dialogue = [
   `Poof! Did you see it vanish? That means the 7-Spotted Ladybird is coming to the party! This is what I need you to do for the rest of my friends in the wild.`,
   `At the bottom is your Party Progress Bar! It shows you exactly how many bugs are left to invite!`,
   `Click on the menu icon up top to open your Bug Collection! Here, you can see all the insects you’ve invited. Learn about them, and read fun mini-stories about their time at the party!`,
-  'To move through the world just scroll with your mouse. If you are on a phone use two fingers.',
+  'To move through the world just scroll with your mouse. If you are on a phone use two fingers to move and scroll.',
   `Now go find my friends, have fun and look out for the sparkels.`,
 ];
 
