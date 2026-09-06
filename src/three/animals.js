@@ -1,5 +1,5 @@
 
-const STORAGE_KEY = "collectedAnimals_v1";
+const STORAGE_KEY = "collectedAnimals";
 
 const registry = new Map();
 
@@ -19,6 +19,7 @@ function readStore() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
   } catch {
+    console.error("Could not read animal storage:", error);
     return {};
   }
 }
@@ -35,9 +36,7 @@ export function registerAnimal(id, object, scene) {
   object.visible = !collected;
   scene.add(object);
 
-  if (collected) {
-    object.visible = false;
-  }
+
 }
 
 export function getObject(id) {

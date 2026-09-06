@@ -8,23 +8,20 @@
 
 
 
-/* Overlay covers almost the whole canvas */
 .overlay {
   position: fixed;
-  inset: 3% 2%;
+  inset: 7% 2%;
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 1400;
+  z-index: 1500;
 
 }
 
-/* Visible state */
 .open {
   display: flex;
 }
 
-/* Inner panel (the white sheet inside the dim) */
 .overlayPanel {
   width: 94%;
   height: 94%;
@@ -224,4 +221,51 @@
     z-index: 2;
     margin-bottom: 6px;
   }
+}
+
+.cardPopup {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    pointer-events: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: popupContainer 2s ease forwards;
+}
+
+.popupCard {
+    width: 50vh;
+
+    animation: collectCard 2s ease forwards;
+}
+
+@keyframes collectCard {
+
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    15% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    55% {
+        transform: scale(1);
+        opacity: 1;
+    }
+ 80% {
+        transform: scale(1);
+        opacity: 1;
+    }
+   
+   100% {
+        transform: translateX(45vw) translateY(-35vh) scale(0.25);
+        opacity: 0;
+    }
 }

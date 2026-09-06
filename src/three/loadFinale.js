@@ -18,7 +18,7 @@ export function loadFinale(world, refs) {
         finale.position.sub(center);
 
 
-     world.camera.position.set(0, 0, 6);
+        world.camera.position.set(0, 0, 6);
 
 
         world.controls.minDistance = 0.1;
@@ -27,10 +27,31 @@ export function loadFinale(world, refs) {
 
 
         world.camera.updateProjectionMatrix();
+       refs.finalePlants = [];
 
-      
+       // Finale plants
+const objects = [
+    "FinBGPlant",
+    "SmallGrasFinale",
+    "SmallGrasFinaletwo",
+    "GrashopperGras",
+    "BigGrasFinale",
+    "BigLeafFinale",
+    "BigGrasOne",
+    "GigGrasFinaleTwo"
+];
 
-    
+objects.forEach(name => {
+    const object = finale.getObjectByName(name);
+
+    refs[name.toLowerCase()] = object;
+
+    if (object) {
+        console.log(`${name} found`);
+    }
+});
+
+
 
     });
 

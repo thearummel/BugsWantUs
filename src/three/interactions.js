@@ -2,7 +2,7 @@
 
 
 import * as THREE from "three";
-import { getObject, collectAnimal } from "./animals.js";
+import { getObject, collectAnimal, getCollectedIds } from "./animals.js";
 import { addSparkles } from "./sparkels.js";
 
 
@@ -22,9 +22,10 @@ export function setupInteractions(world, refs, router) {
     "ladybird",
     "ant",
   ];
-
   function handleAllAnimalsCollected() {
-    router.push("/Finale");
+    setTimeout(() => {
+      router.push("/Finale");
+    }, 3000);
   }
 
   window.addEventListener("allAnimalsCollected", handleAllAnimalsCollected);
@@ -71,7 +72,7 @@ export function setupInteractions(world, refs, router) {
     for (const id of animalIds) {
       const obj = getObject(id);
       if (!obj) continue;
-
+      if (getCollectedIds().includes(id)) continue;
       const hits = world.raycaster.intersectObject(obj, true);
 
       if (hits.length > 0) {
@@ -88,42 +89,44 @@ export function setupInteractions(world, refs, router) {
   }
 
   function onMouseMove(event) {
-  world.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  world.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    world.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    world.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  world.raycaster.setFromCamera(world.mouse, world.camera);
+    world.raycaster.setFromCamera(world.mouse, world.camera);
 
-  const interactables = [
-    refs.door,
-    refs.lake,
-    refs.bowl,
-    refs.garden,
-    refs.anthill,
-    refs.flower,
-    refs.bush,
-    refs.river,
-    refs.sink,
-  ].filter(Boolean);
+    const interactables = [
+      refs.door,
+      refs.lake,
+      refs.bowl,
+      refs.garden,
+      refs.anthill,
+      refs.flower,
+      refs.bush,
+      refs.river,
+      refs.sink,
+    ].filter(Boolean);
 
-  for (const object of interactables) {
-    if (world.raycaster.intersectObject(object, true).length > 0) {
-      world.renderer.domElement.style.cursor = "pointer";
-      return;
+    for (const object of interactables) {
+      if (world.raycaster.intersectObject(object, true).length > 0) {
+        world.renderer.domElement.style.cursor = "pointer";
+        return;
+      }
     }
-  }
 
-  for (const id of animalIds) {
-    const obj = getObject(id);
-    if (!obj) continue;
+    for (const id of animalIds) {
+      const obj = getObject(id);
+      if (!obj) continue;
 
-    if (world.raycaster.intersectObject(obj, true).length > 0) {
-      world.renderer.domElement.style.cursor = "pointer";
-      return;
+      if (getCollectedIds().includes(id)) continue;
+
+      if (world.raycaster.intersectObject(obj, true).length > 0) {
+        world.renderer.domElement.style.cursor = "pointer";
+        return;
+      }
     }
-  }
 
-  world.renderer.domElement.style.cursor = "default";
-}
+    world.renderer.domElement.style.cursor = "default";
+  }
 
 
   function zoomToObject(world, object, onComplete) {
@@ -133,15 +136,21 @@ export function setupInteractions(world, refs, router) {
     const targetPosition = new THREE.Vector3();
     object.getWorldPosition(targetPosition);
 
-    const direction = new THREE.Vector3()
-      .subVectors(world.camera.position, targetPosition)
-      .normalize();
+   const direction = new THREE.Vector3();
+
+direction.subVectors(
+  world.camera.position,
+  targetPosition
+);
+
+direction.normalize();
+
 
     const distance = 1;
 
-    const endCameraPosition = targetPosition
-      .clone()
-      .add(direction.multiplyScalar(distance));
+    const endCameraPosition = targetPosition.clone();
+    direction.multiplyScalar(distance);
+    endCameraPosition.add(direction);
 
     const startCameraPosition = world.camera.position.clone();
     const startTarget = world.controls.target.clone();
@@ -150,7 +159,7 @@ export function setupInteractions(world, refs, router) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
 
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased = 1 - Math.pow(1 - progress, 3); // cubic ease out function
 
       world.camera.position.lerpVectors(
         startCameraPosition,
@@ -175,20 +184,21 @@ export function setupInteractions(world, refs, router) {
 
     requestAnimationFrame(animateZoom);
   }
+
   function onResize() {
     world.camera.aspect = window.innerWidth / window.innerHeight;
     world.camera.updateProjectionMatrix();
     world.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
-window.addEventListener("click", onClick);
-window.addEventListener("mousemove", onMouseMove);
-window.addEventListener("resize", onResize);
+  window.addEventListener("click", onClick);
+  window.addEventListener("mousemove", onMouseMove);
+  window.addEventListener("resize", onResize);
 
 
   return () => {
     window.removeEventListener("click", onClick);
-      window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("mousemove", onMouseMove);
     window.removeEventListener("resize", onResize);
     window.removeEventListener(
       "allAnimalsCollected",
