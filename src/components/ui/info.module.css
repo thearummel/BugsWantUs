@@ -1,0 +1,403 @@
+:root {
+  --panel-bg: #FAEFD2;
+  --card-bg: #FFFFF0;
+  --radius: 12px;
+  --gap: 18px;
+  --text: #3d2e28;
+}
+
+.overlay {
+  position: fixed;
+  inset: 7% 2%;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1500;
+}
+
+.open {
+  display: flex;
+}
+
+
+.overlayPanel {
+  width: 94%;
+  height: 94%;
+
+  background: var(--panel-bg);
+
+  border-radius: var(--radius);
+
+  padding: 20px;
+
+  box-shadow: 0 20px 40px #3d2e2840;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+
+  overflow: auto;
+
+  border: solid 0.1em var(--text);
+}
+
+
+.overlay.open .overlayPanel {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+
+
+.overlayHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-bottom: 25px;
+
+  border-bottom: 1px solid #222;
+}
+
+.overlayHeader h2 {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.closeBtn {
+  background: transparent;
+  border: 0;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  color: var(--text);
+}
+
+.closeBtn:hover {
+  opacity: 0.6;
+}
+
+
+
+
+.aboutSection {
+  display: flex;
+
+  gap: 50px;
+
+  max-width: 1300px;
+
+  margin: 0 auto;
+
+  padding: 50px 0;
+}
+
+
+
+
+.aboutImage {
+  flex: 0 0 35%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.aboutImage img {
+  width: 100%;
+  max-width: 400px;
+
+  height: auto;
+
+  object-fit: cover;
+}
+
+
+
+.aboutContent {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.aboutContent h1 {
+  font-size: 38px;
+  margin: 0;
+}
+
+.aboutHead {
+  margin-bottom: 35px;
+}
+
+.aboutHead h3 {
+  margin-top: 15px;
+
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+
+  gap: 30px;
+
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.instructions p {
+  margin: 0;
+}
+
+
+
+.overlayFooter {
+  padding-top: 25px;
+
+  border-top: 1px solid #222;
+
+  font-size: 14px;
+}
+
+
+
+@media (max-width: 768px) {
+
+  .overlayPanel {
+    width: 92vw;
+    max-height: 90vh;
+
+    padding: 25px;
+  }
+
+  .overlayHeader h2 {
+    font-size: 22px;
+  }
+
+  .aboutSection {
+    flex-direction: column;
+
+    padding: 40px 0;
+
+    gap: 40px;
+  }
+
+  .aboutImage {
+    flex: none;
+
+    width: 100%;
+  }
+
+  .aboutImage img {
+    max-width: 300px;
+  }
+
+  .aboutContent h1 {
+    font-size: 26px;
+  }
+
+  .aboutHead h3 {
+    font-size: 16px;
+  }
+
+  .instructions {
+    font-size: 15px;
+    gap: 25px;
+  }
+
+  .overlayFooter {
+    font-size: 12px;
+  }
+}
+
+.infoNav {
+  display: flex;
+  gap: 35px;
+}
+
+.infoNav button {
+  background: none;
+  border: none;
+
+  color: #222;
+
+  font-family: inherit;
+  font-size: 20px;
+
+  cursor: pointer;
+
+  padding: 5px 0;
+}
+
+.infoNav button:hover {
+  text-decoration: underline;
+}
+
+.infoNav .navActive {
+  text-decoration: underline;
+}
+
+
+/* Main information */
+
+.aboutSection {
+  display: flex;
+  gap: 50px;
+
+  padding: 50px 0;
+}
+
+
+/* Image */
+
+.aboutImage {
+  flex: 0 0 35%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.aboutImage img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+
+  object-fit: cover;
+}
+
+
+/* Content */
+
+.aboutContent {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.aboutHead {
+  margin-bottom: 35px;
+}
+
+.aboutContent h1 {
+  font-size: 38px;
+  line-height: 1.15;
+}
+
+.aboutHead h3 {
+  margin-top: 15px;
+
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+
+/* How to Play */
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+
+  gap: 30px;
+
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.instructions p {
+  margin: 0;
+}
+
+
+/* About interview */
+
+.interview {
+  display: flex;
+  flex-direction: column;
+
+  gap: 30px;
+
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.question p {
+  margin-left: 1em;
+}
+
+.interview a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+
+/* Footer */
+
+.overlayFooter {
+  padding-top: 25px;
+
+  border-top: 1px solid #222;
+
+  font-size: 14px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .overlayPanel {
+    width: 92vw;
+    max-height: 90vh;
+    padding: 25px;
+  }
+
+  .infoNav {
+    gap: 20px;
+  }
+
+  .infoNav button {
+    font-size: 16px;
+  }
+
+  .aboutSection {
+    flex-direction: column;
+    gap: 40px;
+
+    padding: 40px 0;
+  }
+
+  .aboutImage {
+    flex: none;
+    width: 100%;
+  }
+
+  .aboutImage img {
+    max-width: 300px;
+  }
+
+  .aboutContent h1 {
+    font-size: 26px;
+  }
+
+  .aboutHead h3 {
+    font-size: 15px;
+  }
+
+  .instructions,
+  .interview {
+    font-size: 15px;
+  }
+}

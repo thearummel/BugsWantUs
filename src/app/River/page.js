@@ -21,7 +21,7 @@ export default function River() {
       <GlobalAudio
         autoPlay
         loop
-        volume={1}
+        volume={0.2}
         src="/audio/forest-stream-birds.mp3"
       />
     </>

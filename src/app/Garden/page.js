@@ -17,7 +17,7 @@ export default function Garden() {
             <GlobalAudio
               autoPlay
               loop
-              volume={1}
+              volume={0.1}
               src="/audio/forest-stream-birds.mp3"
             />
     </>

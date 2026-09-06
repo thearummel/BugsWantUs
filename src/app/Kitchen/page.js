@@ -14,7 +14,7 @@ export default function Kitchen() {
 
       <GlobalAudio
         autoPlay
-        loop
+        
         volume={1}
         src="/audio/koiroylers-open-and-close-door-351942.mp3"
       />

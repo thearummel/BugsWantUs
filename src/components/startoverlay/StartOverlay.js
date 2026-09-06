@@ -5,70 +5,54 @@ import useTypewriter from "@/hooks/useTypewriter";
 import styles from "./StartOverlay.module.css";
 import LadybirdCanvas from "../LadybirdCanvas";
 
-export default function StartOverlay({
-  dialogue = [],
-  onStart,
-}) {
+export default function StartOverlay({ dialogue = [], onStart }) {
+  const [dialogueIndex, setDialogueIndex] = useState(0);
   const [svgLoaded, setSvgLoaded] = useState(false);
   const [revealing, setRevealing] = useState(false);
   const [alertReceived, setAlertReceived] = useState(false);
-  const [dialogueIndex, setDialogueIndex] = useState(0);
 
-  const svgObjectRef = useRef(null);
   const audioRef = useRef(null);
+  const svgRef = useRef(null);
   const ladybirdStarted = useRef(false);
 
+  const currentDialogue = dialogue[dialogueIndex] || "";
 
+  const { displayed, finished } = useTypewriter(
+    currentDialogue,
+    28
+  );
 
-  const currentDialogue =
-    dialogue[dialogueIndex] || "";
+  const isLastDialogue = dialogueIndex === dialogue.length - 1;
+  const talking = displayed.length > 0 && !finished;
 
-  const { displayed, finished } =
-    useTypewriter(currentDialogue, 28);
-
-  const isLastDialogue =
-    dialogueIndex === dialogue.length - 1;
-
-  const talking =
-    !finished && displayed.length > 0;
 
   useEffect(() => {
     const audio = audioRef.current;
 
     if (!audio) return;
 
+    audio.volume = 0.2;
+    audio.playbackRate = 0.7;
+
     if (talking) {
-      audio.play().catch((error) => {
-        console.log("Audio playback prevented:", error);
-      });
+      audio.play().catch(() => {});
     } else {
       audio.pause();
-    }
-    
-     if (audioRef.current) {
-      audioRef.current.volume = 0.2;
-      audioRef.current.playbackRate = 0.7;
     }
   }, [talking]);
 
   useEffect(() => {
     if (!svgLoaded) return;
 
-    const object = svgObjectRef.current;
+    const svg = svgRef.current?.contentDocument;
+    const mouth = svg?.getElementById("mouthAnimation");
 
-    if (!object) return;
-
-    const svg = object.contentDocument;
-
-    const animation =
-      svg?.getElementById("mouthAnimation");
-
-    if (!animation) return;
+    if (!mouth) return;
 
     if (talking) {
-      animation.beginElement();
+      mouth.beginElement();
     } else {
-      animation.endElement();
+      mouth.endElement();
     }
   }, [talking, svgLoaded]);
 
@@ -79,105 +63,82 @@ export default function StartOverlay({
   }, [dialogueIndex]);
 
   useEffect(() => {
-    function handleShowStartButton(e) {
-      console.log("Alert received:", e.detail);
+    function showButton() {
       setAlertReceived(true);
     }
 
-    window.addEventListener(
-      "showStartButton",
-      handleShowStartButton
-    );
+    window.addEventListener("showStartButton", showButton);
 
     return () => {
-      window.removeEventListener(
-        "showStartButton",
-        handleShowStartButton
-      );
+      window.removeEventListener("showStartButton", showButton);
     };
   }, []);
 
-  function handleSvgLoad() {
-    setSvgLoaded(true);
-  }
-
-  function handleDialogueClick() {
-
+  function nextDialogue() {
     if (!finished) return;
 
-
     if (!isLastDialogue) {
-      setDialogueIndex((index) => index + 1);
-      return;
+      setDialogueIndex(dialogueIndex + 1);
     }
   }
 
-  function handleStart() {
+  function startGame() {
     setRevealing(true);
 
     setTimeout(() => {
-      onStart?.();
+      if (onStart) {
+        onStart();
+      }
     }, 900);
   }
 
-  const showStartButton =
-    (finished && isLastDialogue) || alertReceived;
+
 
   return (
     <div
-      className={`${styles.overlay} ${revealing ? styles.reveal : ""
-        }`}
+      className={`${styles.overlay} ${
+        revealing ? styles.reveal : ""
+      }`}
     >
       <audio
         ref={audioRef}
         src="/audio/drcritter2_mixdown.wav"
         loop
-         volume={1}
         preload="auto"
       />
 
-
       <div className={styles.ladybirdLayer}>
-        <LadybirdCanvas
-          ladybirdStarted={ladybirdStarted}
-        />
+        <LadybirdCanvas ladybirdStarted={ladybirdStarted} />
       </div>
 
-
       <div className={styles.centerContent}>
-
-
         <div
           className={styles.head}
           aria-label="Talking head"
           tabIndex={0}
         >
           <object
-            ref={svgObjectRef}
+            ref={svgRef}
             data="/SVG/talkingHead.svg"
             type="image/svg+xml"
             aria-label="Talking head"
-            onLoad={handleSvgLoad}
+            onLoad={() => setSvgLoaded(true)}
           />
         </div>
 
         <div
-          className={`${styles.bottomBar} ${finished ? styles.clickable : ""
-            }`}
+          className={`${styles.bottomBar} ${
+            finished ? styles.clickable : ""
+          }`}
           role="button"
           tabIndex={0}
-          onClick={handleDialogueClick}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              handleDialogueClick();
-            }
-          }}
+          onClick={nextDialogue}
+        
         >
           <div className={styles.textbox}>
             <div className={styles.text}>
               {displayed}
             </div>
-
 
             {finished && !isLastDialogue && (
               <div className={styles.nextIndicator}>
@@ -185,22 +146,22 @@ export default function StartOverlay({
               </div>
             )}
           </div>
-
-
         </div>
-
       </div>
+
       {dialogueIndex === 8 && (
         <button
           className={styles.startButton}
-          onClick={handleStart}
+          onClick={startGame}
         >
           Start
         </button>
       )}
+
       {dialogueIndex === 5 && (
         <div className={styles.focus}></div>
       )}
+
       {dialogueIndex === 6 && (
         <div className={styles.focusmenu}></div>
       )}

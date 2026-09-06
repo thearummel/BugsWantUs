@@ -1,30 +1,28 @@
 "use client";
 
 import React from "react";
-import { useRouter, usePathname } from "next/navigation";
 import InfoIcon from "./icons/InfoIcon";
 
-export default function InfoButton({ className = "", fallbackHref = "/" }) {
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const goInfo = () => {
-    if (pathname === "/Instructions") {
-     router.back();
-    } else {
-      router.push("/Instructions");
-    }
-  };
-
+const InfoButton = React.forwardRef(function InfoButton(
+  { className = "", onClick, ...rest },
+  ref
+) {
   return (
     <button
-      onClick={goInfo}
-      aria-label={pathname === "/About" ? "Go home" : "About page"}
-      className={className}
+      ref={ref}
       type="button"
-      style={{ background: "transparent", border: "none" }}
+      className={className}
+      aria-label="Information"
+      onClick={onClick}
+      style={{
+        background: "transparent",
+        border: "none",
+      }}
+      {...rest}
     >
       <InfoIcon size={64} />
     </button>
   );
-}
+});
+
+export default InfoButton;

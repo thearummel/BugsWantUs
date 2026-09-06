@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { isAudioMuted } from "./audioControl";
 
 export default function GlobalAudio({
@@ -10,6 +10,7 @@ export default function GlobalAudio({
   volume = 1,
   ...props
 }) {
+  const audioRef = useRef(null);
   const [mounted, setMounted] = useState(false);
   const [muted, setMuted] = useState(true);
 
@@ -21,10 +22,7 @@ export default function GlobalAudio({
       setMuted(event.detail.muted);
     };
 
-    window.addEventListener(
-      "global-audio-change",
-      handleAudioChange
-    );
+    window.addEventListener("global-audio-change", handleAudioChange);
 
     return () => {
       window.removeEventListener(
@@ -34,20 +32,24 @@ export default function GlobalAudio({
     };
   }, []);
 
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = Number(volume);
+    }
+  }, [volume]);
+
   if (!mounted) {
     return null;
   }
 
-  const audioVolume = Number(volume);
-
   return (
     <audio
+      ref={audioRef}
       src={src}
       autoPlay={autoPlay}
       loop={loop}
       preload="auto"
       muted={muted}
-      volume={audioVolume}
       {...props}
     />
   );

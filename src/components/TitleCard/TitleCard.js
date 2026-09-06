@@ -24,7 +24,7 @@ export default function TitleCard({ onComplete }) {
       " Critter & Friends"
     ];
 
-    const morphTime = 0.5;
+    const morphTime = 1.2;
     const cooldownTime = 0;
 
     let textIndex = texts.length - 1;
@@ -120,7 +120,7 @@ export default function TitleCard({ onComplete }) {
 
 
       const dt =
-        (newTime - time) / 5000;
+        (newTime - time) / 8000;
 
       time = newTime;
 

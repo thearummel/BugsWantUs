@@ -9,7 +9,7 @@ export default function BackButton({ className = "", fallbackHref = "/" }) {
 
   const goBack = () => {
     if (pathname === "/About" || pathname === "/Instructions") {
-      router.push("/Garden");
+      router.push("/Kitchen");
       return;
     }
 

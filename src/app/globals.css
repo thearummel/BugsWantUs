@@ -251,3 +251,50 @@ footer {
   color: #41403E;
   font-size: 16px;
 }
+
+
+
+.endButtons {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.endButton {
+  padding: 12px 28px;
+background: #F8EFD5;
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  border-bottom-right-radius: 225px 15px;
+  border-bottom-left-radius: 15px 255px;
+
+  border: solid 1.5px #41403E;
+
+  cursor: pointer;
+  max-width: 60vw;
+
+  font-size: 18px;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.endButton:hover {
+  background: #3e2f28;
+  color: #96d1d0;
+  transform: translateY(-2px);
+}
+
+.endButton:active {
+  transform: translateY(0);
+}
