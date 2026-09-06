@@ -8,19 +8,17 @@ import BackButton from "./BackButton";
 import BarBottom from "./BarBottom";
 import InfoMenu from "./InfoMenu";
 import OverlayMenu from "./OverlayMenu";
-import AudioButton from "./AudioButton";
+import AudioPlayer from "@/components/audio/audioPlayer";
 
 export default function GlobalUI() {
     const pathname = usePathname();
 
     const isHome = pathname === "/";
     const isAbout = pathname === "/About";
-    const isFinale = pathname === "/Finale";
+    
     const isInstructions = pathname === "/Instructions";
 
-    if (isFinale) {
-        return null;
-    }
+  
 
     return (
         <div className={styles.globalUi}>
@@ -52,12 +50,12 @@ export default function GlobalUI() {
             )}
 
   
-            {!isAbout && !isInstructions && (
-                <div className={styles.audioButton}>
-                    <AudioButton />
+      
+{
+ <div className={styles.audioButton}>
+                    <AudioPlayer />
                 </div>
-            )}
-
+}
         </div>
     );
 }

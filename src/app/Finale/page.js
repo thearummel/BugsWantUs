@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import FinaleScene from "@/components/FinaleScene";
 import EndCard from "@/components/EndCard/EndCard";
-import GlobalAudio from "@/components/audio/GlobalAudio";
+
 
 const STORAGE_KEY = "collectedAnimals_v1";
 
@@ -46,18 +46,7 @@ export default function FinalePage() {
         <EndCard onRestart={handleGoToStart} />
       )}
 
-      <GlobalAudio
-        autoPlay
-        volume={0.08}
-        src="/audio/sub_clair-happy-birthday-579516.mp3"
-      />
-
-      <GlobalAudio
-        autoPlay
-        loop
-        volume={0.04}
-        src="/audio/forest-stream-birds.mp3"
-      />
+ 
     </div>
   );
 }

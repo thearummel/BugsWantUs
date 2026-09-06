@@ -36,7 +36,7 @@ export default function EndCard({ onRestart }) {
       onRestart?.();
     }, 500);
   };
-const handlePrint = () => {
+const handlePrint = () => { //https://www.nutrient.io/blog/how-to-print-pdfs-using-pdfjs/
   const iframe = document.createElement("iframe");
 
   iframe.style.position = "fixed";

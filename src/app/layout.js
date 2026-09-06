@@ -1,6 +1,7 @@
 import "./globals.css";
 import GlobalUI from "../components/ui/GlobalUI";
 
+
 export const metadata = {
   title: "Critter & Friends",
   description: "Master Project in Interactive Digital Media",
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <GlobalUI />
+       
         {children}
       </body>
     </html>

@@ -171,7 +171,7 @@ useEffect(() => {
   }
 
 
-  function printDocument() {
+  function printDocument() { // https://www.nutrient.io/blog/how-to-print-pdfs-using-pdfjs/
     let iframe = document.createElement("iframe");
 
     iframe.style.position = "fixed";
