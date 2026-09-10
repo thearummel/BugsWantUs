@@ -68,6 +68,12 @@
   font-weight: 500;
 }
 
+.headerRight{
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
 .closeBtn {
   background: transparent;
   border: 0;
@@ -127,7 +133,7 @@
 }
 
 .aboutContent h1 {
-  font-size: 38px;
+  font-size: 2.125rem;
   margin: 0;
 }
 
@@ -248,7 +254,6 @@
 }
 
 
-/* Main information */
 
 .aboutSection {
   display: flex;
@@ -258,7 +263,6 @@
 }
 
 
-/* Image */
 
 .aboutImage {
   flex: 0 0 35%;
@@ -277,7 +281,7 @@
 }
 
 
-/* Content */
+
 
 .aboutContent {
   flex: 1;
@@ -291,7 +295,7 @@
 }
 
 .aboutContent h1 {
-  font-size: 38px;
+  font-size: 2.125rem;
   line-height: 1.15;
 }
 
@@ -303,8 +307,6 @@
   line-height: 1.5;
 }
 
-
-/* How to Play */
 
 .instructions {
   display: flex;
@@ -320,8 +322,6 @@
   margin: 0;
 }
 
-
-/* About interview */
 
 .interview {
   display: flex;
@@ -343,7 +343,46 @@
 }
 
 
-/* Footer */
+
+.endButton {
+  padding: 12px 28px;
+  background: #F8EFD5;
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  border-bottom-right-radius: 225px 15px;
+  border-bottom-left-radius: 15px 255px;
+
+  border: solid 1.5px #41403E;
+  color: #41403E;
+  cursor: pointer;
+  max-width: 60vw;
+
+  font-size: 18px;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.endButton:hover {
+  background: #3e2f28;
+  color: #96d1d0;
+  transform: translateY(-2px);
+}
+
+.endButton:active {
+  transform: translateY(0);
+}
+
 
 .overlayFooter {
   padding-top: 25px;
@@ -353,8 +392,6 @@
   font-size: 14px;
 }
 
-
-/* Mobile */
 
 @media (max-width: 768px) {
 

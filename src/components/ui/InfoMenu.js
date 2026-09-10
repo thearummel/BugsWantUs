@@ -4,7 +4,8 @@ import React, { useRef, useState } from "react";
 import InfoButton from "./InfoButton";
 import styles from "./info.module.css";
 
-export default function InfoMenu() {
+export default function InfoMenu({ onRestart }) {
+
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("instructions");
   const overlayRef = useRef(null);
@@ -13,6 +14,14 @@ export default function InfoMenu() {
     if (e.target === overlayRef.current) {
       setOpen(false);
     }
+  }
+
+  function handleGoToStart() {
+
+    localStorage.removeItem("collectedAnimals");
+    sessionStorage.removeItem("hasStarted");
+    window.location.href = "/";
+
   }
 
   return (
@@ -36,7 +45,7 @@ export default function InfoMenu() {
           onClick={(e) => e.stopPropagation()}
         >
 
-        
+
           <header className={styles.overlayHeader}>
             <nav className={styles.infoNav}>
               <button
@@ -62,21 +71,33 @@ export default function InfoMenu() {
               >
                 About
               </button>
+
+
+
+
             </nav>
 
-            <button
-              type="button"
-              className={styles.closeBtn}
-              onClick={() => setOpen(false)}
-              aria-label="Close information"
-              title="Close information"
-            >
-              ✕
-            </button>
+            <div className={styles.headerRight}>
+              <button
+                className={styles.endButton}
+                onClick={handleGoToStart}
+              >
+                Restart Game
+              </button>
+              <button
+                type="button"
+                className={styles.closeBtn}
+                onClick={() => setOpen(false)}
+                aria-label="Close information"
+                title="Close information"
+              >
+                ✕
+              </button>
+            </div>
+
           </header>
 
 
-          {/* HOW TO PLAY */}
           {activeSection === "instructions" && (
             <section className={styles.aboutSection}>
 

@@ -1,9 +1,7 @@
 // src/three/interactions.js
 
-
-import * as THREE from "three";
 import { getObject, collectAnimal, getCollectedIds } from "./animals.js";
-import { addSparkles } from "./sparkels.js";
+
 
 
 export function setupInteractions(world, refs, router) {
@@ -38,16 +36,12 @@ export function setupInteractions(world, refs, router) {
 
     const interactables = [
       {
-        object: refs.door,
-        zoom: true,
-        action: () => router.push("/Kitchen")
+        object: refs.door, action: () => router.push("/Kitchen")
       },
       { object: refs.lake, action: () => router.push("/Beetle") },
       { object: refs.bowl, action: () => router.push("/Counter") },
       {
-        object: refs.garden,
-        zoom: true,
-        action: () => router.push("/Garden")
+        object: refs.garden,action: () => router.push("/Garden")
       },
       { object: refs.anthill, action: () => router.push("/Anthill") },
       { object: refs.flower, action: () => router.push("/Flowers") },
@@ -60,11 +54,9 @@ export function setupInteractions(world, refs, router) {
       if (!item.object) continue;
       const hits = world.raycaster.intersectObject(item.object, true);
       if (hits.length > 0) {
-        if (item.zoom) {
-          zoomToObject(world, item.object, item.action);
-        } else {
-          item.action();
-        }
+
+        item.action();
+
         return;
       }
     }
@@ -129,61 +121,7 @@ export function setupInteractions(world, refs, router) {
   }
 
 
-  function zoomToObject(world, object, onComplete) {
-    const duration = 1000;
-    const startTime = performance.now();
-
-    const targetPosition = new THREE.Vector3();
-    object.getWorldPosition(targetPosition);
-
-   const direction = new THREE.Vector3();
-
-direction.subVectors(
-  world.camera.position,
-  targetPosition
-);
-
-direction.normalize();
-
-
-    const distance = 1;
-
-    const endCameraPosition = targetPosition.clone();
-    direction.multiplyScalar(distance);
-    endCameraPosition.add(direction);
-
-    const startCameraPosition = world.camera.position.clone();
-    const startTarget = world.controls.target.clone();
-
-    function animateZoom(currentTime) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-
-      const eased = 1 - Math.pow(1 - progress, 3); // cubic ease out function
-
-      world.camera.position.lerpVectors(
-        startCameraPosition,
-        endCameraPosition,
-        eased
-      );
-
-      world.controls.target.lerpVectors(
-        startTarget,
-        targetPosition,
-        eased
-      );
-
-      world.controls.update();
-
-      if (progress < 1) {
-        requestAnimationFrame(animateZoom);
-      } else {
-        onComplete?.();
-      }
-    }
-
-    requestAnimationFrame(animateZoom);
-  }
+  
 
   function onResize() {
     world.camera.aspect = window.innerWidth / window.innerHeight;

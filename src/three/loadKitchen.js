@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { addSparkles } from "./sparkels.js";
+import { isCollected } from "./animals.js";
 
 export function loadKitchen(world, refs) {
 
@@ -22,13 +23,10 @@ export function loadKitchen(world, refs) {
         box.getBoundingSphere(sphere);
         const radius = sphere.radius;
 
-        // compute an appropriate camera distance so the whole model fits in view.
-        // using vertical fov (camera.fov is degrees)
+       
         const fov = world.camera.fov * (Math.PI / 180); // radians
-        // distance so that sphere fits vertically in frustum: d = r / sin(fov/2)
         let distance = radius / Math.sin(fov / 0.65);
 
-        // place camera straight on along +Z axis looking to origin
         world.camera.position.set(0, 0, distance);
 
         world.controls.minDistance = 0.1;
@@ -58,11 +56,15 @@ export function loadKitchen(world, refs) {
         clickableObjects.forEach(name => {
             const object = kitchen.getObjectByName(name);
 
-            if (object) {
-                refs[`${name.toLowerCase()}sparkles`] =
-                    addSparkles(object, world);
-            }
-        });
+          if (object) {
+        if ((name === "Bowl" && isCollected("fly"))|| (name === "Sink" && isCollected("silverfish"))) {
+            return;
+        }
+
+        refs[`${name.toLowerCase()}sparkles`] =
+            addSparkles(object, world);
+    }
+});
 
     });
 

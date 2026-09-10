@@ -1,5 +1,13 @@
 import * as THREE from "three";
 
+const SPARKLE_COLORS = [
+    0xffc5cb,
+    0xfff0d2,
+    0xff7d5a,
+    0xfc8ff31,
+    0xffffff,
+];
+
 function createSparkle() {
     const shape = new THREE.Shape();
 
@@ -29,15 +37,18 @@ function createSparkle() {
         0, -1
     );
 
+     const color =
+        SPARKLE_COLORS[
+            Math.floor(Math.random() * SPARKLE_COLORS.length)
+        ];
+
     const geometry = new THREE.ShapeGeometry(shape);
 
     const material = new THREE.MeshBasicMaterial({
-        color: 0xffffcc,
+     color: color,
         transparent: true,
         opacity: 1,
-        side: THREE.DoubleSide,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending
+     
     });
 
     return new THREE.Mesh(geometry, material);
@@ -57,12 +68,12 @@ export function addSparkles(object, world, count = 6) {
         const sparkle = createSparkle();
 
         sparkle.position.set(
-            center.x + (Math.random() - 0.5) * 0.3,
-            center.y + (Math.random() - 0.5) * 0.3,
+            center.x + (Math.random() - 0.5) * 0.4,
+            center.y + (Math.random() - 0.5) * 0.4,
             center.z + (Math.random() - 0.1) * 0.3,
         );
 
-        const scale = 0.02 + Math.random() * 0.08;
+        const scale = 0.02 + Math.random() * 0.2;
 
         sparkle.scale.set(
             scale,
@@ -81,6 +92,7 @@ export function addSparkles(object, world, count = 6) {
 
     return group;
 }
+
 
 
 export function updateSparkles(sparkleGroup, time) {

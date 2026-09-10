@@ -14,15 +14,15 @@ export default function MenuIcon({
 
   useEffect(() => {
     const handleAnimalCollected = () => {
-      // Show circle immediately
+     
       setCircleOpacity(1);
 
-      // Clear previous timer if another bug was clicked
+      
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
 
-      // Wait 10 seconds, then fade out
+      
       timeoutRef.current = setTimeout(() => {
         setCircleOpacity(0);
       }, 10000);

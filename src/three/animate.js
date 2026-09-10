@@ -38,7 +38,7 @@ export function animate(world, refs = {}) {
     function render() {
 
         if (!running) return;
-        animationId = requestAnimationFrame(render);
+        animationId = requestAnimationFrame(render); //https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
 
         if (world.controls && typeof world.controls.update === "function") {
             world.controls.update();
@@ -46,18 +46,6 @@ export function animate(world, refs = {}) {
 
         const z = world.camera.position.z;
 
-        /*  if (z <= 15) {
-             world.camera.position.x = Math.max(
-                 -1,
-                 Math.min(world.camera.position.x, 0.5)
- 
-                
-             );
-              world.camera.position.y = Math.max(
-                 -0.2,
-                  Math.min(world.camera.position.y, 0.5)
-              )
-         } */
 
 
         const time = performance.now() * 0.001;
@@ -105,35 +93,6 @@ export function animate(world, refs = {}) {
 
 
 
-        if (Array.isArray(refs.grasses)) {
-
-            for (let i = 0; i < refs.grasses.length; i++) {
-
-                const grass = refs.grasses[i];
-
-                if (!grass || !grass.object) continue;
-
-
-
-                const swaySpeed = 1.5;
-
-                const swayAmount = 0.02;
-
-                const wave = Math.sin(time * swaySpeed + (grass.offset || 0));
-
-
-
-
-
-                const eased = THREE.MathUtils.smoothstep(wave, -1, 1);
-
-                grass.object.rotation.y =
-
-                    (grass.baseRotation || 0) + (eased - 0.5) * swayAmount;
-
-            }
-
-        }
 
 
 
@@ -447,7 +406,7 @@ export function animate(world, refs = {}) {
         }
 
         // Finale
-        // Finale plants
+        
 
         const plants = [
             refs.finbgplant,

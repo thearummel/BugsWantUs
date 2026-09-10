@@ -116,7 +116,7 @@
 
   color: #3e2f28;
 
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Didact Gothic", 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
   font-size:
     clamp(1rem, 2vw, 1.5rem);
@@ -252,7 +252,7 @@ background: #F8EFD5;
   border-bottom-left-radius: 15px 255px;
 
   border: solid 1.5px #41403E;
-
+color:  #41403E;
   cursor: pointer;
   max-width: 60vw;
 

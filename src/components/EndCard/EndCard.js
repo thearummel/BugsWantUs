@@ -36,37 +36,37 @@ export default function EndCard({ onRestart }) {
       onRestart?.();
     }, 500);
   };
-const handlePrint = () => { //https://www.nutrient.io/blog/how-to-print-pdfs-using-pdfjs/
-  const iframe = document.createElement("iframe");
 
-  iframe.style.position = "fixed";
-  iframe.style.width = "0";
-  iframe.style.height = "0";
-  iframe.style.border = "0";
-  iframe.style.visibility = "hidden";
+  const handlePrint = () => { //https://www.nutrient.io/blog/how-to-print-pdfs-using-pdfjs/
+    const iframe = document.createElement("iframe");
 
-  iframe.src = "/SVG/Invites.pdf";
+    iframe.style.position = "fixed";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "0";
+    iframe.style.visibility = "hidden";
 
-  document.body.appendChild(iframe);
+    iframe.src = "/SVG/Invites.pdf";
 
-  iframe.onload = () => {
-    setTimeout(() => {
-      iframe.contentWindow?.focus();
-      iframe.contentWindow?.print();
+    document.body.appendChild(iframe);
 
+    iframe.onload = () => {
       setTimeout(() => {
-        document.body.removeChild(iframe);
-      }, 1000);
-    }, 500);
+        iframe.contentWindow?.focus();
+        iframe.contentWindow?.print();
+
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 1000);
+      }, 500);
+    };
   };
-};
 
 
   return (
     <div
-      className={`${styles.titleCard} ${
-        dissolving ? styles.dissolving : ""
-      }`}
+      className={`${styles.titleCard} ${dissolving ? styles.dissolving : ""
+        }`}
     >
       <div className={styles.background} />
 
@@ -97,6 +97,8 @@ const handlePrint = () => { //https://www.nutrient.io/blog/how-to-print-pdfs-usi
           </button>
 
           <button
+            type="button"
+            aria-label="Print cards"
             className={styles.endButton}
             onClick={handlePrint}
           >

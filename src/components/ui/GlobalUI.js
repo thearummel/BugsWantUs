@@ -15,10 +15,10 @@ export default function GlobalUI() {
 
     const isHome = pathname === "/";
     const isAbout = pathname === "/About";
-    
+
     const isInstructions = pathname === "/Instructions";
 
-  
+
 
     return (
         <div className={styles.globalUi}>
@@ -29,7 +29,7 @@ export default function GlobalUI() {
                 </div>
             )}
 
-            {/* Menus */}
+       
             {!isAbout && !isInstructions && (
                 <>
                     <div className={styles.right}>
@@ -42,20 +42,20 @@ export default function GlobalUI() {
                 </>
             )}
 
-           
+
             {!isAbout && !isInstructions && (
                 <div className={styles.bottommiddle}>
                     <BarBottom />
                 </div>
             )}
 
-  
-      
-{
- <div className={styles.audioButton}>
+
+
+           {!isHome && (
+                <div className={styles.audioButton}>
                     <AudioPlayer />
                 </div>
-}
+                  )}
         </div>
     );
 }

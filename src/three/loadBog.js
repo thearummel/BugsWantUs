@@ -67,6 +67,8 @@ export function loadBog(world, refs) {
             }
         });
 
+        
+
     });
 
 
