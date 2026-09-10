@@ -15,14 +15,11 @@ export function loadCounter(world, refs) {
 
         const center = box.getCenter(new THREE.Vector3());
 
-        // move model so center sits at (0,0,0)
+    
         counter.position.sub(center);
 
 
         world.camera.position.set(0, 0, 3);
-
-        // Restrict vertical rotation to be "straight on" (no tilt) if you want:
-        // This will lock the polar angle so camera cannot tilt up/down.
 
         world.controls.minDistance = 0.1;
         world.controls.maxDistance = 3;

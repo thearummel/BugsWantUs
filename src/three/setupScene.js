@@ -57,6 +57,8 @@ export function setupScene(canvas) {
 
     const minPanX = -1;
     const maxPanX = 1;
+      const minPanY = -0.5;
+    const maxPanY = 0.5;
     
 
     controls.addEventListener("change", () => {
@@ -69,8 +71,8 @@ export function setupScene(canvas) {
         );
          controls.target.y = THREE.MathUtils.clamp(
             controls.target.y,
-            minPanX,
-            maxPanX
+            minPanY,
+            maxPanY
         );
     });
 

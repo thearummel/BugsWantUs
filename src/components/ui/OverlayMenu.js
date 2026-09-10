@@ -155,7 +155,7 @@ useEffect(() => {
 }, []);
 
 
-  useEffect(() => {
+ /*  useEffect(() => {
     if (!popupCard) return;
 
     const timer = setTimeout(() => {
@@ -164,7 +164,7 @@ useEffect(() => {
 
     return () => clearTimeout(timer);
   }, [popupCard]);
-
+ */
 
   function onOverlayClick(e) {
     if (e.target === overlayRef.current) setOpen(false);
@@ -199,7 +199,9 @@ useEffect(() => {
   return (
     <>
       {popupCard && (
-        <div className={styles.cardPopup}>
+        <div 
+        className={styles.cardPopup}
+        onClick={() => setPopupCard(null)}>
           <article className={styles.popupCard}>
             <img src={popupCard.path} alt={popupCard.title} />
           </article>
@@ -294,7 +296,7 @@ useEffect(() => {
             >
               <img
                 src="/SVG/printBtn.svg"
-                alt=""
+                alt="Print Cards"
               />
             </button>
           </footer>

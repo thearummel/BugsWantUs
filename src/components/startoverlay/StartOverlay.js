@@ -45,7 +45,7 @@ export default function StartOverlay({ dialogue = [], onStart }) {
     if (!svgLoaded) return;
 
     const svg = svgRef.current?.contentDocument;
-    const mouth = svg?.getElementById("mouthAnimation");
+    const mouth = svg?.getElementById("mouthAnimation"); //https://www.svggenie.com/blog/svg-animations-complete-guide
 
     if (!mouth) return;
 

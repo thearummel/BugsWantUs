@@ -228,8 +228,8 @@
     inset: 0;
     z-index: 1000;
 
-    pointer-events: none;
-
+    pointer-events: pointer;
+cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -238,11 +238,12 @@
 }
 
 .popupCard {
-    width: 50vh;
-
+    width: 45vh;
+    pointer-events: pointer;
+    cursor: pointer;
     animation: collectCard 2s ease forwards;
 }
-
+/* 
 @keyframes collectCard {
 
     0% {
@@ -250,7 +251,7 @@
         opacity: 0;
     }
 
-    15% {
+    5% {
         transform: scale(1);
         opacity: 1;
     }
@@ -269,3 +270,4 @@
         opacity: 0;
     }
 }
+ */

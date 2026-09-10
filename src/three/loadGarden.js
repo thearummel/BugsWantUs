@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { registerAnimal } from "./animals.js";
+import { registerAnimal, isCollected } from "./animals.js";
 import { addSparkles } from "./sparkels.js";
 
 function saveCameraPosition(world) {
@@ -131,14 +131,18 @@ export function loadGarden(world, refs) {
             "River"
         ];
 
-        clickableObjects.forEach(name => {
-            const object = garden.getObjectByName(name);
+      clickableObjects.forEach(name => {
+    const object = garden.getObjectByName(name);
 
-            if (object) {
-                refs[`${name.toLowerCase()}sparkles`] =
-                    addSparkles(object, world);
-            }
-        });
+    if (object) {
+        if ((name === "Lake" && isCollected("beetlebody"))|| (name === "Bush" && isCollected("butterfly")) || (name === "River" && isCollected("yellowsally"))|| (name === "Anthill" && isCollected("ant"))) {
+            return;
+        }
+
+        refs[`${name.toLowerCase()}sparkles`] =
+            addSparkles(object, world);
+    }
+});
 
     });
 
