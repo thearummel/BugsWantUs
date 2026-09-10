@@ -44,7 +44,7 @@ export function setupInteractions(world, refs, router) {
         object: refs.garden,action: () => router.push("/Garden")
       },
       { object: refs.anthill, action: () => router.push("/Anthill") },
-      { object: refs.flower, action: () => router.push("/Flowers") },
+
       { object: refs.bush, action: () => router.push("/Bush") },
       { object: refs.river, action: () => router.push("/River") },
       { object: refs.sink, action: () => router.push("/Sink") },
