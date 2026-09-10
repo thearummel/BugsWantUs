@@ -113,65 +113,66 @@ export default function InfoMenu({ onRestart }) {
                 <div className={styles.aboutHead}>
                   <h1>How to Play</h1>
 
-                  <h3>
+                  <h2>
                     Help Dr. Fenton Critter invite all of his insect
                     friends to his birthday party.
-                  </h3>
+                  </h2>
                 </div>
 
                 <div className={styles.instructions}>
 
-                  <p>
-                    <b>1. Find the Bugs</b>
-                    <br />
-                    Explore the world and look for insects crawling,
-                    flying, and buzzing through the environment.
-                  </p>
+                 
+                    <h3>1. Find the Bugs</h3>
+               
+                    <div>
+                      <p>
+                        Explore the world and look for insects crawling,
+                        flying, and buzzing through the environment.
+                      </p>
+                      <b>Click a bug to invite it to the party.</b>
+                    </div>
+                 
 
-                  <p>
-                    <b>Click a bug to invite it to the party.</b>
-                  </p>
+              
+                 
+                    <h3>2. Track Your Progress</h3>
+                  
+                    <p>
+                      Check the <b>Party Progress Bar</b> at the bottom
+                      of the screen to see how many bugs you still need
+                      to find.
+                    </p>
+                
 
+              
+                    <h3>3. Check Your Collection</h3>
                   <p>
-                    <b>2. Track Your Progress</b>
-                    <br />
-                    Check the <b>Party Progress Bar</b> at the bottom
-                    of the screen to see how many bugs you still need
-                    to find.
+                    
+                      Open the <b>Bug Collection</b> from the menu to see
+                      the bugs you've found and learn more about them.
                   </p>
+        
+                    <h3>4. Explore the World</h3>
+                    <div>
+                      
+                      <p>Explore by scrolling through the world.</p>
+                      <p><b>Computer:</b> Scroll with your mouse.</p>
+                      <p><b>Phone:</b> Scroll with two fingers.</p>
+                    </div>
 
-                  <p>
-                    <b>3. Check Your Collection</b>
-                    <br />
-                    Open the <b>Bug Collection</b> from the menu to see
-                    the bugs you've found and learn more about them.
-                  </p>
+                    <h3>5. Look Out for Sparkles</h3>
+                  
+                    <p>
+                      Keep an eye out for sparkles as you explore. They
+                      may help you discover something special.
+                    </p>
+               
 
-                  <p>
-                    <b>4. Explore the World</b>
-                    <br />
-                    Explore by scrolling through the world.
-                  </p>
-
-                  <p>
-                    <b>Computer:</b> Scroll with your mouse.
-                    <br />
-                    <b>Phone:</b> Scroll with two fingers.
-                  </p>
-
-                  <p>
-                    <b>5. Look Out for Sparkles</b>
-                    <br />
-                    Keep an eye out for sparkles as you explore. They
-                    may help you discover something special.
-                  </p>
-
-                  <p>
-                    <b>
+                    <h3>
                       Find the bugs, invite them to the party, and find
                       them all!
-                    </b>
-                  </p>
+                    </h3>
+             
 
                 </div>
               </div>
@@ -180,7 +181,7 @@ export default function InfoMenu({ onRestart }) {
           )}
 
 
-          {/* ABOUT */}
+       
           {activeSection === "about" && (
             <section className={styles.aboutSection}>
 
@@ -208,26 +209,31 @@ export default function InfoMenu({ onRestart }) {
 
                 <div className={styles.interview}>
 
-                  <p>
-                    <b>Mr. Pea:</b> Speaking on behalf of insects
-                    everywhere, it isn’t every day we find ourselves
-                    the subjects of a Master’s dissertation. Yet,
-                    Thea Rummel and Lydia Stewart have dedicated their
-                    final project for their interactive Digital Media
-                    course at Griffith College Dublin to spotlighting
-                    Ireland’s insect life.
-                  </p>
-
-                  <p>
-                    I caught up with the duo to discuss what drew them
-                    to our micro-world. Ladies, it’s lovely to be with
-                    you both today, please tell us about yourselves.
-                  </p>
+               
+                    <div>
+                      <h3>Mr. Pea:</h3>
+                         <p>Speaking on behalf of insects
+                      everywhere, it isn’t every day we find ourselves
+                      the subjects of a Master’s dissertation. Yet,
+                      Thea Rummel and Lydia Stewart have dedicated their
+                      final project for their interactive Digital Media
+                      course at Griffith College Dublin to spotlighting
+                      Ireland’s insect life.
+                                        </p>
+                      
+                                        <p>
+                      I caught up with the duo to discuss what drew them
+                      to our micro-world. Ladies, it’s lovely to be with
+                      you both today, please tell us about yourselves.
+                                        </p>
+                    </div>
+                    
 
 
                   <div className={styles.question}>
-                    <p>
-                      <b>Thea:</b> Hello Mr. Pea it's a pleasure to be
+                  
+                      <h3>Thea:</h3> 
+                        <p>Hello Mr. Pea it's a pleasure to be
                       here today. Well I am 24 years old and originally
                       from Germany. I came to Ireland in 2025 to pursue
                       my masters degree. In my free time love to be out
@@ -238,8 +244,9 @@ export default function InfoMenu({ onRestart }) {
 
 
                   <div className={styles.question}>
-                    <p>
-                      <b>Lydia:</b> It’s very nice to be here, Mr. Pea!
+                   
+                      <h3>Lydia:</h3> 
+                       <p>It’s very nice to be here, Mr. Pea!
                       I'm 23 years old and I live in County Dublin. In
                       my spare time I love to write stories, watch
                       movies and go on walks!
@@ -247,16 +254,21 @@ export default function InfoMenu({ onRestart }) {
                   </div>
 
 
-                  <p>
-                    <b>Mr. Pea:</b> Marvellous… Now, the first question
-                    that comes to mind is why did you both decide to
-                    dedicate this site to Irish insect.
-                  </p>
+                <div>
+                  
+                      <h3>Mr. Pea:</h3>
+                        <p> Marvellous… Now, the first question
+                      that comes to mind is why did you both decide to
+                      dedicate this site to Irish insect.
+                    </p>
+                </div>
 
 
                   <div className={styles.question}>
-                    <p>
-                      <b>Lydia:</b> We wanted a project we’d actually
+                  
+                      <h3>Lydia:</h3> 
+                      <p> 
+                      We wanted a project we’d actually
                       enjoy! Combining my love for storytelling with
                       Thea’s web tech skills let us create a fun
                       interactive story! Our goal was to blend a
@@ -272,8 +284,9 @@ export default function InfoMenu({ onRestart }) {
 
 
                   <div className={styles.question}>
-                    <p>
-                      <b>Thea:</b> From a design perspective, the modern
+                  
+                      <h3>Thea:</h3>
+                        <p> From a design perspective, the modern
                       internet can feel pretty copy and paste. We didn't
                       want another rigid WordPress site, we wanted to
                       build something interactive from scratch! Digital
@@ -289,17 +302,21 @@ export default function InfoMenu({ onRestart }) {
                   </div>
 
 
-                  <p>
-                    <b>Mr. Pea:</b> Thea, I want to ask you about the
-                    process of creating this site. I am aware you
-                    created the beautiful illustrations, what was the
-                    process like from original concept to final product?
-                  </p>
+             
+                    <div>
+                      <h3>Mr. Pea:</h3>
+                           <p>Thea, I want to ask you about the
+                      process of creating this site. I am aware you
+                      created the beautiful illustrations, what was the
+                      process like from original concept to final product?
+                                        </p>
+                    </div>
 
 
                   <div className={styles.question}>
-                    <p>
-                      <b>Thea:</b> As with any project, Lydia and I
+                  
+                      <h3>Thea:</h3> 
+                        <p>As with any project, Lydia and I
                       started by collecting visual inspiration and
                       ensuring that our vision for the website was
                       aligned. One illustration we loved was by the
@@ -322,16 +339,20 @@ export default function InfoMenu({ onRestart }) {
                   </div>
 
 
-                  <p>
-                    <b>Mr. Pea:</b> Fascinating.. Lydia, from my
-                    understanding, you underwent the research for this
-                    project, can you talk us through the process?
-                  </p>
+                
+                    <div>
+                      <h3>Mr. Pea:</h3>
+                        <p>Fascinating.. Lydia, from my
+                      understanding, you underwent the research for this
+                      project, can you talk us through the process?
+                                        </p>
+                    </div>
 
 
                   <div className={styles.question}>
-                    <p>
-                      <b>Lydia:</b> The research was hands-on from the
+                  
+                      <h3>Lydia:</h3> 
+                        <p>The research was hands-on from the
                       start! We conducted primary research at the
                       Natural History Museum with entomologist Aidan
                       O’Hanlon, studying physical specimens up close
@@ -347,17 +368,21 @@ export default function InfoMenu({ onRestart }) {
                   </div>
 
 
-                  <p>
-                    <b>Mr. Pea:</b> Hm.. I wonder if my ancestors were
-                    at the museum.. Anyways, ladies, I have a buzzing
-                    question that all of the readers are dying to know -
-                    What is your favourite insect and why?
-                  </p>
+               
+                    <div>
+                      <h3>Mr. Pea:</h3>
+                         <p> Hm.. I wonder if my ancestors were
+                      at the museum.. Anyways, ladies, I have a buzzing
+                      question that all of the readers are dying to know -
+                      What is your favourite insect and why?
+                                        </p>
+                    </div>
 
 
                   <div className={styles.question}>
-                    <p>
-                      <b>Thea:</b> When I was a child, I loved an
+                  
+                      <h3>Thea:</h3>
+                        <p> When I was a child, I loved an
                       audiobook about a golden dung beetle that was
                       stolen from a museum. The word 'Scarabaeus' was
                       one of the first complicated-sounding words I
@@ -367,8 +392,9 @@ export default function InfoMenu({ onRestart }) {
 
 
                   <div className={styles.question}>
-                    <p>
-                      <b>Lydia:</b> I really love the death’s-head hawk
+                 
+                      <h3>Lydia:</h3>
+                         <p> I really love the death’s-head hawk
                       moth. We actually got to see some in person during
                       our primary research! I love this moth because of
                       this pattern and I find it interesting how they
@@ -378,16 +404,20 @@ export default function InfoMenu({ onRestart }) {
                   </div>
 
 
-                  <p>
-                    <b>Mr. Pea:</b> Wow, very controversial.. Thank you
-                    for your time today ladies, any final words for all
-                    our readers?
-                  </p>
+                
+                    <div>
+                      <h3>Mr. Pea:</h3>
+                        <p>Wow, very controversial.. Thank you
+                      for your time today ladies, any final words for all
+                      our readers?
+                                        </p>
+                    </div>
 
 
                   <div className={styles.question}>
-                    <p>
-                      <b>Lydia and Thea:</b> We would like to say thank
+                 
+                      <h3>Lydia and Thea:</h3>
+                        <p> We would like to say thank
                       you to our dissertation supervisor Ellen Hickey,
                       our tutor Ruairi Murphy, Dr. Aiden O’Hanlon,
                       Thea's sister and school name, for testing and

@@ -4,6 +4,9 @@
   --radius: 12px;
   --gap: 18px;
   --text: #3d2e28;
+  --headerone: 3rem;
+  --headertwo:1.8rem;
+  --body: 0.5rem;
 }
 
 .overlay {
@@ -29,7 +32,6 @@
   background: var(--panel-bg);
 
   border-radius: var(--radius);
-
   padding: 20px;
 
   box-shadow: 0 20px 40px #3d2e2840;
@@ -63,10 +65,6 @@
   border-bottom: 1px solid #222;
 }
 
-.overlayHeader h2 {
-  font-size: 28px;
-  font-weight: 500;
-}
 
 .headerRight{
   display: flex;
@@ -77,7 +75,7 @@
 .closeBtn {
   background: transparent;
   border: 0;
-  font-size: 18px;
+  font-size: var(--body);
   cursor: pointer;
   padding: 6px;
   border-radius: 6px;
@@ -93,7 +91,6 @@
 
 .aboutSection {
   display: flex;
-
   gap: 50px;
 
   max-width: 1300px;
@@ -127,42 +124,48 @@
 
 .aboutContent {
   flex: 1;
-
   display: flex;
   flex-direction: column;
 }
 
 .aboutContent h1 {
-  font-size: 2.125rem;
+  font-size: var(--headerone);
   margin: 0;
 }
 
 .aboutHead {
-  margin-bottom: 35px;
+  margin-bottom: 25px;
 }
 
-.aboutHead h3 {
+.aboutHead h2 {
   margin-top: 15px;
 
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.5;
+  
 }
+.aboutHead h3 {
+ 
+  font-size: var(--headertwo);
+  font-weight: 400;
 
+}
 
 
 .instructions {
   display: flex;
   flex-direction: column;
 
-  gap: 30px;
+  gap: 10px;
 
-  font-size: 17px;
+  font-size: var(--body);
   line-height: 1.5;
 }
 
-.instructions p {
-  margin: 0;
+
+
+.instructions b {
+font-style: italic;
 }
 
 
@@ -194,7 +197,6 @@
     flex-direction: column;
 
     padding: 40px 0;
-
     gap: 40px;
   }
 
@@ -212,14 +214,11 @@
     font-size: 26px;
   }
 
-  .aboutHead h3 {
+  .aboutHead h2 {
     font-size: 16px;
   }
 
-  .instructions {
-    font-size: 15px;
-    gap: 25px;
-  }
+
 
   .overlayFooter {
     font-size: 12px;
@@ -295,16 +294,17 @@
 }
 
 .aboutContent h1 {
-  font-size: 2.125rem;
+  font-size: var(--headerone);
   line-height: 1.15;
 }
 
-.aboutHead h3 {
+.aboutHead h2 {
   margin-top: 15px;
 
-  font-size: 17px;
+  font-size: var(--headertwo);
+  line-height: 1.2;
   font-weight: 400;
-  line-height: 1.5;
+ 
 }
 
 
@@ -312,15 +312,12 @@
   display: flex;
   flex-direction: column;
 
-  gap: 30px;
+  gap: 10px;
 
   font-size: 17px;
   line-height: 1.5;
 }
 
-.instructions p {
-  margin: 0;
-}
 
 
 .interview {
@@ -333,13 +330,20 @@
   line-height: 1.6;
 }
 
+
 .question p {
   margin-left: 1em;
+  font-size: 20px;
 }
 
 .interview a {
   color: inherit;
   text-decoration: underline;
+ 
+}
+
+.interview p{
+    font-size: 20px;
 }
 
 
@@ -429,7 +433,7 @@
     font-size: 26px;
   }
 
-  .aboutHead h3 {
+  .aboutHead h2 {
     font-size: 15px;
   }
 
