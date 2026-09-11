@@ -18,11 +18,8 @@ export function loadBeetle(world, refs) {
 
 
 
-        // place camera straight on along +Z axis looking to origin
         world.camera.position.set(1, 0, 7.6);
 
-        // Restrict vertical rotation to be "straight on" (no tilt) if you want:
-        // This will lock the polar angle so camera cannot tilt up/down.
 
 
         world.controls.minDistance = 0.1;

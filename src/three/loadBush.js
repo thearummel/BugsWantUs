@@ -15,21 +15,17 @@ export function loadBush(world, refs) {
 
         const center = box.getCenter(new THREE.Vector3());
 
-        // move model so center sits at (0,0,0)
         bush.position.sub(center);
 
 
         world.camera.position.set(0, 0, 7);
         world.camera.lookAt(0, 0, 0);
 
-        // set control target to origin (the model is centered at origin now)
         world.controls.target.set(0, 0, 0);
 
-        // Restrict vertical rotation to be "straight on" (no tilt) if you want:
-        // This will lock the polar angle so camera cannot tilt up/down.
 
 
-        world.controls.minDistance = 0.1;
+        world.controls.minDistance = 3;
         world.controls.maxDistance = 7;
 
         world.controls.update();

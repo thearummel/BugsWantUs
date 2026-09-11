@@ -20,7 +20,7 @@ const MenuButton = React.forwardRef(function MenuButton(
       type="button"
       style={{ background: "transparent", border: "none" }}
       ref={ref}
-      {...rest} // allows aria-controls / aria-expanded to be passed
+      {...rest} 
     >
       <MenuIcon size={64} />
     </button>

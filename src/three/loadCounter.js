@@ -21,7 +21,7 @@ export function loadCounter(world, refs) {
 
         world.camera.position.set(0, 0, 3);
 
-        world.controls.minDistance = 0.1;
+        world.controls.minDistance = 2;
         world.controls.maxDistance = 3;
 
         world.controls.update();
@@ -36,14 +36,11 @@ export function loadCounter(world, refs) {
          fly.position.set(0, 0, 0.8);
         fly.scale.set(0.5, 0.5, 0.5);
 
-        // add to refs for indivisual objects later
         refs.fly = fly;
 
-        // register with centralized registry; it will add to scene only if not collected
         registerAnimal("fly", fly, world.scene);
 
 
-        //call names of animatabel items
         const objects = [
             "FlyRightWing",
             "FlyLeftWing",

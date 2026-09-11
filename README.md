@@ -1,4 +1,4 @@
-# Critter & Friends
+# Critter & Friends'
 ## What this is
 
 An educational, 3D interactive mini-game built with Next.js and Three.js where players explore 3D scenes find insects and collect character cards.
