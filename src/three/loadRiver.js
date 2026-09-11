@@ -21,7 +21,7 @@ export function loadRiver(world, refs) {
 
         world.controls.target.set(0, 0, 0);
 
-        world.controls.minDistance = 0.1;
+        world.controls.minDistance = 2;
         world.controls.maxDistance = 6;
 
         world.controls.update();

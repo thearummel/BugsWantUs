@@ -49,7 +49,6 @@ export function setupScene(canvas) {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
 
-    // Prevent vertical movement.
     controls.minPolarAngle = Math.PI / 2;
     controls.maxPolarAngle = Math.PI / 2;
 

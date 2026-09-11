@@ -21,7 +21,7 @@ export default function TitleCard({ onComplete }) {
 
     const texts = [
       "",
-      " Critter & Friends"
+      " Critter & Friends'"
     ];
 
     const morphTime = 1.2;

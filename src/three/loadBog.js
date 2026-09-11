@@ -23,7 +23,7 @@ export function loadBog(world, refs) {
         world.camera.position.set(0, 0, 7);
 
 
-        world.controls.minDistance = 0.1;
+        world.controls.minDistance = 4;
         world.controls.maxDistance = 7;
         world.controls.update();
 

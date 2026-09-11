@@ -24,12 +24,12 @@ export function loadKitchen(world, refs) {
         const radius = sphere.radius;
 
        
-        const fov = world.camera.fov * (Math.PI / 180); // radians
+        const fov = world.camera.fov * (Math.PI / 180); 
         let distance = radius / Math.sin(fov / 0.65);
 
         world.camera.position.set(0, 0, distance);
 
-        world.controls.minDistance = 0.1;
+        world.controls.minDistance = 1;
         world.controls.maxDistance = 6;
 
 
